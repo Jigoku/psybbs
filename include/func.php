@@ -255,7 +255,7 @@ ini_set('date.timezone', 'UTC');
 	// display and format sorted items for table 'topics' with page split
 	function listTopics() {
 
-    include 'config.php';
+    	include 'config.php';
 
 	$sql = "SELECT COUNT(id) FROM topics";
 	$result = mysql_query($sql);
@@ -537,8 +537,8 @@ ini_set('date.timezone', 'UTC');
 			'~\[size=(.*?)\](.*?)\[/size\]~s',
 			'~\[color=(.*?)\](.*?)\[/color\]~s',
 			'~\[onion\](.*?)\[/onion\]~s',
-			'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
-			'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s'
+			//'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
+			//'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s'
 		);
 
 		// HTML tags to replace BBcode
@@ -551,8 +551,8 @@ ini_set('date.timezone', 'UTC');
 			'<span style="font-size:$1px;">$2</span>',
 			'<span style="color:$1;">$2</span>',
 			'<span style="color:#3784A4;background:#222;">$1</span>',
-			'<a href="$1">$1</a>',
-			'<img src="$1" alt="" />'
+			//'<a href="$1">$1</a>',
+			//'<img src="$1" alt="" />'
 		);
 
 		return preg_replace($find,$replace,$text);
