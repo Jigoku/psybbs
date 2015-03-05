@@ -5,7 +5,7 @@ include "include/top.php";
 if (!(isset($_SESSION["id"]))) {
 
 if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code"])) {
-        $user = mysql_real_escape_string(strtolower($_POST["username"]));
+        $user = mEscape(strtolower($_POST["username"]));
         $pass = $_POST["password"];
 
         if(!($_POST['code'] == $_SESSION['code'])) {
