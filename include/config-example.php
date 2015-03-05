@@ -13,7 +13,7 @@
 	
 	//small announcement for header area
 	$site_announce = "Announcement: Hello world";
-	$theme = "cyantech";
+	$theme = "mintphosphor";
 
 	//$themeopts = "?fixed";
 	$themeopts = "";
