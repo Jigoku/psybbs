@@ -7,3 +7,6 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 ##Install
 * Edit include/config-example.php
 * Rename include/config.php
+
+##Theme Preview
+![psyBBS mintphosphor](theme/mintphosphor/preview.png)
