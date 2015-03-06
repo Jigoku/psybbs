@@ -118,8 +118,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 			} else {
 				if (checkTopicExists(mEscape($_GET["topic"]))) {
 					//list the threads in selected topic
-					$topic = mEscape(strtolower($_GET["topic"]));
-					listThreads($topic);
+					listThreads(mEscape(strtolower($_GET["topic"])));
 				} else {
 					echo "<div class=\"sub\"><span class=\"large2\">Topic does not exist!</span></div>\n";
 				}

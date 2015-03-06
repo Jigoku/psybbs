@@ -255,7 +255,7 @@ ini_set('date.timezone', 'UTC');
 	// display and format sorted items for table 'topics' with page split
 	function listTopics() {
 
-    	include 'config.php';
+	include 'config.php';
 
 	$sql = "SELECT COUNT(id) FROM topics";
 	$result = mysql_query($sql);
@@ -361,40 +361,46 @@ ini_set('date.timezone', 'UTC');
 
 	// display and format items for table 'threads'
 	function listThreads($topic) {
-		$result = mysql_query("SELECT title FROM topics WHERE pagename = '". $topic . "'")
-			or trigger_error(mysql_error());
+		
+		
+	include 'config.php';
 
-		//make sure topic exists
-		if(mysql_num_rows($result) > 0) {
+	$sql = "SELECT COUNT(id) FROM threads WHERE topic = '".$topic."'";
+	$result = mysql_query($sql);
+	$row = mysql_fetch_row($result);
+	$total_threads = $row[0];
+	$total_pages = ceil($total_threads / $items_per_page);
 
-		//showPostPages($topic);
-			//topic header
-			while ($this_topic = mysql_fetch_array($result)) {
-				echo "<div class=\"topicitem\">Category: <span class=\"title\">" . $this_topic['title'] . "</span>" .
+
+		if (isset($_GET["page"]) && is_numeric($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+
+		$start_from = ($page-1) * $items_per_page;
+		$sql = "SELECT * FROM threads WHERE topic = '".$topic."' ORDER by epoch DESC LIMIT $start_from, ". $items_per_page; 
+		$result = mysql_query($sql);
+
+
+		if (mysql_num_rows($result) > 0) {
+
+				echo "<div class=\"topicitem\">Category: <span class=\"title\">" . $result['title'] . "</span>" .
 					"<span class=\"newthread\"><a href=\"?topic=". $topic ."&amp;newthread\">New Thread</a></span></div>";
+
+			while ($thread = mysql_fetch_assoc($result)) {
+						echo "<a class=\"threaditem\" href=\"?topic=" . $topic ."&id=" .
+						$thread['id'] ."\"><div class=\"threaditem\"><span class=\"subject\">". $thread['subject'] .
+						"</span><span class=\"author\"> - by " . $thread['author'] .
+						"</span><span class=\"right\"><span class=\"replies\">(". countReplies($thread['id']) .
+						" replies)</span>&nbsp;<span class=\"date\">". date('M/d/Y', $thread['epoch']) ."</span></span></div></a>";
+			
+		  	}
+		  		if ($total_threads > $items_per_page) {
+				echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
+					for ($i=1; $i<=$total_pages; $i++) {
+				            echo "<a class=\"pagebutton\" href=\"index.php?topic=" . $topic ."&amp;page=$i\">$i</a>&nbsp;";
+					};
+				echo "</div>\n";
 			}
-
-			$result = mysql_query("SELECT * FROM threads WHERE topic='".  $topic . "'")
-				or trigger_error(mysql_error());
-
-			//check if any threads exist
-			if(mysql_num_rows($result) == 0) {
-				echo "<div class=\"topicitem\">" . $this_topic['title'] . "Nothing has been posted yet!</div>";
-			} else {
-
-				//display the threads for the topic
-				while ($post = mysql_fetch_array($result)) {
-					echo "<a class=\"threaditem\" href=\"?topic=" . $topic ."&id=" .
-						$post['id'] ."\"><div class=\"threaditem\"><span class=\"subject\">". $post['subject'] .
-						"</span><span class=\"author\"> - by " . $post['author'] .
-						"</span><span class=\"right\"><span class=\"replies\">(". countReplies($post['id']) .
-						" replies)</span>&nbsp;<span class=\"date\">". date('M/d/Y', $post['epoch']) ."</span></span></div></a>";
-				}
-			}
-
 		} else {
-			//invalid topic
-			echo "<div class=\"sub\"><span class=\"large2\">Topic does not exist!</span></div>";
+			echo "<div class=\"topicitem\">" . $this_topic['title'] . "Nothing has been posted yet!</div>";
 		}
 
 	}
