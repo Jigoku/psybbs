@@ -56,6 +56,7 @@ if (!$db_selected) {
 	)", $connection);
 
 	mysql_query("INSERT INTO topics (title, pagename, description) VALUES ('Default Topic', 'default', 	'This is an example topic')" , $connection);
+	
 
 	//create threads table
 	mysql_query("CREATE TABLE threads (
