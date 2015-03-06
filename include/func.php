@@ -378,11 +378,13 @@ ini_set('date.timezone', 'UTC');
 		$sql = "SELECT * FROM threads WHERE topic = '".$topic."' ORDER by epoch DESC LIMIT $start_from, ". $items_per_page; 
 		$result = mysql_query($sql);
 
-
+	
+				echo "<div class=\"topicitem\">Category: <span class=\"title\">" . getTopicTitle($topic) . "</span>" .
+					"<span class=\"newthread\"><a href=\"?topic=". $topic ."&amp;newthread\">New Thread</a></span></div>";
+		
 		if (mysql_num_rows($result) > 0) {
 
-				echo "<div class=\"topicitem\">Category: <span class=\"title\">" . $result['title'] . "</span>" .
-					"<span class=\"newthread\"><a href=\"?topic=". $topic ."&amp;newthread\">New Thread</a></span></div>";
+
 
 			while ($thread = mysql_fetch_assoc($result)) {
 						echo "<a class=\"threaditem\" href=\"?topic=" . $topic ."&id=" .
@@ -400,10 +402,25 @@ ini_set('date.timezone', 'UTC');
 				echo "</div>\n";
 			}
 		} else {
-			echo "<div class=\"topicitem\">" . $this_topic['title'] . "Nothing has been posted yet!</div>";
+			echo "<div class=\"topicitem\">Nothing has been posted yet!</div>";
 		}
 
 	}
+
+
+
+	function getTopicTitle($topic) {
+		$result = mysql_query("
+			SELECT * FROM topics WHERE pagename = '". $topic ."'"
+		) or trigger_error(mysql_error());
+
+		if (mysql_num_rows($result) > 0) { 
+			while ($topic = mysql_fetch_assoc($result)) {
+				return $topic['title']; 	
+			}
+		}
+	}
+	
 
 	//post formatting
 	function displayPost($author, $content, $epoch, $level) {
@@ -516,6 +533,7 @@ ini_set('date.timezone', 'UTC');
 
 		if (mysql_num_rows($result) > 0) { return true; }
 	}
+
 
 
 	//used on logout
