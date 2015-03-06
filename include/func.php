@@ -390,7 +390,7 @@ ini_set('date.timezone', 'UTC');
 
 			while ($thread = mysql_fetch_assoc($result)) {
 						echo "<a class=\"threaditem\" href=\"?topic=" . $topic ."&id=" .
-						$thread['id'] ."\"><div class=\"threaditem\"><img class=\"thread\" src=\"theme/".$theme."/icon/thread.png\"/><span class=\"subject\">". $thread['subject'] .
+						$thread['id'] ."\"><img class=\"thread\" src=\"theme/".$theme."/icon/thread.png\"/><div class=\"threaditem\"><span class=\"subject\">". $thread['subject'] .
 						"</span><span class=\"author\"> - by " . $thread['author'] .
 						"</span><span class=\"right\"><span class=\"replies\">(". countReplies($thread['id']) .
 						" replies)</span>&nbsp;<span class=\"date\">". date('M/d/Y', $thread['epoch']) ."</span></span></div></a>";
