@@ -291,7 +291,7 @@ a:hover   { color: $colour1; text-decoration: underline overline; }
 /* global */
 img { padding: 5px; }
 img.settings { padding: 5px; margin-left: -35px; margin-top: -5px;  position: absolute;}
-
+img.thread { width: 32px; height 32px; padding: 5px; float:left; margin-right: 5px;}
 div#userbar {
 	color: #000;
 	padding:10px;

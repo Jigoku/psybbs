@@ -117,17 +117,17 @@ ini_set('date.timezone', 'UTC');
 		echo "<div class=\"info\">Login Captcha [on|off]</div>\n";
 		echo "<div class=\"info\">Post Captcha [on|off]</div><br />\n";
 		
-                echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/topics.png\" /><span class=\"large2\">Topic Control</span></div>\n";
+        echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/topics.png\" /><span class=\"large2\">Topic Control</span></div>\n";
 		echo "<hr />\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?createtopic\">Create Topic</a></div>\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?edittopic\">Edit Topic</a></div>\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deletetopic\">Delete Topic</a></div><br />\n";
 		
-                echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/database.png\" /><span class=\"large2\">Database</span></div>\n";
+        echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/database.png\" /><span class=\"large2\">Database</span></div>\n";
 		echo "<hr />\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?dropdb\">Delete database</a></div><br />\n";
 		
-                echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/users.png\" /><span class=\"large2\">User Control</span></div>\n";
+        echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/users.png\" /><span class=\"large2\">User Control</span></div>\n";
 		echo "<hr />\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?lockuser\">Lock User</a></div>\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deluser\">Delete User</a></div>\n";
@@ -275,7 +275,7 @@ ini_set('date.timezone', 'UTC');
 			while ($topic = mysql_fetch_assoc($result)) {
 
 				echo "\n<a class=\"topic\" href=\"?topic=" . $topic['pagename'] . "\">\n";
-					echo "\t\t<img class=\"topicimg\" src=\"media/glyphs/message.png\" alt=\"\" />\n";
+					echo "\t\t<img class=\"topicimg\" src=\"theme/".$theme."/icon/folder.png\" alt=\"\" />\n";
 	//				echo "\t\t<img class=\"topicimg\" src=\"media/glyphs/" .$topic['pagename'] . ".png\"/>\n";
 					echo "\t\t<span class=\"topictitle\">" .$topic['title']."</span>\n";
 					echo "\t\t<span class=\"lastpost\">Last post by&nbsp;" . getLatestPost($topic['pagename']) ."</span>\n";
@@ -296,10 +296,13 @@ ini_set('date.timezone', 'UTC');
 		}
 	}
 
+
 	function getLatestPost($topic) {
 		return "Unimplemented";
 	}
-	// display and format items for table 'topics'
+	
+	
+
 	function listReplies($topic, $id) {
 
 		$result = mysql_query("SELECT author, subject, epoch FROM threads WHERE id = '" . $id."'")
@@ -358,7 +361,7 @@ ini_set('date.timezone', 'UTC');
 
 
 
-	// display and format items for table 'threads'
+	// display and format items for table 'threads' with page split
 	function listThreads($topic) {
 		
 		
@@ -387,7 +390,7 @@ ini_set('date.timezone', 'UTC');
 
 			while ($thread = mysql_fetch_assoc($result)) {
 						echo "<a class=\"threaditem\" href=\"?topic=" . $topic ."&id=" .
-						$thread['id'] ."\"><div class=\"threaditem\"><span class=\"subject\">". $thread['subject'] .
+						$thread['id'] ."\"><img class=\"thread\" src=\"theme/".$theme."/icon/thread.png\"/><div class=\"threaditem\"><span class=\"subject\">". $thread['subject'] .
 						"</span><span class=\"author\"> - by " . $thread['author'] .
 						"</span><span class=\"right\"><span class=\"replies\">(". countReplies($thread['id']) .
 						" replies)</span>&nbsp;<span class=\"date\">". date('M/d/Y', $thread['epoch']) ."</span></span></div></a>";
