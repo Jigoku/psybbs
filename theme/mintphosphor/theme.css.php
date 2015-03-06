@@ -110,10 +110,9 @@ p {
 
 
 div#banner {
-	background: #000;
+	background: #222; /* fallback */
 	padding: 10px; 
 	background: -moz-linear-gradient(top,  #333,  #111);
-	
 	font-family: Monospace;
 	font-size: 20px;
 	font-weight: bold;
@@ -140,6 +139,7 @@ a.topic:link,a.topic:active {
 	text-decoration: none;
 }
 a.topic:hover {
+	background: #222; /* fallback */
 	background: -moz-linear-gradient(bottom, #222, #111);
 	border-left: 1px solid $colour1;
 	margin-left: -1px;
@@ -198,6 +198,7 @@ div.topicitem {
 }*/
 
 div.topic:hover, div.threaditem:hover {
+	background: #222; /* fallback */
 	background: -moz-linear-gradient(top, #222, #111);
 
 }
@@ -296,20 +297,26 @@ img.thread { width: 32px; height 32px; float:left; margin-right: 5px;  }
 div#userbar {
 	color: #000;
 	padding:10px;
+	background: $colour1; /* fallback */
 	background: -moz-linear-gradient(top, $colour3,  $colour1);
 }
 
 a.userbar:link,a.userbar:visited,a.userbar:active    { 
 	text-decoration: none;
-		  border-radius: 15px;
+	border-radius: 15px;
 	font-size: 12px;
-	background: #222;
 	color: #888;
 	border: 1px solid #111;
 	padding: 5px;
-		background: -moz-linear-gradient(top, #111,  #333);
+	background: #222; /* fallback */
+	background: -moz-linear-gradient(top, #111,  #333);
 }
-a.userbar:hover   { color: #fff; text-decoration: none; }
+a.userbar:hover { 
+	color: #fff; 
+	text-decoration: none; 
+	background: #333; /* fallback */
+	background: -moz-linear-gradient(top, #222,  #444);
+}
 
 /* forms */
 
