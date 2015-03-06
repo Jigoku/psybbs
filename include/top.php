@@ -121,7 +121,6 @@ if (!$db_selected) {
 </head>
 
 <body>
-<noscript>
 <div id="wrap">
 	<div id="page">
 		<div id="banner">
