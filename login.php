@@ -54,7 +54,7 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code
 
 }
 
-}else {
+} else {
 
         echo "<div class=\"sub\">You appear to be logged in. Wrong? Try deleting cookies... or [ <a href=\"" . $_SERVER["PHP_SELF"] . "?logout\">logout</a> ]</div>";
         if (isset($_GET["logout"])) { endSession(); }

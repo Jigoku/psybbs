@@ -26,7 +26,7 @@ $colour3 = "#1D584D";
 ?>
 
 html { 
-	background: #444;
+	background: #333; /* fallback */
     background: -moz-linear-gradient(left,  #111,  #222, #333, #333,#333,#333,#333,#333,#333,#222, #111);
 	margin-top: 40px; margin-bottom:30px; padding:0; 
 }

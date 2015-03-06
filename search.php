@@ -1,0 +1,42 @@
+<?php 
+ini_set('display_errors', 'on');
+include 'include/top.php';
+
+if (isset($_SESSION["id"])) {
+	 if (!isset($_POST["query"])) {
+		echo "<div class=\"sub\"><span class=\"large2\">Search</span><hr /></div>\n";
+		echo "<div class=\"sub\">\n";
+                echo "<form class=\"create\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\">\n";
+                echo "<label>Query</label> <input type=\"text\" size=\"50\" maxlength=\"50\" name=\"query\"><br />\n";
+                echo "<input type=\"submit\" value=\"search\" name=\"submit\" class=\"button\">\n";
+                echo "</form>\n";
+        echo "</div>\n";
+	} else {
+		
+		echo "<div class=\"sub\"><span class=\"large2\">Search Results</span><hr /></div>\n";
+		echo "<div class=\"sub\">\n";
+		
+		if (strlen($_POST["query"]) > 3) {
+			
+			//TODO add page filtering
+			$sql = "SELECT * FROM posts WHERE content LIKE '%".mEscape($_POST["query"])."%' ORDER by epoch";
+			$result = mysql_query($sql);
+		
+			if (mysql_num_rows($result) > 0) {
+				while ($query = mysql_fetch_assoc($result)) {
+					//TODO get thread title from threadid, and format results as link to post
+					echo $query['threadid'] . "<br />";
+				}
+			} else {
+				echo "No Results!\n";
+			}
+		} else {
+			echo "Search query must be at least 4 characters in length!\n";
+		}
+		echo "</div>\n";
+	}
+} else {
+	// not logged in (no access)
+}
+include 'include/bottom.php';
+?>
