@@ -290,6 +290,7 @@ a:hover   { color: $colour1; text-decoration: underline overline; }
 
 /* global */
 img { padding: 5px; }
+img.settings { padding: 5px; margin-left: -35px; margin-top: -5px;  position: absolute;}
 
 div#userbar {
 	color: #000;

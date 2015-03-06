@@ -30,7 +30,6 @@
 	function getAccountLevel()
 	function formatBB($text)
 	function showBBinfo()
-
 */
 
 
@@ -103,9 +102,10 @@ ini_set('date.timezone', 'UTC');
 	}
 
 	function showSettings() {
+		include 'config.php';
 		echo "<div class=\"sub\">";
 		
-		echo "<div class=\"info\"><span class=\"large2\">Board Settings</span><span class=\"right\"><a href=\"index.php\">Exit Settings</a></span></div>\n";
+		echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/settings.png\" /><span class=\"large2\">Board Settings</span><span class=\"right\"><a href=\"index.php\">Exit Settings</a></span></div>\n";
 		echo "<hr />\n";
 		echo "<div class=\"info\">Board Name [edit]</div>\n";
 		echo "<div class=\"info\">Board Slogan [edit]</div>\n";
@@ -117,17 +117,17 @@ ini_set('date.timezone', 'UTC');
 		echo "<div class=\"info\">Login Captcha [on|off]</div>\n";
 		echo "<div class=\"info\">Post Captcha [on|off]</div><br />\n";
 		
-                echo "<div class=\"info\"><span class=\"large2\">Topic Control</span></div>\n";
+                echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/topics.png\" /><span class=\"large2\">Topic Control</span></div>\n";
 		echo "<hr />\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?createtopic\">Create Topic</a></div>\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?edittopic\">Edit Topic</a></div>\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deletetopic\">Delete Topic</a></div><br />\n";
 		
-                echo "<div class=\"info\"><span class=\"large2\">Database</span></div>\n";
+                echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/database.png\" /><span class=\"large2\">Database</span></div>\n";
 		echo "<hr />\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?dropdb\">Delete database</a></div><br />\n";
 		
-                echo "<div class=\"info\"><span class=\"large2\">User Control</span></div>\n";
+                echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/users.png\" /><span class=\"large2\">User Control</span></div>\n";
 		echo "<hr />\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?lockuser\">Lock User</a></div>\n";
 		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deluser\">Delete User</a></div>\n";
@@ -168,7 +168,6 @@ ini_set('date.timezone', 'UTC');
 	function delReply($postid) {
 		mysql_query("DELETE FROM posts WHERE id = '". $postid ."'");
 		header("Location: " . $_SERVER["PHP_SELF"]);
-
 	}
 
 	//delete a thread (and all associated posts)
