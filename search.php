@@ -25,13 +25,12 @@ if (isset($_SESSION["id"])) {
 			if (mysql_num_rows($resultpost) > 0) {
 				while ($post = mysql_fetch_assoc($resultpost)) {
 					
-					//TODO currently links to thread, but doesn't highlight post. (add tags to scroll page to postid)
 					$sql = "SELECT * FROM threads WHERE id = '". mEscape($post["threadid"])."'";
 					$resultthread = mysql_query($sql);
 					while ($thread = mysql_fetch_assoc($resultthread)) {
-							echo "<a class=\"threaditem\" href=\"index.php?topic=".$thread["topic"]."&id=".$thread["id"]."\">
-									<div class=\"threaditem\">". $thread["subject"] ."<span class=\"author\"> - by ".$thread["author"]."</span>".
-									"</div>\n";
+							echo "<a class=\"threaditem\" href=\"index.php?topic=".$thread["topic"]."&id=".$thread["id"]."#".$post["id"]."\">
+									<div class=\"threaditem\"><span class=\"author\">".$post["author"]. " in </span> '". $thread["subject"] .
+									"'</div>\n";
 					}
 					///////////
 				}

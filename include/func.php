@@ -340,7 +340,7 @@ ini_set('date.timezone', 'UTC');
 				}
 				//end user level
 
-				displayPost($post["author"], $post["content"], $post["epoch"], $level);
+				displayPost($post["author"], $post["content"], $post["epoch"], $level, $post["id"]);
 			}
 
 			showBBinfo();
@@ -425,8 +425,8 @@ ini_set('date.timezone', 'UTC');
 	
 
 	//post formatting
-	function displayPost($author, $content, $epoch, $level) {
-			echo "<div class=\"post\">\n";
+	function displayPost($author, $content, $epoch, $level, $postid) {
+			echo "<a name=\"".$postid."\"></a><div class=\"post\">\n";
 
 			echo "\t<div class=\"postinfo\">\n";
 
@@ -436,7 +436,7 @@ ini_set('date.timezone', 'UTC');
 				echo "\t\t<img src=\"media/avatar/1.png\" class=\"avatar\" alt=\"\" />\n";		//  IMG
 
 			echo "\t</div>\n";
-			echo "\t<div class=\"postbody\"><span class=\"postdate\">Posted on ". date('M/d/Y', $epoch) ."</span><br />". formatBB(nl2br($content)) ."</div>"; //convert \n to <br />
+			echo "\t<div class=\"postbody\"><span class=\"postdate\">Posted on ". date('M/d/Y', $epoch) ." </span><br />". formatBB(nl2br($content)) ."</div>"; //convert \n to <br />
 
 			echo "</div>\n";
 
