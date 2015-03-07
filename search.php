@@ -20,12 +20,20 @@ if (isset($_SESSION["id"])) {
 			
 			//TODO add page filtering
 			$sql = "SELECT * FROM posts WHERE content LIKE '%".mEscape($_POST["query"])."%' ORDER by epoch";
-			$result = mysql_query($sql);
+			$resultpost = mysql_query($sql);
 		
-			if (mysql_num_rows($result) > 0) {
-				while ($query = mysql_fetch_assoc($result)) {
-					//TODO get thread title from threadid, and format results as link to post
-					echo $query['threadid'] . "<br />";
+			if (mysql_num_rows($resultpost) > 0) {
+				while ($post = mysql_fetch_assoc($resultpost)) {
+					
+					//TODO currently links to thread, but doesn't highlight post. (add tags to scroll page to postid)
+					$sql = "SELECT * FROM threads WHERE id = '". mEscape($post["threadid"])."'";
+					$resultthread = mysql_query($sql);
+					while ($thread = mysql_fetch_assoc($resultthread)) {
+							echo "<a class=\"threaditem\" href=\"index.php?topic=".$thread["topic"]."&id=".$thread["id"]."\">
+									<div class=\"threaditem\">". $thread["subject"] ."<span class=\"author\"> - by ".$thread["author"]."</span>".
+									"</div>\n";
+					}
+					///////////
 				}
 			} else {
 				echo "No Results!\n";

@@ -22,7 +22,7 @@ if (!$db_selected) {
 
   // defaults / testing tables
 	//REPLACCE THIS LATER WITH WEB CONTROLS VIA ADMIN/INSTALLATION PANEL
-  if (mysql_query($sql, $connection)) {
+	if (mysql_query($sql, $connection)) {
         mysql_select_db($mysql_database, $connection);
 
 	//create users table
@@ -79,10 +79,12 @@ if (!$db_selected) {
 	)", $connection);
 /*
 	//create global table
+	* //rewrite this (BROKEN) for issue #2
+	* 
 	mysql_query("CREATE TABLE global (
 		announce char(1) NOT NULL,
 		lockdown char(1) NOT NULL,
-		theme varchar(20) NOT NULL,
+		theme varchar(20) NOT NULL,  
 		themeopts varchar(100),
 		site_title varchar(200),
 		site_name varchar(200),
@@ -94,10 +96,10 @@ if (!$db_selected) {
 
 	mysql_query("INSERT INTO global (announce, lockdown, theme, themeopts) VALUES ('Y', 'N', 'cyantech', '?fixed')" , $connection);
 */
-	
-  } else {
-      echo 'Error creating database: ' . mysql_error() . "\n";
-  }
+
+	} else {
+		echo 'Error creating database: ' . mysql_error() . "\n";
+	}
 }
 
 
