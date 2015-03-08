@@ -1,15 +1,25 @@
 <?php
 /*
-For use with nginx.conf, add to the server { }  section;
-	...
-
-	error_page  404              /bbs/error.php?code=404;
-        error_page  500              /bbs/error.php?code=500;
-        error_page  502              /bbs/error.php?code=502;
-        error_page  503              /bbs/error.php?code=503;
-        error_page  504              /bbs/error.php?code=504;
-
-	...
+ * NOTE, this file will not be processed unless defined within 
+ * your webserver config. This is used for site wide error messages, 
+ * if you want a consistent site appearance throughout.
+ *
+ * Internal errors are processed by 'include/error.php' for example,
+ * "Search returned 0 results" or "You have been banned", etc.
+ * 
+ * For 404's, 403's, this is the file which handles that.
+ *
+ * For use with nginx.conf, add to the server { }  section;
+ * fo reach error code you want to process with psyBBS.
+ * 
+ * ...
+ *   error_page  404              /bbs/error.php?code=404;
+ *   error_page  500              /bbs/error.php?code=500;
+ *   error_page  502              /bbs/error.php?code=502;
+ *   error_page  503              /bbs/error.php?code=503;
+ *   error_page  504              /bbs/error.php?code=504;
+ * ...
+ * 
 */
 
 include "include/top.php";
@@ -63,7 +73,6 @@ switch ($_GET["code"]) {
 
 	echo "<div id=\"sub\"><span class=\"large2\">Unknown Error</span></div>";
 }
-
 
 
 include "include/bottom.php";
