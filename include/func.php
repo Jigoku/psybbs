@@ -109,7 +109,8 @@ ini_set('date.timezone', 'UTC');
 		echo "<hr />\n";
 		echo "<div class=\"info\">Board Name [edit]</div>\n";
 		echo "<div class=\"info\">Board Slogan [edit]</div>\n";
-		echo "<div class=\"info\">Board Announcement [on|off|edit]</div>\n";
+		echo "<div class=\"info\">Board Announcement [<a href=\"". $_SERVER["PHP_SELF"] ."?announce_on\">on</a>".
+													"|<a href=\"". $_SERVER["PHP_SELF"] ."?announce_off\">off</a>|edit]</div>\n";
 		echo "<div class=\"info\">Board Rules [edit]</div>\n";
 		echo "<div class=\"info\">Board Lockdown [public|private|locked]</div>\n";
 		echo "<div class=\"info\">Board Logo [image|disable]</div>\n";
@@ -163,7 +164,16 @@ ini_set('date.timezone', 'UTC');
 
 	}
 
-
+	function enableAnnouncement() {
+		mysql_query("UPDATE global SET announce='Y'");
+		header("Location: " . $_SERVER["PHP_SELF"]);
+	}
+	
+	function disableAnnouncement() {
+		mysql_query("UPDATE global SET announce='N'");
+		header("Location: " . $_SERVER["PHP_SELF"]);
+	}
+	
 	//delete a post from a thread
 	function delReply($postid) {
 		mysql_query("DELETE FROM posts WHERE id = '". $postid ."'");
@@ -514,8 +524,19 @@ ini_set('date.timezone', 'UTC');
 		$result = mysql_query("
 			SELECT id FROM users WHERE username = '" . mEscape($username) . "'"
 		) or trigger_error(mysql_error());
-
+		
 		if(mysql_num_rows($result) > 0) { return true; }
+	}
+
+	//check if announcement is enabled
+	function checkAnnounceEnabled() {
+		$result = mysql_query("
+			SELECT announce FROM global"
+		) or trigger_error(mysql_error());
+		$ret = mysql_fetch_assoc($result);
+		
+		if($ret["announce"] == "Y") { return true; }
+	
 	}
 
 	//check if thread exists

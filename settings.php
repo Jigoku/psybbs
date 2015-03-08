@@ -81,6 +81,12 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 		} elseif (array_keys($_GET) === array('lockuser')) {
 			echo "<div class=\"sub\"><span class=\"large2\">Lock User</span><hr /></div>\n";
 
+		//user control
+		} elseif (array_keys($_GET) === array('announce_on')) {
+			enableAnnouncement();
+		} elseif (array_keys($_GET) === array('announce_off')) {
+			disableAnnouncement();
+
 		} elseif (array_keys($_GET) === array('deluser')) {
 			echo "<div class=\"sub\"><span class=\"large2\">Delete User</span><hr /></div>\n";
 

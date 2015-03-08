@@ -1,36 +1,36 @@
 <?php
-	$default_admin_username = ""; //you must change set this
-	$default_admin_password = ""; //you must change set this
+	//admin account details
+	$default_admin_username = "psy"; 
+	$default_admin_password = "psy";
 
+	//psyBBS version
+	$version = "0.3";
+
+	//mysql settings
 	$mysql_host 	= "localhost";
 	$mysql_user 	= "";
 	$mysql_pass 	= "";
-	$mysql_database = "";
+	$mysql_database = "psyBBS";
 	$mysql_salt 	= "";
 
-	//text logo for the board header
-	$site_title = "<span class=\"bannertext\">Bulletin</span><span class=\"banneremphasis\">Board</span>";
-	
-	//small announcement for header area
-	$site_announce = "Announcement: Hello world";
-	$theme = "mintphosphor";
-
-	//$themeopts = "?fixed";
-	$themeopts = "";
-
-	//global <title>
+	//text logo for the header
+	$site_title = "<span class=\"bannertext\">Example</span><span class=\"banneremphasis\">Text</span>";
 	$site_name = "psyBBS";
-	$site_quote = "psyBBS 0.3";
+	$site_announce = "Announcement: Welcome to psyBBS!";
+	$site_quote = "psyBBS $version";
 
+	//theme settings
+	$theme = "mintphosphor";
+	$themeopts = "?fixed";
 
+	//page sorting
 	$items_per_page = 10;
 
-	//user level aliases shown on posts/profile
+	//user level aliases
 	$userLevel = [
-		"banned" => "banned user",
-		"member" => "registered user",
-		"moderator" => "mod",
-		"admin" => "board admin",
+		"banned" => "remnant",
+		"member" => "shadow",
+		"moderator" => "agent",
+		"admin" => "operator",
 	];
-	
 ?>

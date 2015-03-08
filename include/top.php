@@ -77,25 +77,23 @@ if (!$db_selected) {
 		threadid int(8) NOT NULL,
 		content varchar(5000) NOT NULL
 	)", $connection);
-/*
+
 	//create global table
-	* //rewrite this (BROKEN) for issue #2
-	* 
 	mysql_query("CREATE TABLE global (
 		announce char(1) NOT NULL,
 		lockdown char(1) NOT NULL,
 		theme varchar(20) NOT NULL,  
-		themeopts varchar(100),
-		site_title varchar(200),
-		site_name varchar(200),
-		site_quote varchar(200),
-		site_announce varchar(500),
-		version varchar(10) NOT NULL,
-
+		themeopts varchar(100) NOT NULL,
+		site_title varchar(100) NOT NULL,
+		site_name varchar(100) NOT NULL,
+		site_quote varchar(100) NOT NULL,
+		site_announce varchar(500) NOT NULL,
+		version varchar(10) NOT NULL
 	)", $connection);
 
-	mysql_query("INSERT INTO global (announce, lockdown, theme, themeopts) VALUES ('Y', 'N', 'cyantech', '?fixed')" , $connection);
-*/
+	mysql_query("INSERT INTO global (announce, lockdown, theme, themeopts) VALUES ('Y', 'N', 'mintphosphor', '?fixed')" , $connection);
+	mysql_query("INSERT INTO global (site_title, site_name, site_announce, site_quote, version) VALUES ('".$site_title."', '".$site_name."', '".$site_announce."', 'psyBBS ".$version."', '".$version."')" , $connection);
+
 
 	} else {
 		echo 'Error creating database: ' . mysql_error() . "\n";

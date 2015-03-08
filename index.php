@@ -23,7 +23,9 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 		echo "\t\t</div>\n\n";
 		
 		 //announcements (if enabled)..
-		echo "<div id=\"announce\">$site_announce</div>";
+		if (checkAnnounceEnabled()) {
+			echo "<div id=\"announce\">$site_announce</div>";
+		}
 
 		if (!(isset($_GET["topic"]))) {
 

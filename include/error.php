@@ -1,5 +1,5 @@
-<div id="sub">
-	<span class="large2">Error</span>
+<div class="sub">
+	<span class="large2">Error</span><hr />
 	<div class="sub">
 		<?php echo $errormsg; ?>
 	</div>
