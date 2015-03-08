@@ -88,9 +88,8 @@ ini_set('date.timezone', 'UTC');
 		include 'config.php';
 		
 		if (compareLogin($_SESSION["username"], $currentpassword)) {
-			echo "lol";
 			mysql_query("UPDATE users SET password='".hash('sha1', $newpassword.$mysql_salt)."' WHERE username='".$_SESSION["username"]."'");
-			//header("Location: " . $_SERVER["PHP_SELF"] . "?account");
+			header("Location: " . $_SERVER["PHP_SELF"] . "?account");
 		} else {
 			echo "<div class=\"sub\"><span class=\"large2\">Error: Password does not match!</span>\n";
 		}
