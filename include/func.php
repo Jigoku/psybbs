@@ -68,9 +68,32 @@ ini_set('date.timezone', 'UTC');
 		echo "\t<div class=\"info\">You have posted <span class=\"hl\">" .  ($numposts - $numthreads) . "</span> replies.</div>\n";
 		echo "\t<div class=\"info\">You have started <span class=\"hl\">" .  $numthreads . "</span> threads.</div>\n</div>\n";
 		echo "\t<div class=\"sub\"><span class=\"large2\">Account Settings</span>\n\t<hr />\n";
-		echo "\t<div class=\"info\">Change Password</div>\n</div>\n";
+		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;password\">Change Password</a></div>\n</div>\n";
 
 
+	}
+
+	function changePasswordPrompt() {
+		echo "<div class=\"sub\">\n";
+			echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?changepassword\">\n";
+			echo "<label>Current Password</label> <input type=\"text\" size=\"20\" maxlength=\"40\" name=\"currentpassword\"><br />\n";
+			echo "<label>New Password</label> <input type=\"text\" size=\"20\" maxlength=\"40\" name=\"newpassword\"><br />\n";
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\" class=\"button\">\n";
+			echo "</form>\n";
+		echo "</div>\n";
+		
+	}
+	
+	function setNewPassword($currentpassword, $newpassword) {
+		include 'config.php';
+		
+		if (compareLogin($_SESSION["username"], $currentpassword)) {
+			echo "lol";
+			mysql_query("UPDATE users SET password='".hash('sha1', $newpassword.$mysql_salt)."' WHERE username='".$_SESSION["username"]."'");
+			//header("Location: " . $_SERVER["PHP_SELF"] . "?account");
+		} else {
+			echo "<div class=\"sub\"><span class=\"large2\">Error: Password does not match!</span>\n";
+		}
 	}
 
 	//get information about the database
@@ -571,6 +594,8 @@ ini_set('date.timezone', 'UTC');
 		$row = mysql_fetch_assoc($result);
 		return $row['level'];
 	}
+	
+	
 
 	function formatBB($text) {
 

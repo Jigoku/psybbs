@@ -33,6 +33,17 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 				//show profile information per active account
 				showAccount();
 
+			} elseif (array_keys($_GET) === array('account', 'password')) {
+				changePasswordPrompt();
+			
+			} elseif (array_keys($_GET) === array('changepassword')) {
+				if (isset($_POST["currentpassword"]) && isset($_POST["newpassword"])) {
+					setNewPassword(
+						mEscape($_POST["currentpassword"]), 
+						mEscape($_POST["newpassword"])
+					);
+				}
+				
 			} elseif (array_keys($_GET) === array('stats')) {
 				//show server (forum) stats
 				showStats();
