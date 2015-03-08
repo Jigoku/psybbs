@@ -17,6 +17,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 		echo "\t\t\t\t<a class=\"userbar\" href=\"" . $_SERVER["PHP_SELF"] . "\">topics</a>\n";
 		echo "\t\t\t\t<a class=\"userbar\" href=\"" . $_SERVER["PHP_SELF"] . "?account\">account</a>\n";
 		echo "\t\t\t\t<a class=\"userbar\" href=\"" . $_SERVER["PHP_SELF"] . "?stats\">stats</a>\n";
+		echo "\t\t\t\t<a class=\"userbar\" href=\"search.php\">search</a>\n";
 		echo "\t\t\t\t<a class=\"userbar\" href=\"" . $_SERVER["PHP_SELF"] . "?logout\">logout</a>\n";
 		echo "\t\t\t</span>\n";
 		echo "\t\t</div>\n\n";
