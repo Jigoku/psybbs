@@ -12,6 +12,13 @@ No, it has nothing to do with the korean guy. Pronounced psybbs as in 'sye'bee'b
 ##NOTE
 This is and will be full of bugs right now, consider this software as pre-alpha quality. Some features are missing and/or need to be rewritten.
 
+##Project Goals
+* ZERO javascript. 
+* XHTML / CSS3 valid
+* SQLi resistant
+* Fast
+* Easy to administer
+
 ##Install
 * Edit include/config-example.php
 * Rename include/config.php
