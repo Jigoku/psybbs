@@ -76,8 +76,8 @@ ini_set('date.timezone', 'UTC');
 	function changePasswordPrompt() {
 		echo "<div class=\"sub\">\n";
 			echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?changepassword\">\n";
-			echo "<label>Current Password</label> <input type=\"text\" size=\"20\" maxlength=\"40\" name=\"currentpassword\"><br />\n";
-			echo "<label>New Password</label> <input type=\"text\" size=\"20\" maxlength=\"40\" name=\"newpassword\"><br />\n";
+			echo "<label>Current Password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"currentpassword\"><br />\n";
+			echo "<label>New Password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword\"><br />\n";
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\" class=\"button\">\n";
 			echo "</form>\n";
 		echo "</div>\n";
