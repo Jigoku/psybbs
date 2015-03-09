@@ -597,6 +597,10 @@ ini_set('date.timezone', 'UTC');
 	
 
 	function formatBB($text) {
+		//notes for iframe embeds:
+		// youtube = video tag after ?v= (bJ9r8LMU9bQ)
+		// vimeo = video number (vimeo.com/26179832)
+		// soundcloud = band/track (l7theband/wargasm)
 
 		// BBcode array
 		$find = array(
@@ -608,8 +612,10 @@ ini_set('date.timezone', 'UTC');
 			'~\[size=(.*?)\](.*?)\[/size\]~s',
 			'~\[color=(.*?)\](.*?)\[/color\]~s',
 			'~\[youtube\](.*?)\[/youtube\]~s',
+			'~\[vimeo\](.*?)\[/vimeo\]~s',
 			'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
-			'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s'
+			'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
+			'~\[soundcloud\](.*?)\[/soundcloud\]~s',
 		);
 
 		// HTML tags to replace BBcode
@@ -621,11 +627,12 @@ ini_set('date.timezone', 'UTC');
 			'<p class="quote">$1</p>',
 			'<span style="font-size:$1px;">$2</span>',
 			'<span style="color:$1;">$2</span>',
-			'<iframe width="560" height="315" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>',
+			'<iframe width="500" height="281" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>',
+			'<iframe width="500" height="281" src="https://player.vimeo.com/video/$1" frameborder="0" allowfullscreen></iframe>',
 			'<a href="$1">$1</a>',
-			'<a href="$1"><img src="$1" width="100%" alt="" /></a>'
+			'<a href="$1"><img src="$1" width="100%" alt="" /></a>',
+			'<iframe width="500" height="150" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/$1&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>'
 		);
-
 		return preg_replace($find,$replace,$text);
 	}
 
