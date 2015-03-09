@@ -15,19 +15,21 @@
 <?php
 //theme colour vars here
 
-/*$colour1 = "#71D096"; //phosphor
-$colour2 = "#194D36";
-$colour3 = "#0B221A";*/
+$colour1 = "#71D096"; //phosphor
+$colour2 = "#0B221A";
 
-$colour1 = "#3EBB9E"; //cyan
-$colour2 = "#ff0000";
-$colour3 = "#1D584D";
+/*$colour1 = "#3EBB9E"; //cyanic
+$colour2 = "#1D584D";*/
+
+/*$colour1 = "#884411"; //rust
+$colour2 = "#aa7722";*/
 
 ?>
 
 html { 
 	background: #333; /* fallback */
     background: -moz-linear-gradient(left,  #111,  #222, #333, #333,#333,#333,#333,#333,#333,#222, #111);
+    background: -webkit-linear-gradient(left,  #111,  #222, #333, #333,#333,#333,#333,#333,#333,#222, #111);
 	margin-top: 40px; margin-bottom:30px; padding:0; 
 }
 
@@ -113,6 +115,7 @@ div#banner {
 	background: #222; /* fallback */
 	padding: 10px; 
 	background: -moz-linear-gradient(top,  #333,  #111);
+	background: -webkit-linear-gradient(top,  #333,  #111);
 	font-family: Monospace;
 	font-size: 20px;
 	font-weight: bold;
@@ -141,6 +144,7 @@ a.topic:link,a.topic:active {
 a.topic:hover {
 	background: #222; /* fallback */
 	background: -moz-linear-gradient(bottom, #222, #111);
+	background: -webkit-linear-gradient(bottom, #222, #111);
 	border-left: 1px solid $colour1;
 	margin-left: -1px;
 }
@@ -200,6 +204,7 @@ div.topicitem {
 div.topic:hover, div.threaditem:hover {
 	background: #222; /* fallback */
 	background: -moz-linear-gradient(top, #222, #111);
+	background: -webkit-linear-gradient(top, #222, #111);
 
 }
 
@@ -298,7 +303,8 @@ div#userbar {
 	color: #000;
 	padding:10px;
 	background: $colour1; /* fallback */
-	background: -moz-linear-gradient(top, $colour3,  $colour1);
+	background: -moz-linear-gradient(top, $colour2,  $colour1);
+	background: -webkit-linear-gradient(top, $colour2,  $colour1);
 }
 
 a.userbar:link,a.userbar:visited,a.userbar:active    { 
@@ -310,12 +316,14 @@ a.userbar:link,a.userbar:visited,a.userbar:active    {
 	padding: 5px;
 	background: #222; /* fallback */
 	background: -moz-linear-gradient(top, #111,  #333);
+	background: -webkit-linear-gradient(top, #111,  #333);
 }
 a.userbar:hover { 
 	color: #fff; 
 	text-decoration: none; 
 	background: #333; /* fallback */
 	background: -moz-linear-gradient(top, #222,  #444);
+	background: -webkit-linear-gradient(top, #222,  #444);
 }
 
 /* forms */

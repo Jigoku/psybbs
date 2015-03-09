@@ -643,9 +643,11 @@ ini_set('date.timezone', 'UTC');
 		echo "[u]underline[/u]\n";
 		echo "[s]strikethrough[/s]\n";
 		echo "[quote]quoted text[/quote]\n";
+		echo "[soundcloud]band/track[/soundcloud]\n";
+		echo "[vimeo]video number[/vimeo]\n";
+		echo "[youtube]vieo tag[/youtube]\n";
 		echo "[size=20]Text size 20[/size]\n";
 		echo "[color=#ff0000]red text[/color]\n";
-		echo "[onion]http://somethinginteresting.onion/[/onion]\n";
 		echo "</pre></div>";
 	}
 
