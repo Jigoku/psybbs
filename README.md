@@ -25,3 +25,7 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 
 ##Theme Preview
 ![psyBBS mintphosphor](theme/mintphosphor/preview.png)
+
+##Pentesting
+If you are working on a pentest script/software for finding SQLi, XSS, javascript injection or the 
+likes, feel free to clone/abuse psyBBS and report any finds! Thanks
