@@ -607,9 +607,9 @@ ini_set('date.timezone', 'UTC');
 			'~\[quote\](.*?)\[/quote\]~s',
 			'~\[size=(.*?)\](.*?)\[/size\]~s',
 			'~\[color=(.*?)\](.*?)\[/color\]~s',
-			'~\[onion\](.*?)\[/onion\]~s',
-			//'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
-			//'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s'
+			'~\[youtube\](.*?)\[/youtube\]~s',
+			'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
+			'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s'
 		);
 
 		// HTML tags to replace BBcode
@@ -621,9 +621,9 @@ ini_set('date.timezone', 'UTC');
 			'<p class="quote">$1</p>',
 			'<span style="font-size:$1px;">$2</span>',
 			'<span style="color:$1;">$2</span>',
-			'<span style="color:#3784A4;background:#222;">$1</span>',
-			//'<a href="$1">$1</a>',
-			//'<img src="$1" alt="" />'
+			'<iframe width="560" height="315" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>',
+			'<a href="$1">$1</a>',
+			'<a href="$1"><img src="$1" width="100%" alt="" /></a>'
 		);
 
 		return preg_replace($find,$replace,$text);
