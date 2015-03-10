@@ -1,36 +1,21 @@
 <?php
-/*
-	function mEscape($str)
-	function showAccount()
-	function showStats()
-	function showSettings()
-	function delTopic($pagename)
-	function delUser($username)
-	function delReply($postid)
-	function delThread($threadid)
-	function addTopic($title, $pagename, $description)
-	function createThread($topic, $subject, $message, $author)
-	function createReply($author, $threadid, $topic, $message)
-	function listTopics()
-	function getLatestPost($topic)
-	function listReplies($topic, $id)
-	function listThreads($topic)
-	function displayPost($author, $content, $epoch, $level)
-	function formatUserLevel($level)
-	function threadIsLocked()
-	function threadIsSticky()
-	function countReplies($threadid)
-	function getCurrentTopicTitle($pagename)
-	function countTopics($topic)
-	function compareLogin($username, $password)
-	function checkUserExists($username)
-	function checkThreadExists($threadid)
-	function checkTopicExists($topic)
-	function endSession()
-	function getAccountLevel()
-	function formatBB($text)
-	function showBBinfo()
-*/
+
+/* psyBBS (func.php)
+ * This file contains all the functions
+ * 
+ * Copyright (C) 2015 Ricky K. Thomson
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * u should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>. 
+ */
 
 
 
