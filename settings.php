@@ -121,8 +121,11 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<div class=\"sub\"><span class=\"large2\">Modify User</span><hr /></div>\n";
 
 
-
-
+		} elseif (array_keys($_GET) === array('setboardname')) {
+			setBoardName(
+				mEscape($_POST["boardname"])
+			);
+			
 		} else {
 			showSettings();
 		}

@@ -129,7 +129,14 @@ ini_set('date.timezone', 'UTC');
 		
 		echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/settings.png\" /><span class=\"large2\">Board Settings</span><span class=\"right\"><a href=\"index.php\">Exit Settings</a></span></div>\n";
 		echo "<hr />\n";
-		echo "<div class=\"info\">Board Name [edit]</div>\n";
+
+		//board name
+		echo "<form class=\"info\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardname\">\n";
+		echo "<label>Board Name</label> <input type=\"text\" size=\"20\" maxlength=\"255\" name=\"boardname\" value=\"".getMysqlStr("site_name","global")."\">\n";	
+		echo "<input type=\"submit\" value=\"Save\" name=\"submit\" class=\"info\">\n";
+		echo "</form>\n";
+		
+		
 		echo "<div class=\"info\">Board Slogan [edit]</div>\n";
 		echo "<div class=\"info\">Board Announcement [<a href=\"". $_SERVER["PHP_SELF"] ."?announce_on\">on</a>".
 													"|<a href=\"". $_SERVER["PHP_SELF"] ."?announce_off\">off</a>|edit]</div>\n";
@@ -228,6 +235,12 @@ ini_set('date.timezone', 'UTC');
 			echo "<div class=\"sub\"><span class=\"large2\">Failed to create topic. Does it exist already? Is pagename a-z0-9?</span></div>";
 		}
 
+	}
+
+	//change the board name
+	function setBoardName($str) {
+		mysql_query("UPDATE global SET site_name='".$str."'");
+		header("Location: " . $_SERVER["PHP_SELF"]);
 	}
 
 	function createThread($topic, $subject, $message, $author) {
