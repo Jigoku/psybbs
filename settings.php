@@ -126,6 +126,11 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 				mEscape($_POST["boardname"])
 			);
 			
+		} elseif (array_keys($_GET) === array('setboardquote')) {
+			setBoardQuote(
+				mEscape($_POST["boardquote"])
+			);
+			
 		} else {
 			showSettings();
 		}

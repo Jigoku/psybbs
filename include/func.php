@@ -136,8 +136,13 @@ ini_set('date.timezone', 'UTC');
 		echo "<input type=\"submit\" value=\"Save\" name=\"submit\" class=\"info\">\n";
 		echo "</form>\n";
 		
+		//board quote
+		echo "<form class=\"info\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardquote\">\n";
+		echo "<label>Board Quote</label> <input type=\"text\" size=\"20\" maxlength=\"255\" name=\"boardquote\" value=\"".getMysqlStr("site_quote","global")."\">\n";	
+		echo "<input type=\"submit\" value=\"Save\" name=\"submit\" class=\"info\">\n";
+		echo "</form>\n";
 		
-		echo "<div class=\"info\">Board Slogan [edit]</div>\n";
+
 		echo "<div class=\"info\">Board Announcement [<a href=\"". $_SERVER["PHP_SELF"] ."?announce_on\">on</a>".
 													"|<a href=\"". $_SERVER["PHP_SELF"] ."?announce_off\">off</a>|edit]</div>\n";
 		echo "<div class=\"info\">Board Rules [edit]</div>\n";
@@ -237,11 +242,26 @@ ini_set('date.timezone', 'UTC');
 
 	}
 
+
+	
+	
+	// POSSIBLY MERGE these setBoard* functions.....
+
 	//change the board name
 	function setBoardName($str) {
 		mysql_query("UPDATE global SET site_name='".$str."'");
 		header("Location: " . $_SERVER["PHP_SELF"]);
 	}
+	
+	//change the board quote
+	function setBoardQuote($str) {
+		mysql_query("UPDATE global SET site_quote='".$str."'") or trigger_error(mysql_error());
+		header("Location: " . $_SERVER["PHP_SELF"]);
+	}
+
+
+
+
 
 	function createThread($topic, $subject, $message, $author) {
 
