@@ -333,7 +333,13 @@ ini_set('date.timezone', 'UTC');
 		return "Unimplemented";
 	}
 	
-	
+	// return value for given colum in table
+	// used for just 'global' table right now
+	function getMysqlStr($column, $table) {
+		$sql = "SELECT ".$column." FROM ".$table."";
+		$result = mysql_fetch_assoc(mysql_query($sql));
+		return $result[$column];
+	}
 
 	function listReplies($topic, $id) {
 
@@ -507,8 +513,7 @@ ini_set('date.timezone', 'UTC');
 			or trigger_error(mysql_error());
 
 		while ($pagename = mysql_fetch_array($result)) {
-			global $site_name;
-			return $site_name . " | " .$pagename["title"];
+			return getMysqlStr("site_name", "global") . " | " .$pagename["title"];
 		}
 	}
 
@@ -552,13 +557,7 @@ ini_set('date.timezone', 'UTC');
 
 	//check if announcement is enabled
 	function checkAnnounceEnabled() {
-		$result = mysql_query("
-			SELECT announce FROM global"
-		) or trigger_error(mysql_error());
-		$ret = mysql_fetch_assoc($result);
-		
-		if($ret["announce"] == "Y") { return true; }
-	
+		if(getMysqlStr("announce", "global") == "Y") { return true; }
 	}
 
 	//check if thread exists
@@ -583,8 +582,8 @@ ini_set('date.timezone', 'UTC');
 
 	//used on logout
 	function endSession() {
-			session_destroy();
-                        header("Location: " . $_SERVER["PHP_SELF"]);
+		session_destroy();
+		header("Location: " . $_SERVER["PHP_SELF"]);
 	}
 
 	//return the access level for active user

@@ -33,7 +33,7 @@ if (!$db_selected) {
 		username varchar(20) NOT NULL,
 		password varchar(40) NOT NULL,
 		level int(1) UNSIGNED
-	)", $connection);
+	)", $connection) or trigger_error(mysql_error());
 
 	//insert initial operator account (used for setup)
 	mysql_query("INSERT INTO users (username, password, level, epoch) VALUES ('".$default_admin_username."', '". hash('sha1', $default_admin_password.$mysql_salt) ."', 3,'".time()."')" , $connection);
@@ -53,7 +53,7 @@ if (!$db_selected) {
 		title varchar(255) NOT NULL,
 		pagename varchar(30) NOT NULL,
 		description varchar(255)
-	)", $connection);
+	)", $connection) or trigger_error(mysql_error());
 
 	mysql_query("INSERT INTO topics (title, pagename, description) VALUES ('Default Topic', 'default', 	'This is an example topic')" , $connection);
 	
@@ -67,7 +67,7 @@ if (!$db_selected) {
 		subject varchar(70) NOT NULL,
 		sticky int(1) NOT NULL,
 		locked int(1) NOT NULL
-	)", $connection);
+	)", $connection) or trigger_error(mysql_error());
 
 	//create posts table
 	mysql_query("CREATE TABLE posts (
@@ -76,7 +76,7 @@ if (!$db_selected) {
 		epoch int(11) NOT NULL,
 		threadid int(8) NOT NULL,
 		content varchar(5000) NOT NULL
-	)", $connection);
+	)", $connection) or trigger_error(mysql_error());
 
 	//create global table
 	mysql_query("CREATE TABLE global (
@@ -89,10 +89,33 @@ if (!$db_selected) {
 		site_quote varchar(100) NOT NULL,
 		site_announce varchar(500) NOT NULL,
 		version varchar(10) NOT NULL
-	)", $connection);
-
-	mysql_query("INSERT INTO global (announce, lockdown, theme, themeopts) VALUES ('Y', 'N', 'mintphosphor', '?fixed')" , $connection);
-	mysql_query("INSERT INTO global (site_title, site_name, site_announce, site_quote, version) VALUES ('".$site_title."', '".$site_name."', '".$site_announce."', 'psyBBS ".$version."', '".$version."')" , $connection);
+	)", $connection) or trigger_error(mysql_error());
+	
+	
+	//default values (this could be tidied up...)
+	mysql_query("INSERT INTO global
+		(
+			announce, 
+			lockdown, 
+			theme, 
+			themeopts, 
+			site_title, 
+			site_name, 
+			site_announce, 
+			site_quote, 
+			version
+			) 
+		VALUES (
+			'Y', 
+			'N', 
+			'mintphosphor', 
+			'?fixed', 
+			'".$site_title."', 
+			'".$site_name."', 
+			'".$site_announce."', 
+			'psyBBS ".$version."', 
+			'".$version."'
+		)" , $connection);
 
 
 	} else {
@@ -113,17 +136,17 @@ if (!$db_selected) {
 	<meta http-equiv="content-language" content="en-US" />
 
 	<meta name="description" content="psyBBS" />
-	<meta name="copyright" content="GPLv3, CC0" />
+	<meta name="copyright" content="GPLv3, CC" />
 	<meta name="robots" content="nofollow" />
 
 	<link href="media/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	<link href="theme/<?php echo $theme; ?>/theme.css.php<?php echo $themeopts; ?>" rel="stylesheet" type="text/css" />
-	<title><?php if(isset($_GET["topic"])){ echo getCurrentTopicTitle($_GET["topic"]); } else { echo $site_name; } ?></title>
+	<link href="theme/<?php echo getMysqlStr("theme", "global"); ?>/theme.css.php<?php echo getMysqlStr("themeopts", "global");; ?>" rel="stylesheet" type="text/css" />
+	<title><?php if(isset($_GET["topic"])){ echo getCurrentTopicTitle($_GET["topic"]); } else { echo getMysqlStr("site_name", "global");; } ?></title>
 </head>
 
 <body>
 <div id="wrap">
 	<div id="page">
 		<div id="banner">
-			<?php echo $site_title ?><span class="bannerquote"><?php echo $site_quote; ?></span>
+			<?php echo getMysqlStr("site_title", "global") ?><span class="bannerquote"><?php echo getMysqlStr("site_quote", "global"); ?></span>
 		</div>
