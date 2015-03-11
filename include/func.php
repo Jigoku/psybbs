@@ -271,7 +271,7 @@ ini_set('date.timezone', 'UTC');
 			");
 
 			//redirect to new thread
-			header("Location: " . $_SERVER["PHP_SELF"] . "?topic=" . $topic .  "&id=" . $rows);
+			header("Location: " . $_SERVER["PHP_SELF"] . "?topic=" . $topic .  "&id=" . $rows . "&page=1");
 		} else {
 			echo "<div class=\"sub\"><span class=\"large2\">You must enter at least something...</span></div>";
 		}
@@ -290,7 +290,7 @@ ini_set('date.timezone', 'UTC');
 			");
 
 			//redirect to same page
-			header("Location: " . $_SERVER["PHP_SELF"] . "?topic=" . $topic .  "&id=" . $threadid);
+			header("Location: " . $_SERVER["PHP_SELF"] . "?topic=" . $topic .  "&id=" . $threadid . "&page=1");
 
 		} else {
 
@@ -335,12 +335,12 @@ ini_set('date.timezone', 'UTC');
 				echo "</a>\n";
 		  	}
 		  		if ($total_topics > $items_per_page) {
-				echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
+					echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
 					for ($i=1; $i<=$total_pages; $i++) {
 				            echo "<a class=\"pagebutton\" href=\"index.php?page=$i\">$i</a>&nbsp;";
 					};
-				echo "</div>\n";
-			}
+					echo "</div>\n";
+				}
 		} else {
 			echo "<div class=\"sub\"><span class=\"large2\">No results</span></div>";
 		}
@@ -359,9 +359,24 @@ ini_set('date.timezone', 'UTC');
 		return $result[$column];
 	}
 
+
+
+
 	function listReplies($topic, $id) {
 
-		$result = mysql_query("SELECT author, subject, epoch FROM threads WHERE id = '" . $id."'")
+		include 'config.php';
+
+		$sql = "SELECT COUNT(id) FROM posts WHERE threadid = '".$id."'";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_row($result);
+		$total_replies = $row[0];
+		$total_pages = ceil($total_replies / $items_per_page);
+	
+		if (isset($_GET["page"]) && is_numeric($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+	
+		$start_from = ($page-1) * $items_per_page;
+		
+		$result = mysql_query("SELECT author, subject, epoch FROM threads WHERE id = '" . $id."'" )
 			or trigger_error(mysql_error());
 
 		//make sure thread exists
@@ -379,10 +394,16 @@ ini_set('date.timezone', 'UTC');
 
 			//get and format the replies to the thread
 
-			$result = mysql_query("SELECT author, id, threadid, epoch, content FROM posts WHERE threadid = '" . $id."'")
+			$result = mysql_query("SELECT * FROM posts WHERE threadid = '" . $id."' ORDER by epoch ASC LIMIT $start_from, ". $items_per_page)
 				or trigger_error(mysql_error());
 
-
+		  	if ($total_replies > $items_per_page) {
+				echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
+				for ($i=1; $i<=$total_pages; $i++) {
+					echo "<a class=\"pagebutton\" href=\"index.php?topic=" . $topic ."&amp;id=$id&amp;page=$i\">$i</a>&nbsp;";
+				};
+				echo "</div>\n";
+			}
 
 			while ($post = mysql_fetch_array($result)) {
 				if (getAccountLevel() > 1) { echo "<div class=\"threadopts\">Post Options | <a href=\"?deletepost=". $post["id"] ."\">delete post</a> &brvbar; edit</div>\n"; }
@@ -407,7 +428,14 @@ ini_set('date.timezone', 'UTC');
                                  echo "<input type=\"submit\" value=\"Post Reply\" name=\"submit\" class=\"button\" />\n";
                                  echo "</form>\n";
                         echo "</div>\n";
-
+                        
+		  	if ($total_replies > $items_per_page) {
+				echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
+				for ($i=1; $i<=$total_pages; $i++) {
+					echo "<a class=\"pagebutton\" href=\"index.php?topic=" . $topic ."&amp;id=$id&amp;page=$i\">$i</a>&nbsp;";
+				};
+				echo "</div>\n";
+			}
 		} else {
 			//invalid thread
 			echo "<div class=\"sub\"><span class=\"large2\">Thread does not exist!</span></div>";
@@ -446,19 +474,19 @@ ini_set('date.timezone', 'UTC');
 
 			while ($thread = mysql_fetch_assoc($result)) {
 						echo "<a class=\"threaditem\" href=\"?topic=" . $topic ."&id=" .
-						$thread['id'] ."\"><img class=\"thread\" src=\"theme/".$theme."/icon/thread.png\"/><div class=\"threaditem\"><span class=\"subject\">". $thread['subject'] .
+						$thread['id'] ."&page=1\"><img class=\"thread\" src=\"theme/".$theme."/icon/thread.png\"/><div class=\"threaditem\"><span class=\"subject\">". $thread['subject'] .
 						"</span><span class=\"author\"> - by " . $thread['author'] .
 						"</span><span class=\"right\"><span class=\"replies\">(". countReplies($thread['id']) .
 						" replies)</span>&nbsp;<span class=\"date\">". date('M/d/Y', $thread['epoch']) ."</span></span></div></a>";
 			
 		  	}
 		  		if ($total_threads > $items_per_page) {
-				echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
+					echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
 					for ($i=1; $i<=$total_pages; $i++) {
 				            echo "<a class=\"pagebutton\" href=\"index.php?topic=" . $topic ."&amp;page=$i\">$i</a>&nbsp;";
 					};
-				echo "</div>\n";
-			}
+					echo "</div>\n";
+				}
 		} else {
 			echo "<div class=\"topicitem\">Nothing has been posted yet!</div>";
 		}

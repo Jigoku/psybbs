@@ -134,7 +134,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 					echo "<div class=\"sub\"><span class=\"large2\">Topic does not exist!</span></div>\n";
 				}
 
-			} elseif (array_keys($_GET) === array('topic', 'id') && mEscape($_GET["id"]) > 0) {
+			} elseif (array_keys($_GET) === array('topic', 'id','page') && mEscape($_GET["id"]) > 0) {
 				//list replies to a thread
 				if (checkTopicExists(mEscape($_GET["topic"]))) {
 					listReplies(
