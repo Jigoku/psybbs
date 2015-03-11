@@ -68,10 +68,10 @@ switch ($_GET["code"]) {
                         exit('Unknown http status code "' . htmlentities($code) . '"');
                     break;
 }
-		    echo "<div id=\"sub\"><span class=\"large2\">Error: ". $text . "</span></div>";
+		    echo "<div class=\"sub\"><span class=\"large2\">Error: ". $text . "</span></div>";
 } else {
 
-	echo "<div id=\"sub\"><span class=\"large2\">Unknown Error</span></div>";
+	echo "<div class=\"sub\"><span class=\"large2\">Unknown Error</span></div>";
 }
 
 

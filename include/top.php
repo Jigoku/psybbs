@@ -20,6 +20,7 @@ session_start();
 include "include/config.php";
 include "include/func.php";
 
+$psybbs =  dirname($_SERVER['PHP_SELF']);
 
 // connect to database server
 $connection = mysql_connect($mysql_host, $mysql_user, $mysql_pass);
@@ -156,8 +157,8 @@ if (!$db_selected) {
 	<meta name="copyright" content="GPLv3, CC" />
 	<meta name="robots" content="nofollow" />
 
-	<link href="media/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	<link href="theme/<?php echo getMysqlStr("theme", "global"); ?>/theme.css.php<?php echo getMysqlStr("themeopts", "global");; ?>" rel="stylesheet" type="text/css" />
+	<link href="<?php echo $psybbs; ?>/media/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<link href="<?php echo $psybbs; ?>/theme/<?php echo getMysqlStr("theme", "global"); ?>/theme.css.php<?php echo getMysqlStr("themeopts", "global"); ?>" rel="stylesheet" type="text/css" />
 	<title><?php if(isset($_GET["topic"])){ echo getCurrentTopicTitle($_GET["topic"]); } else { echo getMysqlStr("site_name", "global");; } ?></title>
 </head>
 
