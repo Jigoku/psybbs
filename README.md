@@ -1,6 +1,8 @@
 # psybbs
 
-A GPLv3/CC Bulletin Board Software written in PHP/MYSQL
+A GPLv3/CC licensed Bulletin Board Software using PHP/MYSQL
+
+![psyBBS default2](theme/default/preview2.png)
 
 ###What is psyBBS? 
 psyBBS is a platform for managing discussions, a de-facto web forum portal. It is being put together for learning and personal use at the moment. What does psyBBS stand for? No, it has nothing to do with the korean guy. Pronounced psybbs as in 'sye'bee'bee'ess. Like sci-fi, or psycho. It doesn't really matter what, but probably something like:
@@ -30,10 +32,9 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 * When processed, 'include/top.php' will check if a database exists, and otherwise creates it
 * Log in with your admin details and click the 'settings' button in the userbar for extra configuration
 
-##Theme Preview
+##Themes
 * default
 ![psyBBS default](theme/default/preview.png)
-![psyBBS default2](theme/default/preview2.png)
 
 ##Pentesting
 If you are working on a pentest script/software for finding SQLi, XSS, javascript injection or the 
