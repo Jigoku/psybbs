@@ -132,10 +132,10 @@ if (!$db_selected) {
 			'N', 
 			'mintphosphor', 
 			'?fixed', 
-			'<span class=\"bannertext\">Example</span><span class=\"banneremphasis\">Board</span>', 
+			'<span class=\"bannertext\">psy</span><span class=\"banneremphasis\">BBS</span>', 
 			'psyBBS', 
 			'Announcement: Congratulations on installing psyBBS!!', 
-			'psyBBS ".$version."', 
+			'powered by psyBBS ".$version."', 
 			'".$version."',
 			10,
 			10
