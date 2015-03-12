@@ -84,7 +84,8 @@ if (!$db_selected) {
 		topic varchar(30) NOT NULL,
 		subject varchar(70) NOT NULL,
 		sticky int(1) NOT NULL,
-		locked int(1) NOT NULL
+		locked int(1) NOT NULL,
+		lastpostepoch int(11) NOT NULL
 	)", $connection) or trigger_error(mysql_error());
 
 	//create posts table

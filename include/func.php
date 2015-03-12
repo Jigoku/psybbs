@@ -197,10 +197,12 @@ ini_set('date.timezone', 'UTC');
 			$subject = strip_tags($subject);
 			$message = strip_tags($message);
 
+			$epoch = time();
+
 			//add thread
 			mysql_query("
-				INSERT INTO threads (topic, subject, author, epoch, sticky, locked)
-				VALUES ('" . $topic . "','" . $subject ."','". $author ."','" . time() ."','0','0')
+				INSERT INTO threads (topic, subject, author, epoch, sticky, locked, lastpostepoch)
+				VALUES ('" . $topic . "','" . $subject ."','". $author ."','" . $epoch ."','0','0', '". $epoch ."')
 			");
 
 			//get the new threadid
@@ -209,7 +211,7 @@ ini_set('date.timezone', 'UTC');
 			//add first post to the thread
 			mysql_query("
 				INSERT INTO posts (author, threadid, epoch, content)
-				VALUES ('" . $author . "','".$thread["id"]."','". time()."','". $message . "')
+				VALUES ('" . $author . "','".$thread["id"]."','". $epoch."','". $message . "')
 			");
 
 			//redirect to new thread
@@ -225,10 +227,17 @@ ini_set('date.timezone', 'UTC');
 			//remove html
 			$message = strip_tags($message);
 
+			$epoch = time();
+
 			//add reply
 			mysql_query("
 				INSERT INTO posts (author, threadid, epoch, content)
-				VALUES ('" . $author . "','" . $threadid ."','". time()."','". $message . "')
+				VALUES ('" . $author . "','" . $threadid ."','". $epoch."','". $message . "')
+			");
+
+			//update latest post epoch
+			mysql_query("
+				UPDATE threads SET lastpostepoch = '".$epoch."' WHERE id = '".$threadid."'
 			");
 
 			//redirect to same page
@@ -258,7 +267,7 @@ ini_set('date.timezone', 'UTC');
 					echo "\t\t<img class=\"topicimg\" src=\"theme/".getMysqlStr("theme", "global")."/icon/folder.png\" alt=\"\" />\n";
 					//echo "\t\t<img class=\"topicimg\" src=\"media/glyphs/" .$topic['pagename'] . ".png\"/>\n";
 					echo "\t\t<span class=\"topictitle\">" .$topic['title']."</span>\n";
-					echo "\t\t<span class=\"lastpost\">Last post by&nbsp;" . getLatestPost($topic['pagename']) ."</span>\n";
+					echo "\t\t<span class=\"lastpost\">" . getLatestPost($topic['pagename']) ."</span>\n";
 					echo "\t\t<br />\n";
 					echo "\t\t<span class=\"topicdescription\">" . $topic['description']. "</span>\n";
 					echo "\t\t<span class=\"postcount\">" . countTopics($topic['pagename']) . "&nbsp;threads</span>\n";
@@ -271,9 +280,7 @@ ini_set('date.timezone', 'UTC');
 	}
 
 
-	function getLatestPost($topic) {
-		return "Unimplemented";
-	}
+
 	
 	// return value for given colum in table
 	// used for just 'global' table right now
@@ -364,6 +371,37 @@ ini_set('date.timezone', 'UTC');
 		}
 	}
 
+	function getLatestPost($topic) {
+		//BROKEN FIXME
+	/*	$sql = "SELECT * FROM posts WHERE threadid = '".$topicid."' ORDER by epoch DESC LIMIT 1";
+		$result = mysql_query($sql);
+		
+		if (mysql_num_rows($result) > 0) {
+			while ($post = mysql_fetch_assoc($result)) {
+				//latest post
+				$author =  $post['author'];
+				$postid =  $post['id'];
+				$threadid = $post['threadid'];	
+			}
+
+		}
+	*/
+		$sql = "SELECT * FROM threads WHERE topic = '".$topic."' ORDER by lastpostepoch DESC LIMIT 1";
+		$result = mysql_query($sql);
+		
+		if (mysql_num_rows($result) > 0) {
+			while ($thread = mysql_fetch_assoc($result)) {
+				$subject = $thread['subject'];
+			}
+		} else {
+			return "Active thread: N/A";
+		}
+		
+			//BROKEN FIXME
+		//return "<a href=\"index.php?topic=".$topic."&amp;id=".$topicid."&amp;page=1\">$subject</a>";
+
+		return "Active thread: \"" . $subject. "\"";
+	}
 
 	function showPageNav($total_items, $total_pages, $items_per_page, $href) {
 		if ($total_items > $items_per_page) {
@@ -391,7 +429,7 @@ ini_set('date.timezone', 'UTC');
 	$page = getCurrentPage();
 
 		$start_from = ($page-1) * $items_per_page;
-		$sql = "SELECT * FROM threads WHERE topic = '".$topic."' ORDER by epoch DESC LIMIT $start_from, ". $items_per_page; 
+		$sql = "SELECT * FROM threads WHERE topic = '".$topic."' ORDER by lastpostepoch DESC LIMIT $start_from, ". $items_per_page; 
 		$result = mysql_query($sql);
 
 	
