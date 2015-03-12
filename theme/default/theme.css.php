@@ -175,7 +175,7 @@ a.topic:hover {
 }
 
 a.threaditem,a.threaditem:link,a.threaditem:active,a.threaditem:hover { text-decoration: none; color:transparent;}
-.topicdescription {color: #888; font-size: 14px;}
+.topicdescription {color: #bbb; font-size: 14px;}
 .topictitle { text-decoration: underline; color: $colour1; font-size: 16px;}
 
 .topicimg {
@@ -320,6 +320,13 @@ background: transparent; margin-top:5px;}
     -1px 1px 0 #000,
     1px 1px 0 #000;
 }
+
+.user-admin 	{}
+.user-moderator {}
+.user-member 	{}
+.user-banned 	{}
+
+
 /* uri */
 
 a:link,a:visited,a:active    { color: #bbb; text-decoration: underline; }
