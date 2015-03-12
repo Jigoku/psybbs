@@ -39,9 +39,6 @@ $site_quote = "psyBBS $version";
 $theme = "mintphosphor";
 $themeopts = "?fixed";
 
-/* page sorting */
-$items_per_page = 10;
-
 /* user level aliases */
 $userLevel = [
 	"banned" => "remnant",
