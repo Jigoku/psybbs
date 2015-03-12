@@ -108,12 +108,7 @@ ini_set('date.timezone', 'UTC');
 
 	}
 
-	function showSettings() {
-		include 'config.php';
 
-
-		
-	}
 
 	//delete a topic and all associated posts
 	function delTopic($pagename) {
