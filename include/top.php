@@ -163,7 +163,7 @@ if (!$db_selected) {
 	<meta name="copyright" content="GPLv3, CC" />
 	<meta name="robots" content="nofollow" />
 
-	<link href="<?php echo $psybbs; ?>/media/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<link href="<?php echo $psybbs; ?>/theme/<?php echo getMysqlStr("theme", "global");?>/icon/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<link href="<?php echo $psybbs; ?>/theme/<?php echo getMysqlStr("theme", "global"); ?>/theme.css.php<?php echo getMysqlStr("themeopts", "global"); ?>" rel="stylesheet" type="text/css" />
 	<title><?php if(isset($_GET["topic"])){ echo getCurrentTopicTitle($_GET["topic"]); } else { echo getMysqlStr("site_name", "global"); } ?></title>
 </head>
