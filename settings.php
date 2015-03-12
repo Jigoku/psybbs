@@ -163,6 +163,17 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 				"theme", $_POST["theme"]
 			);
 			
+		} elseif (array_keys($_GET) === array('setpagelimitthreads')) {
+			setGlobalStr(
+				"page_limit_threads", $_POST["page_limit_threads"]
+			);
+			
+		} elseif (array_keys($_GET) === array('setpagelimitposts')) {
+			setGlobalStr(
+				"page_limit_posts", $_POST["page_limit_posts"]
+			);
+			
+			
 		} else {
 			echo "<div class=\"sub\">";
 		
@@ -219,6 +230,16 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?createtopic\">Create Topic</a></div>\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?edittopic\">Edit Topic</a></div>\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deletetopic\">Delete Topic</a></div><br />\n";
+		
+			echo "<div class=\"info\">Threads per page<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setpagelimitthreads\">\n";
+			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"page_limit_threads\" value=\"".getMysqlStr("page_limit_threads","global")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
+			
+			echo "<div class=\"info\">Posts per page<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setpagelimitposts\">\n";
+			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"page_limit_posts\" value=\"".getMysqlStr("page_limit_posts","global")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
 		
 			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/database.png\" /><span class=\"large4\">Database</span></div>\n";
 			echo "<hr />\n";

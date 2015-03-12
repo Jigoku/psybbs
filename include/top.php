@@ -106,7 +106,9 @@ if (!$db_selected) {
 		site_name varchar(100) NOT NULL,
 		site_quote varchar(100) NOT NULL,
 		site_announce varchar(500) NOT NULL,
-		version varchar(10) NOT NULL
+		version varchar(10) NOT NULL,
+		page_limit_threads int(3) NOT NULL,
+		page_limit_posts int(3) NOT NULL
 	)", $connection) or trigger_error(mysql_error());
 	
 	
@@ -121,7 +123,9 @@ if (!$db_selected) {
 			site_name, 
 			site_announce, 
 			site_quote, 
-			version
+			version,
+			page_limit_threads,
+			page_limit_posts
 			) 
 		VALUES (
 			'Y', 
@@ -132,7 +136,9 @@ if (!$db_selected) {
 			'".$site_name."', 
 			'".$site_announce."', 
 			'psyBBS ".$version."', 
-			'".$version."'
+			'".$version."',
+			10,
+			10
 		)" , $connection);
 
 

@@ -291,6 +291,8 @@ ini_set('date.timezone', 'UTC');
 
 		include 'config.php';
 
+		$items_per_page = getMysqlStr('page_limit_posts', 'global');
+
 		$sql = "SELECT COUNT(id) FROM posts WHERE threadid = '".$id."'";
 		$result = mysql_query($sql);
 		$row = mysql_fetch_row($result);
@@ -372,10 +374,11 @@ ini_set('date.timezone', 'UTC');
 
 	// display and format items for table 'threads' with page split
 	function listThreads($topic) {
-		
-		
+	
 	include 'config.php';
-
+		
+	$items_per_page = getMysqlStr('page_limit_threads', 'global');
+		
 	$sql = "SELECT COUNT(id) FROM threads WHERE topic = '".$topic."'";
 	$result = mysql_query($sql);
 	$row = mysql_fetch_row($result);
