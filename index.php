@@ -26,7 +26,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 		//navigational links and welcome message
 		echo "\t\t<div id=\"userbar\">\n";
 		//echo "\t\t\t$site_title<span class=\"bannerquote\">$site_notice</span><br /><span class=\"small\">Welcome <b>". $_SESSION["username"] ."</b></span>\n";
-		echo "\t\t\t<span class=\"small\">Welcome back <b>". $_SESSION["username"] ."</b></span>\n";
+		echo "\t\t\t<span class=\"small\"><span class=\"shadow\">Welcome back <b>". $_SESSION["username"] ."</b></span></span>\n";
 		echo "\t\t\t<span class=\"right\">\n";
 
 		if (getAccountLevel() == 3) { echo "\t\t\t\t<a class=\"userbar\" href=\"settings.php\">settings</a> &brvbar; \n"; }

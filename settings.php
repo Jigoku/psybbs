@@ -234,10 +234,9 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
 			echo "</form></div>\n";
 			
-			echo "<div class=\"info\">Theme Options<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setthemeopts\">\n";
-			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"themeopts\" value=\"".getMysqlStr("themeopts","global")."\">\n";	
-			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
-			echo "</form></div>\n";
+
+			
+			include 'theme/'.getMysqlStr("theme","global").'/theme.css.php';
 													
 		/*	echo "<div class=\"info\">Board Rules [edit]</div>\n";
 			echo "<div class=\"info\">Board Lockdown [public|private|locked]</div>\n";

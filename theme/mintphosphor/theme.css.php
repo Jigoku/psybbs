@@ -15,7 +15,13 @@
  * u should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>. 
  */
-
+if (isset($psybbs)) {
+	echo "<div class=\"info\">Theme Options<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setthemeopts\">\n";
+	echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"themeopts\" value=\"".getMysqlStr("themeopts","global")."\">\n";	
+	echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+	echo "</form></div>\n";
+	return;
+}
 
 	//strip comments, strip newline/tab/carriage, compress to gzip
 	header('Content-type: text/css');
@@ -31,13 +37,18 @@
 
 
 <?php
-//theme colour vars here
+if (isset($_GET["colour1"])){
+	$colour1 = "#" . $_GET["colour1"];
 
-$colour1 = "#71D096"; //phosphor
-$colour2 = "#0B221A";
+} else {
+	$colour1 = "#71D096";
+}
 
-/*$colour1 = "#3EBB9E"; //cyanic
-$colour2 = "#1D584D";*/
+if (isset($_GET["colour2"])){
+	$colour2 = "#" . $_GET["colour2"];
+} else {
+	$colour2 = "#0B221A";
+}
 
 /*$colour1 = "#884411"; //rust
 $colour2 = "#aa7722";*/
@@ -294,7 +305,7 @@ background: transparent; margin-top:5px;}
 .info { font-size: 14px; padding: 2px;}
 .topic { color: #ff2277; font-size:20px; padding: 10px; }
 .newthread { float: right; color:#dddddd;}
-.small { font-size: 12px; }
+.small { font-size: 12px;   }
 .postcount { color: #555;  float:right;	padding: 5px;   font-size: 14px; }
 .lastpost {  color: #555; font-style: italic; font-size: 14px; float:right;}
 .large { font-size: 22px; color: #ddd; }
@@ -306,8 +317,13 @@ background: transparent; margin-top:5px;}
 /* placement */
 .right { float:right; }
 .left  { float:left; }
-
-
+.shadow {
+ text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
 /* uri */
 
 a:link,a:visited,a:active    { color: #bbb; text-decoration: underline; }
@@ -320,7 +336,7 @@ img { padding: 5px; }
 img.thread { width: 32px; height 32px; float:left; margin-right: 5px;  }
 
 div#userbar {
-	color: #000;
+
 	padding:10px;
 	background: $colour1; /* fallback */
 	background: -moz-linear-gradient(top, $colour2,  $colour1);
