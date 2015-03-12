@@ -300,6 +300,7 @@ background: transparent; margin-top:5px;}
 .large { font-size: 22px; color: #ddd; }
 .large2 { font-size: 22px; color: $colour1; }
 .large3 { font-size: 30px; color: $colour1; text-align: center;}
+.large4 { font-size: 22px; color: $colour1; margin-top: 8px; position: absolute; }
 .center { text-align: center; }
 .topiclabel { colour: $colour1; }
 /* placement */
@@ -314,7 +315,8 @@ a:hover   { color: $colour1; text-decoration: underline overline; }
 
 /* global */
 img { padding: 5px; }
-img.settings { padding: 5px; margin-left: -35px; margin-top: -5px;  position: absolute;}
+
+
 img.thread { width: 32px; height 32px; float:left; margin-right: 5px;  }
 
 div#userbar {
@@ -355,8 +357,16 @@ label {
     color: #aaa;
 }
 
+label.settings {
+    color: #aaa;
+}
+
 
 hr, hr.thread { color: #444; background: #444; border: 0px;  }
+
+form.settings {
+	margin: 0px auto;
+}
 
 form.create, form.login {
 	margin-left:auto;

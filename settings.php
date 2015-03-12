@@ -148,9 +148,68 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 				mEscape($_POST["boardquote"])
 			);
 			
+		} elseif (array_keys($_GET) === array('setboardannouncement')) {
+			setBoardAnnouncement(
+				mEscape($_POST["boardannouncement"])
+			);
+			
 		} else {
-			showSettings();
+			echo "<div class=\"sub\">";
+		
+			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/settings.png\" /><span class=\"large4\">Board Settings</span><span class=\"right\"><a href=\"index.php\">Exit Settings</a></span></div>\n";
+			echo "<hr />\n";
+
+			//board name
+			echo "<div class=\"info\">Board Name<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardname\">\n";
+			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"boardname\" value=\"".getMysqlStr("site_name","global")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
+		
+			//board quote
+			echo "<div class=\"info\">Board Quote<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardquote\">\n";
+			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"boardquote\" value=\"".getMysqlStr("site_quote","global")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
+		
+			//board announcement
+			echo "<div class=\"info\">Board Announcement [ <a href=\"". $_SERVER["PHP_SELF"] ."?announce_on\">on</a>".
+													" | <a href=\"". $_SERVER["PHP_SELF"] ."?announce_off\">off</a> ]\n";
+													
+			echo "<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardannouncement\">\n";
+			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"boardannouncement\" value=\"".getMysqlStr("site_announce","global")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";							
+					
+					
+													
+			echo "<div class=\"info\">Board Rules [edit]</div>\n";
+			echo "<div class=\"info\">Board Lockdown [public|private|locked]</div>\n";
+			echo "<div class=\"info\">Board Logo [image|disable]</div>\n";
+			echo "<div class=\"info\">Board splash [image|disable]</div>\n";
+			echo "<div class=\"info\">Login Captcha [on|off]</div>\n";
+			echo "<div class=\"info\">Post Captcha [on|off]</div><br />\n";
+		
+			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/topics.png\" /><span class=\"large4\">Topic Control</span></div>\n";
+			echo "<hr />\n";
+			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?createtopic\">Create Topic</a></div>\n";
+			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?edittopic\">Edit Topic</a></div>\n";
+			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deletetopic\">Delete Topic</a></div><br />\n";
+		
+			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/database.png\" /><span class=\"large4\">Database</span></div>\n";
+			echo "<hr />\n";
+			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?dropdb\">Delete database</a></div><br />\n";
+		
+			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/users.png\" /><span class=\"large4\">User Control</span></div>\n";
+			echo "<hr />\n";
+			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?lockuser\">Lock User</a></div>\n";
+			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deluser\">Delete User</a></div>\n";
+			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?moduser\">Modify User</a></div>\n";
+
+			echo "</div>";
+			
+			
 		}
+		
 		echo "</div>\n";
 
 

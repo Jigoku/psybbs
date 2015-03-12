@@ -40,7 +40,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 		
 		 //announcements (if enabled)..
 		if (checkAnnounceEnabled()) {
-			echo "<div id=\"announce\">$site_announce</div>";
+			echo "<div id=\"announce\">".getMysqlStr("site_announce", "global")."</div>";
 		}
 
 		if (!(isset($_GET["topic"]))) {
@@ -134,7 +134,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 					echo "<div class=\"sub\"><span class=\"large2\">Topic does not exist!</span></div>\n";
 				}
 
-			} elseif (array_keys($_GET) === array('topic', 'id','page') && mEscape($_GET["id"]) > 0) {
+			} elseif (isset($_GET) === array('topic', 'id','page') && mEscape($_GET["id"]) > 0) {
 				//list replies to a thread
 				if (checkTopicExists(mEscape($_GET["topic"]))) {
 					listReplies(

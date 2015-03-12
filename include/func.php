@@ -110,50 +110,7 @@ ini_set('date.timezone', 'UTC');
 
 	function showSettings() {
 		include 'config.php';
-		echo "<div class=\"sub\">";
-		
-		echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/settings.png\" /><span class=\"large2\">Board Settings</span><span class=\"right\"><a href=\"index.php\">Exit Settings</a></span></div>\n";
-		echo "<hr />\n";
 
-		//board name
-		echo "<form class=\"info\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardname\">\n";
-		echo "<label>Board Name</label> <input type=\"text\" size=\"20\" maxlength=\"255\" name=\"boardname\" value=\"".getMysqlStr("site_name","global")."\">\n";	
-		echo "<input type=\"submit\" value=\"Save\" name=\"submit\" class=\"info\">\n";
-		echo "</form>\n";
-		
-		//board quote
-		echo "<form class=\"info\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardquote\">\n";
-		echo "<label>Board Quote</label> <input type=\"text\" size=\"20\" maxlength=\"255\" name=\"boardquote\" value=\"".getMysqlStr("site_quote","global")."\">\n";	
-		echo "<input type=\"submit\" value=\"Save\" name=\"submit\" class=\"info\">\n";
-		echo "</form>\n";
-		
-
-		echo "<div class=\"info\">Board Announcement [<a href=\"". $_SERVER["PHP_SELF"] ."?announce_on\">on</a>".
-													"|<a href=\"". $_SERVER["PHP_SELF"] ."?announce_off\">off</a>|edit]</div>\n";
-		echo "<div class=\"info\">Board Rules [edit]</div>\n";
-		echo "<div class=\"info\">Board Lockdown [public|private|locked]</div>\n";
-		echo "<div class=\"info\">Board Logo [image|disable]</div>\n";
-		echo "<div class=\"info\">Board splash [image|disable]</div>\n";
-		echo "<div class=\"info\">Login Captcha [on|off]</div>\n";
-		echo "<div class=\"info\">Post Captcha [on|off]</div><br />\n";
-		
-        echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/topics.png\" /><span class=\"large2\">Topic Control</span></div>\n";
-		echo "<hr />\n";
-		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?createtopic\">Create Topic</a></div>\n";
-		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?edittopic\">Edit Topic</a></div>\n";
-		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deletetopic\">Delete Topic</a></div><br />\n";
-		
-        echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/database.png\" /><span class=\"large2\">Database</span></div>\n";
-		echo "<hr />\n";
-		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?dropdb\">Delete database</a></div><br />\n";
-		
-        echo "<div class=\"info\"><img class=\"settings\" src=\"theme/".$theme."/icon/users.png\" /><span class=\"large2\">User Control</span></div>\n";
-		echo "<hr />\n";
-		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?lockuser\">Lock User</a></div>\n";
-		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deluser\">Delete User</a></div>\n";
-		echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?moduser\">Modify User</a></div>\n";
-
-		echo "</div>";
 
 		
 	}
@@ -244,7 +201,10 @@ ini_set('date.timezone', 'UTC');
 		header("Location: " . $_SERVER["PHP_SELF"]);
 	}
 
-
+	function setBoardAnnouncement($str) {
+		mysql_query("UPDATE global SET site_announce='".$str."'");
+		header("Location: " . $_SERVER["PHP_SELF"]);
+	}
 
 
 
@@ -372,7 +332,7 @@ ini_set('date.timezone', 'UTC');
 		$total_replies = $row[0];
 		$total_pages = ceil($total_replies / $items_per_page);
 	
-		if (isset($_GET["page"]) && is_numeric($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+		if (isset($_GET["page"]) && is_numeric($_GET["page"])) { $page  = mEscape($_GET["page"]); } else { $page=1; };
 	
 		$start_from = ($page-1) * $items_per_page;
 		
