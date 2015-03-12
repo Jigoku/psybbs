@@ -284,21 +284,27 @@ ini_set('date.timezone', 'UTC');
 	}
 
 
-
+	function getCurrentPage() {
+		if (isset($_GET["page"]) && is_numeric($_GET["page"]) ) { 
+			if ($_GET["page"] <= 0) { $page = 1; } else { $page = $_GET["page"]; }
+		} else { 
+			$page = 1; 
+		}
+		return $page;
+	}
 
 	function listReplies($topic, $id) {
 
-		include 'config.php';
-
+		
 		$items_per_page = getMysqlStr('page_limit_posts', 'global');
 
 		$sql = "SELECT COUNT(id) FROM posts WHERE threadid = '".$id."'";
 		$result = mysql_query($sql);
 		$row = mysql_fetch_row($result);
-		$total_replies = $row[0];
-		$total_pages = ceil($total_replies / $items_per_page);
+		$total_items = $row[0];
+		$total_pages = ceil($total_items / $items_per_page);
 	
-		if (isset($_GET["page"]) && is_numeric($_GET["page"])) { $page  = mEscape($_GET["page"]); } else { $page=1; };
+		$page = getCurrentPage();
 	
 		$start_from = ($page-1) * $items_per_page;
 		
@@ -317,36 +323,29 @@ ini_set('date.timezone', 'UTC');
 			echo "\t<div id=\"threadtitle\">Subject: <span class=\"title\">". $subject["subject"]."</span></div>\n";
 
 
-
 			//get and format the replies to the thread
 
 			$result = mysql_query("SELECT * FROM posts WHERE threadid = '" . $id."' ORDER by epoch ASC LIMIT $start_from, ". $items_per_page)
 				or trigger_error(mysql_error());
+			
+			if ($start_from >= 0 && mysql_num_rows($result) > 0) {
+				showPageNav($total_items, $total_pages, $items_per_page, "index.php?topic=" . $topic."&amp;id=$id");
 
-		  	if ($total_replies > $items_per_page) {
-				echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
-				for ($i=1; $i<=$total_pages; $i++) {
-					echo "<a class=\"pagebutton\" href=\"index.php?topic=" . $topic ."&amp;id=$id&amp;page=$i\">$i</a>&nbsp;";
-				};
-				echo "</div>\n";
-			}
+				while ($post = mysql_fetch_array($result)) {
+					if (getAccountLevel() > 1) { echo "<div class=\"threadopts\">Post Options | <a href=\"?deletepost=". $post["id"] ."\">delete post</a> &brvbar; edit</div>\n"; }
 
-			while ($post = mysql_fetch_array($result)) {
-				if (getAccountLevel() > 1) { echo "<div class=\"threadopts\">Post Options | <a href=\"?deletepost=". $post["id"] ."\">delete post</a> &brvbar; edit</div>\n"; }
-
-				//get user level
-				$result2 = mysql_query("SELECT level FROM users WHERE username= '" . $post["author"] ."'")
-					or trigger_error(mysql_error());
+					//get user level
+					$result2 = mysql_query("SELECT level FROM users WHERE username= '" . $post["author"] ."'")
+						or trigger_error(mysql_error());
 					
-				while ($user = mysql_fetch_array($result2)) {
-					$level = $user["level"];
+					while ($user = mysql_fetch_array($result2)) {
+						$level = $user["level"];
+					}
+					//end user level
+
+					displayPost($post["author"], $post["content"], $post["epoch"], $level, $post["id"]);
 				}
-				//end user level
-
-				displayPost($post["author"], $post["content"], $post["epoch"], $level, $post["id"]);
-			}
-
-			showBBinfo();
+				showBBinfo();
                         //show the reply form below
                         echo "<div class=\"sub\">\n";
                                  echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?topic=" .$_GET["topic"] . "&amp;id=" . $_GET["id"] . "&amp;reply\">\n";
@@ -355,12 +354,9 @@ ini_set('date.timezone', 'UTC');
                                  echo "</form>\n";
                         echo "</div>\n";
                         
-		  	if ($total_replies > $items_per_page) {
-				echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
-				for ($i=1; $i<=$total_pages; $i++) {
-					echo "<a class=\"pagebutton\" href=\"index.php?topic=" . $topic ."&amp;id=$id&amp;page=$i\">$i</a>&nbsp;";
-				};
-				echo "</div>\n";
+				showPageNav($total_items, $total_pages, $items_per_page, "index.php?topic=" . $topic."&amp;id=$id");
+			} else { 
+				echo "<div class=\"sub\"><span class=\"large2\">Page does not exist!</span></div>";
 			}
 		} else {
 			//invalid thread
@@ -369,7 +365,17 @@ ini_set('date.timezone', 'UTC');
 	}
 
 
-
+	function showPageNav($total_items, $total_pages, $items_per_page, $href) {
+		if ($total_items > $items_per_page) {
+			echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
+			
+			for ($i=1; $i<=$total_pages; $i++) {
+				echo "<a class=\"pagebutton\" href=\"".$href."&amp;page=$i\">$i</a>&nbsp;";
+			}
+			
+			echo "</div>\n";
+		}
+	}
 
 	// display and format items for table 'threads' with page split
 	function listThreads($topic) {
@@ -379,18 +385,17 @@ ini_set('date.timezone', 'UTC');
 	$sql = "SELECT COUNT(id) FROM threads WHERE topic = '".$topic."'";
 	$result = mysql_query($sql);
 	$row = mysql_fetch_row($result);
-	$total_threads = $row[0];
-	$total_pages = ceil($total_threads / $items_per_page);
+	$total_items = $row[0];
+	$total_pages = ceil($total_items / $items_per_page);
 
-
-		if (isset($_GET["page"]) && is_numeric($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+	$page = getCurrentPage();
 
 		$start_from = ($page-1) * $items_per_page;
 		$sql = "SELECT * FROM threads WHERE topic = '".$topic."' ORDER by epoch DESC LIMIT $start_from, ". $items_per_page; 
 		$result = mysql_query($sql);
 
 	
-				echo "<div class=\"topicitem\">Category: <span class=\"title\">" . getTopicTitle($topic) . "</span>" .
+		echo "<div class=\"topicitem\">Category: <span class=\"title\">" . getTopicTitle($topic) . "</span>" .
 					"<span class=\"newthread\"><a href=\"?topic=". $topic ."&amp;newthread\">New Thread</a></span></div>";
 		
 		if (mysql_num_rows($result) > 0) {
@@ -405,13 +410,9 @@ ini_set('date.timezone', 'UTC');
 						" replies)</span>&nbsp;<span class=\"date\">". date('M/d/Y', $thread['epoch']) ."</span></span></div></a>";
 			
 		  	}
-		  		if ($total_threads > $items_per_page) {
-					echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
-					for ($i=1; $i<=$total_pages; $i++) {
-				            echo "<a class=\"pagebutton\" href=\"index.php?topic=" . $topic ."&amp;page=$i\">$i</a>&nbsp;";
-					};
-					echo "</div>\n";
-				}
+
+			showPageNav($total_items, $total_pages, $items_per_page, "index.php?topic=" . $topic);
+				
 		} else {
 			echo "<div class=\"topicitem\">Nothing has been posted yet!</div>";
 		}
