@@ -182,24 +182,11 @@ ini_set('date.timezone', 'UTC');
 
 	
 	
-	// POSSIBLY MERGE these setBoard* functions.....
-
-	//change the board name
-	function setBoardName($str) {
-		mysql_query("UPDATE global SET site_name='".$str."'");
-		header("Location: " . $_SERVER["PHP_SELF"]);
-	}
-	
-	//change the board quote
-	function setBoardQuote($str) {
-		mysql_query("UPDATE global SET site_quote='".$str."'") or trigger_error(mysql_error());
+	function setGlobalStr($row, $str) {
+		mysql_query("UPDATE global SET ".$row."='".mEscape($str)."'");
 		header("Location: " . $_SERVER["PHP_SELF"]);
 	}
 
-	function setBoardAnnouncement($str) {
-		mysql_query("UPDATE global SET site_announce='".$str."'");
-		header("Location: " . $_SERVER["PHP_SELF"]);
-	}
 
 
 

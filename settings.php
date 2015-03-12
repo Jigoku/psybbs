@@ -139,18 +139,18 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 
 
 		} elseif (array_keys($_GET) === array('setboardname')) {
-			setBoardName(
-				mEscape($_POST["boardname"])
+			setGlobalStr(
+				"site_name", $_POST["boardname"]
 			);
 			
 		} elseif (array_keys($_GET) === array('setboardquote')) {
-			setBoardQuote(
-				mEscape($_POST["boardquote"])
+			setGlobalStr(
+				"site_quote", $_POST["boardquote"]
 			);
 			
 		} elseif (array_keys($_GET) === array('setboardannouncement')) {
-			setBoardAnnouncement(
-				mEscape($_POST["boardannouncement"])
+			setGlobalStr(
+				"site_announce", $_POST["boardannouncement"]
 			);
 			
 		} else {
