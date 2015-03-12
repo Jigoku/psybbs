@@ -31,7 +31,9 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 * Log in with your admin details and click the 'settings' button in the userbar for extra configuration
 
 ##Theme Preview
-![psyBBS mintphosphor](theme/mintphosphor/preview.png)
+* default
+![psyBBS default](theme/default/preview.png)
+![psyBBS default2](theme/default/preview2.png)
 
 ##Pentesting
 If you are working on a pentest script/software for finding SQLi, XSS, javascript injection or the 

@@ -49,10 +49,6 @@ if (isset($_GET["colour2"])){
 } else {
 	$colour2 = "#0B221A";
 }
-
-/*$colour1 = "#884411"; //rust
-$colour2 = "#aa7722";*/
-
 ?>
 
 html { 

@@ -1,0 +1,12 @@
+Default psyBBS theme, by Ricky Thomson.
+https://github.com/Jigoku/psybbs/tree/master/theme/default
+
+Theme options available:
+  * fixed
+  * colour1  (main colour)
+  * colour2  (used to blend userbar gradient)
+
+For example, the theme options could be like the following...
+  * ?fixed
+  * ?colour1=882222&colour2=112222
+  * ?fixed&colour1=884411&colour2=aa7722

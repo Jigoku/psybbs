@@ -133,7 +133,7 @@ if (!$db_selected) {
 		VALUES (
 			'Y', 
 			'N', 
-			'mintphosphor', 
+			'default', 
 			'?fixed', 
 			'<span class=\"bannertext\">psy</span><span class=\"banneremphasis\">BBS</span>', 
 			'psyBBS', 
