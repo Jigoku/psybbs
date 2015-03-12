@@ -153,11 +153,22 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 				"site_announce", $_POST["boardannouncement"]
 			);
 			
+		} elseif (array_keys($_GET) === array('setboardtitle')) {
+			setGlobalStr(
+				"site_title", $_POST["boardtitle"]
+			);
+			
 		} else {
 			echo "<div class=\"sub\">";
 		
 			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/settings.png\" /><span class=\"large4\">Board Settings</span><span class=\"right\"><a href=\"index.php\">Exit Settings</a></span></div>\n";
 			echo "<hr />\n";
+
+			//board title
+			echo "<div class=\"info\">Board Title<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardtitle\">\n";
+			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"boardtitle\" value=\"".htmlspecialchars(getMysqlStr("site_title","global"))."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
 
 			//board name
 			echo "<div class=\"info\">Board Name<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardname\">\n";

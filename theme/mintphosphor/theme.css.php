@@ -128,7 +128,6 @@ p {
 
 }
 
-
 div#banner {
 	background: #222; /* fallback */
 	padding: 10px; 
@@ -138,6 +137,7 @@ div#banner {
 	font-size: 20px;
 	font-weight: bold;
 	border-bottom: 1px solid $colour1;
+	height: 25px;
 }
 
 div#announce {
