@@ -24,7 +24,7 @@
 
 include "include/top.php";
 
-if (isset($_GET["code"])) {
+if (isset($_GET["code"]) && is_numeric($_GET["code"])) {
 
 switch ($_GET["code"]) {
                     case 100: $text = 'Continue'; break;
@@ -65,10 +65,10 @@ switch ($_GET["code"]) {
                     case 504: $text = 'Gateway Time-out'; break;
                     case 505: $text = 'HTTP Version not supported'; break;
                     default:
-                        exit('Unknown http status code "' . htmlentities($code) . '"');
+                        exit('Unknown http status code "' . htmlentities($_GET["code"]) . '"');
                     break;
 }
-		    echo "<div class=\"sub\"><span class=\"large2\">Error: ". $text . "</span></div>";
+		    echo "<div class=\"sub\"><span class=\"large2\">Error</span><hr /><span class=\"large\">".$_GET["code"]." ". $text . "</span></div>";
 } else {
 
 	echo "<div class=\"sub\"><span class=\"large2\">Unknown Error</span></div>";
