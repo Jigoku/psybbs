@@ -158,6 +158,11 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 				"site_title", $_POST["boardtitle"]
 			);
 			
+		} elseif (array_keys($_GET) === array('settheme')) {
+			setGlobalStr(
+				"theme", $_POST["theme"]
+			);
+			
 		} else {
 			echo "<div class=\"sub\">";
 		
@@ -190,15 +195,24 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"boardannouncement\" value=\"".getMysqlStr("site_announce","global")."\">\n";	
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
 			echo "</form></div>\n";							
-					
+		
+			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/theme.png\" /><span class=\"large4\">Theme Settings</span>\n";	
+			echo "<hr />\n";
+			
+			//theme name
+			echo "<div class=\"info\">Theme Name<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?settheme\">\n";
+			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"theme\" value=\"".getMysqlStr("theme","global")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
+			
 					
 													
-			echo "<div class=\"info\">Board Rules [edit]</div>\n";
+		/*	echo "<div class=\"info\">Board Rules [edit]</div>\n";
 			echo "<div class=\"info\">Board Lockdown [public|private|locked]</div>\n";
 			echo "<div class=\"info\">Board Logo [image|disable]</div>\n";
 			echo "<div class=\"info\">Board splash [image|disable]</div>\n";
 			echo "<div class=\"info\">Login Captcha [on|off]</div>\n";
-			echo "<div class=\"info\">Post Captcha [on|off]</div><br />\n";
+			echo "<div class=\"info\">Post Captcha [on|off]</div><br />\n";*/
 		
 			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/topics.png\" /><span class=\"large4\">Topic Control</span></div>\n";
 			echo "<hr />\n";
