@@ -163,6 +163,12 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 				"theme", $_POST["theme"]
 			);
 			
+		} elseif (array_keys($_GET) === array('setthemeopts')) {
+			setGlobalStr(
+				"themeopts", $_POST["themeopts"]
+			);
+			
+			
 		} elseif (array_keys($_GET) === array('setpagelimitthreads')) {
 			setGlobalStr(
 				"page_limit_threads", $_POST["page_limit_threads"]
@@ -177,7 +183,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 		} else {
 			echo "<div class=\"sub\">";
 		
-			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/settings.png\" /><span class=\"large4\">Board Settings</span><span class=\"right\"><a href=\"index.php\">Exit Settings</a></span></div>\n";
+			echo "<div class=\"info\"><img src=\"theme/".getMysqlStr("theme", "global")."/icon/settings.png\" /><span class=\"large4\">Board Settings</span><span class=\"right\"><a href=\"index.php\">Exit Settings</a></span></div>\n";
 			echo "<hr />\n";
 
 			//board title
@@ -207,7 +213,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
 			echo "</form></div>\n";							
 		
-			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/theme.png\" /><span class=\"large4\">Theme Settings</span>\n";	
+			echo "<div class=\"info\"><img src=\"theme/".getMysqlStr("theme", "global")."/icon/theme.png\" /><span class=\"large4\">Theme Settings</span>\n";	
 			echo "<hr />\n";
 			
 			//theme name
@@ -216,7 +222,10 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
 			echo "</form></div>\n";
 			
-					
+			echo "<div class=\"info\">Theme Options<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setthemeopts\">\n";
+			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"themeopts\" value=\"".getMysqlStr("themeopts","global")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
 													
 		/*	echo "<div class=\"info\">Board Rules [edit]</div>\n";
 			echo "<div class=\"info\">Board Lockdown [public|private|locked]</div>\n";
@@ -225,7 +234,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<div class=\"info\">Login Captcha [on|off]</div>\n";
 			echo "<div class=\"info\">Post Captcha [on|off]</div><br />\n";*/
 		
-			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/topics.png\" /><span class=\"large4\">Topic Control</span></div>\n";
+			echo "<div class=\"info\"><img src=\"theme/".getMysqlStr("theme", "global")."/icon/topics.png\" /><span class=\"large4\">Topic Control</span></div>\n";
 			echo "<hr />\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?createtopic\">Create Topic</a></div>\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?edittopic\">Edit Topic</a></div>\n";
@@ -241,11 +250,11 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
 			echo "</form></div>\n";
 		
-			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/database.png\" /><span class=\"large4\">Database</span></div>\n";
+			echo "<div class=\"info\"><img src=\"theme/".getMysqlStr("theme", "global")."/icon/database.png\" /><span class=\"large4\">Database</span></div>\n";
 			echo "<hr />\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?dropdb\">Delete database</a></div><br />\n";
 		
-			echo "<div class=\"info\"><img src=\"theme/".$theme."/icon/users.png\" /><span class=\"large4\">User Control</span></div>\n";
+			echo "<div class=\"info\"><img src=\"theme/".getMysqlStr("theme", "global")."/icon/users.png\" /><span class=\"large4\">User Control</span></div>\n";
 			echo "<hr />\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?lockuser\">Lock User</a></div>\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deluser\">Delete User</a></div>\n";

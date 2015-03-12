@@ -132,9 +132,9 @@ if (!$db_selected) {
 			'N', 
 			'mintphosphor', 
 			'?fixed', 
-			'".$site_title."', 
-			'".$site_name."', 
-			'".$site_announce."', 
+			'<span class=\"bannertext\">Example</span><span class=\"banneremphasis\">Board</span>', 
+			'psyBBS', 
+			'Announcement: Congratulations on installing psyBBS!!', 
 			'psyBBS ".$version."', 
 			'".$version."',
 			10,
@@ -165,7 +165,7 @@ if (!$db_selected) {
 
 	<link href="<?php echo $psybbs; ?>/media/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<link href="<?php echo $psybbs; ?>/theme/<?php echo getMysqlStr("theme", "global"); ?>/theme.css.php<?php echo getMysqlStr("themeopts", "global"); ?>" rel="stylesheet" type="text/css" />
-	<title><?php if(isset($_GET["topic"])){ echo getCurrentTopicTitle($_GET["topic"]); } else { echo getMysqlStr("site_name", "global");; } ?></title>
+	<title><?php if(isset($_GET["topic"])){ echo getCurrentTopicTitle($_GET["topic"]); } else { echo getMysqlStr("site_name", "global"); } ?></title>
 </head>
 
 <body>

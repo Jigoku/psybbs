@@ -245,7 +245,6 @@ ini_set('date.timezone', 'UTC');
 
 	// display and format sorted items for table 'topics' with page split
 	function listTopics() {
-		include 'config.php';
 
 		$sql = "SELECT * FROM topics ORDER by title ASC"; 
 		$result = mysql_query($sql);
@@ -256,7 +255,7 @@ ini_set('date.timezone', 'UTC');
 			while ($topic = mysql_fetch_assoc($result)) {
 
 				echo "\n<a class=\"topic\" href=\"?topic=" . $topic['pagename'] . "\">\n";
-					echo "\t\t<img class=\"topicimg\" src=\"theme/".$theme."/icon/folder.png\" alt=\"\" />\n";
+					echo "\t\t<img class=\"topicimg\" src=\"theme/".getMysqlStr("theme", "global")."/icon/folder.png\" alt=\"\" />\n";
 					//echo "\t\t<img class=\"topicimg\" src=\"media/glyphs/" .$topic['pagename'] . ".png\"/>\n";
 					echo "\t\t<span class=\"topictitle\">" .$topic['title']."</span>\n";
 					echo "\t\t<span class=\"lastpost\">Last post by&nbsp;" . getLatestPost($topic['pagename']) ."</span>\n";
@@ -374,8 +373,6 @@ ini_set('date.timezone', 'UTC');
 
 	// display and format items for table 'threads' with page split
 	function listThreads($topic) {
-	
-	include 'config.php';
 		
 	$items_per_page = getMysqlStr('page_limit_threads', 'global');
 		
@@ -402,7 +399,7 @@ ini_set('date.timezone', 'UTC');
 
 			while ($thread = mysql_fetch_assoc($result)) {
 						echo "<a class=\"threaditem\" href=\"?topic=" . $topic ."&id=" .
-						$thread['id'] ."&page=1\"><img class=\"thread\" src=\"theme/".$theme."/icon/thread.png\"/><div class=\"threaditem\"><span class=\"subject\">". $thread['subject'] .
+						$thread['id'] ."&page=1\"><img class=\"thread\" src=\"theme/".getMysqlStr("theme", "global")."/icon/thread.png\"/><div class=\"threaditem\"><span class=\"subject\">". $thread['subject'] .
 						"</span><span class=\"author\"> - by " . $thread['author'] .
 						"</span><span class=\"right\"><span class=\"replies\">(". countReplies($thread['id']) .
 						" replies)</span>&nbsp;<span class=\"date\">". date('M/d/Y', $thread['epoch']) ."</span></span></div></a>";

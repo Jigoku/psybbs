@@ -27,17 +27,8 @@ $mysql_pass 	= "";
 $mysql_database = "psyBBS";
 $mysql_salt 	= "";
 
-/* global settings */
 $version = "0.3";
 
-$site_title = "<span class=\"bannertext\">Example</span><span class=\"banneremphasis\">Board</span>";
-$site_name = "psyBBS";
-$site_announce = "Announcement: Registrations now open";
-$site_quote = "psyBBS $version";
-
-/* theme settings */
-$theme = "mintphosphor";
-$themeopts = "?fixed";
 
 /* user level aliases */
 $userLevel = [
