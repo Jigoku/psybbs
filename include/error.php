@@ -1,6 +1,8 @@
 <?php
 /* psyBBS (error.php)
- * This file handles internal errors
+ * This file displays internal error messages
+ * 
+ * Set $errormsg, then simply include this file.
  * 
  * Copyright (C) 2015 Ricky K. Thomson
  * 
@@ -23,8 +25,7 @@ echo "
 	<div class=\"sub\">";
 echo $errormsg;
 echo "</div>
-</div>
-<meta http-equiv=\"refresh\" content=\"3;url=\"".$_SERVER["PHP_SELF"]."/>";
+</div>";
 
 include "bottom.php";
 ?>

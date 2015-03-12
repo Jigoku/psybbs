@@ -76,7 +76,7 @@ ini_set('date.timezone', 'UTC');
 			mysql_query("UPDATE users SET password='".hash('sha1', $newpassword.$mysql_salt)."' WHERE username='".$_SESSION["username"]."'");
 			header("Location: " . $_SERVER["PHP_SELF"] . "?account");
 		} else {
-			echo "<div class=\"sub\"><span class=\"large2\">Error: Password does not match!</span>\n";
+			echo "<div class=\"sub\"><span class=\"large2\">Error</span><hr />Password does not match!</span>\n";
 		}
 	}
 
@@ -275,7 +275,7 @@ ini_set('date.timezone', 'UTC');
 		  	}
 
 		} else {
-			echo "<div class=\"sub\"><span class=\"large2\">No results</span></div>";
+			echo "<div class=\"sub\"><span class=\"large2\">There are no topics!</span></div>";
 		}
 	}
 

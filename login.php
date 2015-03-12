@@ -26,17 +26,17 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code
         $pass = $_POST["password"];
 
         if(!($_POST['code'] == $_SESSION['code'])) {
-		$errormsg = "Security code was wrong.";
-                include "include/error.php";
-                session_destroy();
-                exit;
+			$errormsg = "Security code was wrong.";
+            include "include/error.php";
+            session_destroy();
+            exit;
         }
 
         if (!(preg_match('#([a-zA-Z0-9]+)#is', $user))) {
-		$errormsg = "Username can only contain alphanumerical symbols.";
-                include "include/error.php";
-                session_destroy();
-                exit;
+			$errormsg = "Username can only contain alphanumerical symbols.";
+            include "include/error.php";
+            session_destroy();
+            exit;
         }
 
 
@@ -46,8 +46,8 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code
 		echo "<meta http-equiv=\"refresh\" content=\"2;url=index.php\">\n";
 	} else {
 		$errormsg = "Login Failed.";
-                include "include/error.php";
-                session_destroy();
+        include "include/error.php";
+        session_destroy();
 		exit;
 	}
 

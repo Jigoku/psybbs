@@ -56,7 +56,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 		} elseif (array_keys($_GET) === array('dropdb', 'do')) {
 				mysql_query("DROP DATABASE " . $mysql_database);
 				echo "<div class=\"sub\"><span class=\"large3\">Done!</span><hr />Clearing your session...</div>\n";
-				echo "<meta http-equiv=\"refresh\" content=\"3;url=index.php?logout\">\n";
+				echo "<meta http-equiv=\"refresh\" content=\"2;url=index.php?logout\">\n";
 				
 				
 		//delete a topic
@@ -65,7 +65,8 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			$result = mysql_query("SELECT * FROM topics");
 
 			if (mysql_num_rows($result) == 0) {
-				echo "<div class=\"sub\"><span class=\"large2\">There are no topics to delete!</span></div>\n";
+				echo "<div class=\"sub\"><span class=\"large2\">Error</span><hr />There are no topics to delete!</div>\n";
+				
 			} else {
 				echo "<div class=\"sub\"><span class=\"large2\">Delete Topic</span><hr /></div>\n";
 				echo "<div class=\"sub\"><span class=\"large1\">WARNING: This will recursively delete all threads/posts in the selected topic!</span></div>\n";
