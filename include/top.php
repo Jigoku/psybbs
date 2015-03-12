@@ -108,7 +108,8 @@ if (!$db_selected) {
 		site_announce varchar(500) NOT NULL,
 		version varchar(10) NOT NULL,
 		page_limit_threads int(3) NOT NULL,
-		page_limit_posts int(3) NOT NULL
+		page_limit_posts int(3) NOT NULL,
+		date_format varchar(30) NOT NULL
 	)", $connection) or trigger_error(mysql_error());
 	
 	
@@ -125,7 +126,8 @@ if (!$db_selected) {
 			site_quote, 
 			version,
 			page_limit_threads,
-			page_limit_posts
+			page_limit_posts,
+			date_format
 			) 
 		VALUES (
 			'Y', 
@@ -138,8 +140,9 @@ if (!$db_selected) {
 			'powered by psyBBS ".$version."', 
 			'".$version."',
 			10,
-			10
-		)" , $connection);
+			10,
+			'[m:h:s] M/d/Y'
+		)" , $connection) or trigger_error(mysql_error());
 
 
 	} else {

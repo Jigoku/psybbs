@@ -343,7 +343,7 @@ ini_set('date.timezone', 'UTC');
 					}
 					//end user level
 
-					displayPost($post["author"], $post["content"], $post["epoch"], $level, $post["id"]);
+					formatPost($post["author"], $post["content"], $post["epoch"], $level, $post["id"]);
 				}
 				showBBinfo();
                         //show the reply form below
@@ -399,15 +399,12 @@ ini_set('date.timezone', 'UTC');
 					"<span class=\"newthread\"><a href=\"?topic=". $topic ."&amp;newthread\">New Thread</a></span></div>";
 		
 		if (mysql_num_rows($result) > 0) {
-
-
-
 			while ($thread = mysql_fetch_assoc($result)) {
 						echo "<a class=\"threaditem\" href=\"?topic=" . $topic ."&id=" .
 						$thread['id'] ."&page=1\"><img class=\"thread\" src=\"theme/".getMysqlStr("theme", "global")."/icon/thread.png\"/><div class=\"threaditem\"><span class=\"subject\">". $thread['subject'] .
 						"</span><span class=\"author\"> - by " . $thread['author'] .
 						"</span><span class=\"right\"><span class=\"replies\">(". countReplies($thread['id']) .
-						" replies)</span>&nbsp;<span class=\"date\">". date('M/d/Y', $thread['epoch']) ."</span></span></div></a>";
+						" replies)</span>&nbsp;<span class=\"date\">".formatDate($thread['epoch']) ."</span></span></div></a>";
 			
 		  	}
 
@@ -419,7 +416,10 @@ ini_set('date.timezone', 'UTC');
 
 	}
 
-
+	function formatDate($epoch) {
+		$date =  date(getMysqlStr("date_format", "global"), $epoch);
+		return $date;
+	}
 
 	function getTopicTitle($topic) {
 		$result = mysql_query("
@@ -435,7 +435,7 @@ ini_set('date.timezone', 'UTC');
 	
 
 	//post formatting
-	function displayPost($author, $content, $epoch, $level, $postid) {
+	function formatPost($author, $content, $epoch, $level, $postid) {
 			echo "<a name=\"".$postid."\"></a><div class=\"post\">\n";
 
 			echo "\t<div class=\"postinfo\">\n";
@@ -446,7 +446,7 @@ ini_set('date.timezone', 'UTC');
 				echo "\t\t<img src=\"media/avatar/1.png\" class=\"avatar\" alt=\"\" />\n";		//  IMG
 
 			echo "\t</div>\n";
-			echo "\t<div class=\"postbody\"><span class=\"postdate\">Posted on ". date('M/d/Y', $epoch) ." </span><br />". formatBB(nl2br($content)) ."</div>"; //convert \n to <br />
+			echo "\t<div class=\"postbody\"><span class=\"postdate\">Posted on ". formatDate($epoch) ." </span><br />". formatBB(nl2br($content)) ."</div>"; //convert \n to <br />
 
 			echo "</div>\n";
 

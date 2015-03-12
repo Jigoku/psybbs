@@ -158,6 +158,11 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 				"site_title", $_POST["boardtitle"]
 			);
 			
+		} elseif (array_keys($_GET) === array('setdateformat')) {
+			setGlobalStr(
+				"date_format", $_POST["date_format"]
+			);			
+			
 		} elseif (array_keys($_GET) === array('settheme')) {
 			setGlobalStr(
 				"theme", $_POST["theme"]
@@ -179,6 +184,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 				"page_limit_posts", $_POST["page_limit_posts"]
 			);
 			
+
 			
 		} else {
 			echo "<div class=\"sub\">";
@@ -211,7 +217,12 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setboardannouncement\">\n";
 			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"boardannouncement\" value=\"".getMysqlStr("site_announce","global")."\">\n";	
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
-			echo "</form></div>\n";							
+			echo "</form></div>\n";		
+			
+			echo "<div class=\"info\">Date Format<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setdateformat\">\n";
+			echo "<input type=\"text\" size=\"40\" maxlength=\"255\" name=\"date_format\" value=\"".getMysqlStr("date_format","global")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";					
 		
 			echo "<div class=\"info\"><img src=\"theme/".getMysqlStr("theme", "global")."/icon/theme.png\" /><span class=\"large4\">Theme Settings</span>\n";	
 			echo "<hr />\n";
