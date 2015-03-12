@@ -163,11 +163,8 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 	echo "<div id=\"userbar\"><a class=\"userbar\" href=\"login.php\">login</a> &brvbar; <a class=\"userbar\" href=\"create.php\">register</a>";
 	echo "<span class=\"right\"><a class=\"userbar\" href=\"info.php\">?</a></span></div>\n";
 
-	echo "<div class=\"sub\"><img class=\"splashimg\" src=\"theme/".$theme."/splash.png\" /></div>";
-	echo "<div class=\"sub\"><h1 class=\"large3\">$site_title</h1></div>";
-	echo "<div class=\"sub\"><p class=\"small\">Sample Text (change this)</p></div>";
-
-
+	echo "<div class=\"sub\"><img class=\"splashimg\" src=\"theme/".getMysqlStr("theme", "global")."/splash.png\" />";
+	echo "<h1 class=\"large3\">".getMysqlStr("site_title", "global")."</h1><br /></div>";
 }
 
 

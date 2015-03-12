@@ -33,7 +33,6 @@ if (!(isset($_SESSION["id"]))) {
 			exit;
 		}
 
-//		if (!(preg_match('#([a-zA-Z0-9]+)#is', $user))) {
 		if (!(ctype_alnum($user))) {
 			$errormsg = "Username can only contain alphanumerical symbols.";
 			include "include/error.php";
@@ -64,7 +63,7 @@ if (!(isset($_SESSION["id"]))) {
 
 		$pass = hash('sha1', $pass.$mysql_salt);
 
-	        mysql_query("INSERT INTO users (username, password, epoch, level) VALUES ('$user', '$pass', '".time()."', 1)" , $connection);
+	    mysql_query("INSERT INTO users (username, password, epoch, level) VALUES ('$user', '$pass', '".time()."', 1)" , $connection);
 		unset($_SESSION["code"]);
 
 		echo "<div id=\"userbar\">Welcome!</div>\n";

@@ -41,7 +41,7 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code
 
 
 	if (compareLogin($user, $pass)) {
-		echo "<div class=\"sub\">Logging in as <b>". $_SESSION["username"] . "</b>...<img class=\"right\"src=\"theme/".$theme."/loading.gif\" /></div>\n";
+		echo "<div class=\"sub\">Logging in as <b>". $_SESSION["username"] . "</b>...<img class=\"right\"src=\"theme/".getMysqlStr("theme", "global")."/loading.gif\" /></div>\n";
 		//echo "<div id=\"sub\"><img src=\"media/splash.png\" class=\"splash.png\" /></div>";
 		echo "<meta http-equiv=\"refresh\" content=\"2;url=index.php\">\n";
 	} else {

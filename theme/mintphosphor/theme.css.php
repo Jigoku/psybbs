@@ -171,8 +171,6 @@ a.threaditem,a.threaditem:link,a.threaditem:active,a.threaditem:hover { text-dec
 .topicdescription {color: #888; font-size: 14px;}
 .topictitle { text-decoration: underline; color: $colour1; font-size: 16px;}
 
-a.latestpost {float:right;}
-
 .topicimg {
 	float:left;
 	height: 30px;
