@@ -245,20 +245,9 @@ ini_set('date.timezone', 'UTC');
 
 	// display and format sorted items for table 'topics' with page split
 	function listTopics() {
+		include 'config.php';
 
-	include 'config.php';
-
-	$sql = "SELECT COUNT(id) FROM topics";
-	$result = mysql_query($sql);
-	$row = mysql_fetch_row($result);
-	$total_topics = $row[0];
-	$total_pages = ceil($total_topics / $items_per_page);
-
-
-		if (isset($_GET["page"]) && is_numeric($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-
-		$start_from = ($page-1) * $items_per_page;
-		$sql = "SELECT * FROM topics ORDER by title ASC LIMIT $start_from, ". $items_per_page; 
+		$sql = "SELECT * FROM topics ORDER by title ASC"; 
 		$result = mysql_query($sql);
 
 
@@ -268,7 +257,7 @@ ini_set('date.timezone', 'UTC');
 
 				echo "\n<a class=\"topic\" href=\"?topic=" . $topic['pagename'] . "\">\n";
 					echo "\t\t<img class=\"topicimg\" src=\"theme/".$theme."/icon/folder.png\" alt=\"\" />\n";
-	//				echo "\t\t<img class=\"topicimg\" src=\"media/glyphs/" .$topic['pagename'] . ".png\"/>\n";
+					//echo "\t\t<img class=\"topicimg\" src=\"media/glyphs/" .$topic['pagename'] . ".png\"/>\n";
 					echo "\t\t<span class=\"topictitle\">" .$topic['title']."</span>\n";
 					echo "\t\t<span class=\"lastpost\">Last post by&nbsp;" . getLatestPost($topic['pagename']) ."</span>\n";
 					echo "\t\t<br />\n";
@@ -276,13 +265,7 @@ ini_set('date.timezone', 'UTC');
 					echo "\t\t<span class=\"postcount\">" . countTopics($topic['pagename']) . "&nbsp;threads</span>\n";
 				echo "</a>\n";
 		  	}
-		  		if ($total_topics > $items_per_page) {
-					echo "<div class=\"pagenav\"><span class=\"small\">Page:</span>\n";
-					for ($i=1; $i<=$total_pages; $i++) {
-				            echo "<a class=\"pagebutton\" href=\"index.php?page=$i\">$i</a>&nbsp;";
-					};
-					echo "</div>\n";
-				}
+
 		} else {
 			echo "<div class=\"sub\"><span class=\"large2\">No results</span></div>";
 		}
