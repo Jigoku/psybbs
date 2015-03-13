@@ -97,7 +97,8 @@ echo "
 div#page {
 	background: transparent;
 	border-bottom: 1px solid $colour1;
-
+	position: relative;
+	width: 100%;
 }
 div#wrap { 
 	box-shadow: 0px 0px 6px 6px #111;
