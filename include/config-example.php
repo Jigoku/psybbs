@@ -21,21 +21,12 @@ $default_admin_username = "psy";
 $default_admin_password = "psy";
 
 /* mysql settings */
-$mysql_host 	= "localhost";
-$mysql_user 	= "";
-$mysql_pass 	= "";
-$mysql_database = "psyBBS";
-$mysql_salt 	= "";
+$mysql_host 	= "localhost";	//hostname for the mysql server
+$mysql_user 	= "";			//username .. 
+$mysql_pass 	= "";			//password .. 
+$mysql_database = "psyBBS";		//the name of the database to use/create
+$mysql_salt 	= "";			//random string used to obfuscate password hashes
 
-$version = "0.3";
-
-
-/* user level aliases */
-$userLevel = [
-	"banned" => "remnant",
-	"member" => "shadow",
-	"moderator" => "agent",
-	"admin" => "operator",
-];
+$version = "0.3"; //psyBBS version (don't change, this helps keep things compatbile)
 
 ?>
