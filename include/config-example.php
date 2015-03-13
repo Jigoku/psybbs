@@ -27,6 +27,6 @@ $mysql_pass 	= "";			//password ..
 $mysql_database = "psyBBS";		//the name of the database to use/create
 $mysql_salt 	= "";			//random string used to obfuscate password hashes
 
-$version = "0.3"; //psyBBS version (don't change, this helps keep things compatbile)
+$version = "0.3-pre"; //psyBBS version (don't change, this helps keep things compatbile)
 
 ?>
