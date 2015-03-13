@@ -16,8 +16,20 @@ Take your pick!
 ##NOTE
 This is and will be full of bugs right now, consider this software as pre-alpha quality. Some features are missing and/or need to be rewritten. Most of the functions handling $_GET and $_POST input *should* be sanitised already. Be cautious however.
 
+##Features
+* Splash page
+* Topic listing
+* Thread listing (with page filter)
+* Post listing (with page filter)
+* Web based administration
+* Login / creation captcha
+* Global user customization
+* Local user customization
+* Simple stats
+* Search querys
+
 ##Project Goals
-* ZERO javascript/flash (remote bbcode embeddings are the only exception). 
+* Minimal javascript (currently none, but may be needed to simplifying settings management)
 * W3C XHTML / W3C CSS3 valid
 * SQLi and XSS resistant
 * Fast
@@ -26,11 +38,11 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 
 ##How to Install
 * Clone the master branch into your web server root
-* Edit include/config-example.php ans set the mysql options along with other settings
-* Rename to include/config.php
+* Add your MySQL server connectiont to include/config-example.php
+* Rename it to include/config.php
 * Navigate to index.php
 * When processed, 'include/top.php' will check if a database exists, and otherwise creates it
-* Log in with your admin details and click the 'settings' button in the userbar for extra configuration
+* Log in with your primary admin account and click the 'settings' tab in the userbar for further configuration
 
 ##Themes
 * default
@@ -38,4 +50,4 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 
 ##Pentesting
 If you are working on a pentest script/software for finding SQLi, XSS, javascript injection or the 
-likes, feel free to clone/abuse psyBBS and report any finds! Thanks
+likes, feel free to clone/abuse psyBBS and report any finds! Thanks, it will be highly appreciated
