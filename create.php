@@ -76,11 +76,14 @@ if (!(isset($_SESSION["id"]))) {
 		unset($_SESSION["code"]);
 
 		echo "<div id=\"userbar\"><span class=\"small\"><span class=\"shadow\">Welcome ".$user."!</span></span></div>\n";
+		
+		/*
 		echo "<div class=\"sub\">";
-			/* TODO@ RULES HERE ????? showRules() */
+				showWelcome()  / showRules();
 		echo "</div>";
+		*/
 
-	        echo "<div class=\"sub\"><span class=\"large2\">You may now <a href=\"login.php\">login</a></span></div>";
+	        echo "<div class=\"sub\"><span class=\"large2\">Account Created</span><hr />You may now <a href=\"login.php\">login</a></div>";
 
 	} else {
 
