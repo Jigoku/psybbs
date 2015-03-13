@@ -264,6 +264,7 @@ div.postinfo {
 	float:left;
 	width: 120px;
 	padding: 10px 0px 0px 10px;
+	background: #222;
 }
 div.postbody {
 	padding: 20px;
@@ -287,9 +288,9 @@ div#threadtitle {
 
 
 .postdate { color: #555; font-size: 14px;font-style: italic; float:right;}
-.postauthor { font-size: 16px; color: #555; font-weight: bold;}
+.postauthor { font-size: 16px; color: #888; font-weight: bold;}
 /*div.postavatar { float:left; margin-right: 10px;}*/
-img.avatar { float:left; margin-right: 10px; width: 100px; height: 100px; 
+img.avatar { float:left; margin-right: 10px; width: 100px; height: 100px; margin-bottom: 10px; 
 background: transparent; margin-top:5px;}
 
 /* text items */
@@ -382,8 +383,8 @@ label.settings {
 }
 
 
-hr, hr.thread { color: #444; background: #444; border: 0px;  }
-
+hr { color: #444; background: #444; border: 0px;  }
+hr.thread  { color: $colour1; background: $colour1; border: 0px;  }
 form.settings {
 	margin: 0px auto;
 }
