@@ -23,7 +23,7 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 * Post listing (with page filter)
 * BBCode
 * Web based administration
-* Login / creation captcha
+* Login / Registration captcha
 * Global user customization
 * Local user customization
 * Simple stats
@@ -48,6 +48,11 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 ##Themes
 * default
 ![psyBBS default](theme/default/preview.png)
+
+##Licensing
+The code of psyBBS is released under the General Public License version 3. 
+Graphics/Artwork are released under various Creative Commons licenses (no stricter that cc-by-sa).
+Themes/plugins are advised to be released as any "free" license of your choosing (MIT, GPL, BSD, etc)
 
 ##Pentesting
 If you are working on a pentest script/software for finding SQLi, XSS, javascript injection or the 
