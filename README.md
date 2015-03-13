@@ -21,6 +21,7 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 * Topic listing
 * Thread listing (with page filter)
 * Post listing (with page filter)
+* BBCode
 * Web based administration
 * Login / creation captcha
 * Global user customization
