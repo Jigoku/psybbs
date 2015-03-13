@@ -60,22 +60,29 @@ ini_set('date.timezone', 'UTC');
 	}
 
 	function changePasswordPrompt() {
-		echo "<div class=\"sub\">\n";
+		echo "<div class=\"sub\"><span class=\"large2\">Change Password</span><hr />\n";
 			echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?changepassword\">\n";
-			echo "<label>Current Password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"currentpassword\"><br />\n";
-			echo "<label>New Password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword\"><br />\n";
+			echo "<label>Current password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"currentpassword\"><br />\n";
+			echo "<label>New password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword\"><br />\n";
+			echo "<label>Verify new password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword2\"><br />\n";
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\" class=\"button\">\n";
 			echo "</form>\n";
 		echo "</div>\n";
 		
 	}
 	
-	function setNewPassword($currentpassword, $newpassword) {
+	function setNewPassword($currentpassword, $newpassword, $newpassword2) {
 		include 'config.php';
-		
-		if (compareLogin($_SESSION["username"], $currentpassword)) {
-			mysql_query("UPDATE users SET password='".hash('sha1', $newpassword.$mysql_salt)."' WHERE username='".$_SESSION["username"]."'");
-			header("Location: " . $_SERVER["PHP_SELF"] . "?account");
+		if ($newpassword == $newpassword2) {
+			if (compareLogin($_SESSION["username"], $currentpassword)) {
+				mysql_query("UPDATE users SET password='".hash('sha1', $newpassword.$mysql_salt)."' WHERE username='".$_SESSION["username"]."'");
+				
+				echo "<div class=\"sub\"><span class=\"large2\">Success!</span><hr />Your password has been updated. Redirecting...</div>\n";
+				echo "<meta http-equiv=\"refresh\" content=\"2;url=index.php?account\">\n";
+	
+			} else {
+				echo "<div class=\"sub\"><span class=\"large2\">Error</span><hr />Password does not match!</span>\n";
+			}
 		} else {
 			echo "<div class=\"sub\"><span class=\"large2\">Error</span><hr />Password does not match!</span>\n";
 		}

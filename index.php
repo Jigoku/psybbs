@@ -53,10 +53,11 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 				changePasswordPrompt();
 			
 			} elseif (array_keys($_GET) === array('changepassword')) {
-				if (isset($_POST["currentpassword"]) && isset($_POST["newpassword"])) {
+				if (isset($_POST["currentpassword"]) && isset($_POST["newpassword"]) && isset($_POST["newpassword2"])) {
 					setNewPassword(
 						mEscape($_POST["currentpassword"]), 
-						mEscape($_POST["newpassword"])
+						mEscape($_POST["newpassword"]),
+						mEscape($_POST["newpassword2"])
 					);
 				}
 				
