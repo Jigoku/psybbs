@@ -20,13 +20,14 @@ ini_set('display_errors', 'on');
 include "include/top.php";
 if (!(isset($_SESSION["id"]))) {
 
-	if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code"])) {
+	if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) && isset($_POST["code"])) {
 
 		$user = mEscape($_POST["username"]);
 		$pass = mEscape($_POST["password"]);
+		$pass2 = mEscape($_POST["password2"]);
 
 
-		if(!($_POST["code"] == $_SESSION["code"])) {
+		if(!($_POST["code"] == @$_SESSION["code"])) {
 			$errormsg = "Security code was wrong.";
 			include "include/error.php";
 			session_destroy();
@@ -41,7 +42,7 @@ if (!(isset($_SESSION["id"]))) {
 		}
 
 		if (strlen($user) < 3) {
-			$errormsg = "Username must be at least 3 characters";
+			$errormsg = "Username must be at least 3 characters.";
 			include "include/error.php";
 			session_destroy();
 			exit;
@@ -53,6 +54,14 @@ if (!(isset($_SESSION["id"]))) {
 			session_destroy();
 			exit;
 		}
+		
+		if (!($pass == $pass2)) {
+			$errormsg = "Passwords do not match.";
+			include "include/error.php";
+			session_destroy();
+			exit;
+		}
+
 
 		if (checkUserExists($user)) {
 			$errormsg = "Username already exists.";
@@ -66,7 +75,7 @@ if (!(isset($_SESSION["id"]))) {
 	    mysql_query("INSERT INTO users (username, password, epoch, level) VALUES ('$user', '$pass', '".time()."', 1)" , $connection);
 		unset($_SESSION["code"]);
 
-		echo "<div id=\"userbar\">Welcome!</div>\n";
+		echo "<div id=\"userbar\"><span class=\"small\"><span class=\"shadow\">Welcome ".$user."!</span></span></div>\n";
 		echo "<div class=\"sub\">";
 			/* TODO@ RULES HERE ????? showRules() */
 		echo "</div>";
@@ -76,11 +85,14 @@ if (!(isset($_SESSION["id"]))) {
 	} else {
 
 
-	echo "<div class=\"sub\"><span class=\"large\">Create account</span><hr /></div>\n";
-	echo "<div class=\"sub\">\n";
+	echo "<div class=\"sub\"><span class=\"large2\">Create account</span><hr /></div>\n";
+	//echo "<div class=\"sub\"><div class=\"info\">Username must be alpha-numeric and 3-20 characters long.</div>";
+	//echo "<div class=\"info\">Password must be 8-40 characters long.</div>";
+	
                 echo "<form class=\"create\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\">\n";
                 echo "<label>Username</label> <input type=\"text\" size=\"12\" maxlength=\"20\" name=\"username\"><br />\n";
                 echo "<label>Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password\"><br />\n";
+                echo "<label>Verify Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password2\"><br />\n";
 
 		echo "<label><img class=\"captcha\" src=\"./scripts/captcha.php\"></label>\n";
 		echo "<span class=\"small\">Please enter the captcha:</span>\n";
