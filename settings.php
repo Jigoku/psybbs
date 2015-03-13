@@ -140,52 +140,89 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 
 
 		} elseif (array_keys($_GET) === array('setboardname')) {
-			setGlobalStr(
-				"site_name", $_POST["boardname"]
+			setMysqlStr(
+				"site_name", $_POST["boardname"], "global"
 			);
 			
 		} elseif (array_keys($_GET) === array('setboardquote')) {
-			setGlobalStr(
-				"site_quote", $_POST["boardquote"]
+			setMysqlStr(
+				"site_quote", $_POST["boardquote"], "global"
 			);
 			
 		} elseif (array_keys($_GET) === array('setboardannouncement')) {
-			setGlobalStr(
-				"site_announce", $_POST["boardannouncement"]
+			setMysqlStr(
+				"site_announce", $_POST["boardannouncement"], "global"
 			);
 			
 		} elseif (array_keys($_GET) === array('setboardtitle')) {
-			setGlobalStr(
-				"site_title", $_POST["boardtitle"]
+			setMysqlStr(
+				"site_title", $_POST["boardtitle"], "global"
 			);
 			
 		} elseif (array_keys($_GET) === array('setdateformat')) {
-			setGlobalStr(
-				"date_format", $_POST["date_format"]
+			setMysqlStr(
+				"date_format", $_POST["date_format"], "global"
 			);			
 			
 		} elseif (array_keys($_GET) === array('settheme')) {
-			setGlobalStr(
-				"theme", $_POST["theme"]
+			setMysqlStr(
+				"theme", $_POST["theme"], "global"
 			);
 			
 		} elseif (array_keys($_GET) === array('setthemeopts')) {
-			setGlobalStr(
-				"themeopts", $_POST["themeopts"]
+			setMysqlStr(
+				"themeopts", $_POST["themeopts"], "global"
 			);
 			
 			
 		} elseif (array_keys($_GET) === array('setpagelimitthreads')) {
-			setGlobalStr(
-				"page_limit_threads", $_POST["page_limit_threads"]
+			setMysqlStr(
+				"page_limit_threads", $_POST["page_limit_threads"], "global"
 			);
 			
 		} elseif (array_keys($_GET) === array('setpagelimitposts')) {
-			setGlobalStr(
-				"page_limit_posts", $_POST["page_limit_posts"]
+			setMysqlStr(
+				"page_limit_posts", $_POST["page_limit_posts"], "global"
 			);
 			
+		} elseif (array_keys($_GET) === array('userlevels')) {
+			echo "<div class=\"frame\"><span class=\"large2\">User Aliases</span><hr />\n";
+			echo "<div class=\"info\">Admin (level 3)<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setlevel_admin\">\n";
+			echo "<input type=\"text\" size=\"20\" maxlength=\"20\" name=\"level_admin\" value=\"".getMysqlStr("level_admin","user_settings")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
+			
+			echo "<div class=\"info\">Moderator (level 2)<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setlevel_moderator\">\n";
+			echo "<input type=\"text\" size=\"20\" maxlength=\"20\" name=\"level_moderator\" value=\"".getMysqlStr("level_moderator","user_settings")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
 
+			echo "<div class=\"info\">Member (level 1)<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setlevel_member\">\n";
+			echo "<input type=\"text\" size=\"20\" maxlength=\"20\" name=\"level_member\" value=\"".getMysqlStr("level_member","user_settings")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
+			
+			echo "<div class=\"info\">Banned (level 0)<form class=\"settings\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?setlevel_banned\">\n";
+			echo "<input type=\"text\" size=\"20\" maxlength=\"20\" name=\"level_banned\" value=\"".getMysqlStr("level_banned","user_settings")."\">\n";	
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\">\n";
+			echo "</form></div>\n";
+			echo "</div>\n";
+		} elseif (array_keys($_GET) === array('setlevel_admin')) {
+			setMysqlStr(
+				"level_admin", $_POST["level_admin"], "user_settings"
+			);
+		} elseif (array_keys($_GET) === array('setlevel_moderator')) {
+			setMysqlStr(
+				"level_moderator", $_POST["level_moderator"], "user_settings"
+			);
+		} elseif (array_keys($_GET) === array('setlevel_member')) {
+			setMysqlStr(
+				"level_member", $_POST["level_member"], "user_settings"
+			);
+		} elseif (array_keys($_GET) === array('setlevel_banned')) {
+			setMysqlStr(
+				"level_banned", $_POST["level_banned"], "user_settings"
+			);
 			
 		} else {
 			echo "<div class=\"sub\">";
@@ -265,13 +302,17 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 			echo "<hr />\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?dropdb\">Delete database</a></div><br />\n";
 		
+			//user control
 			echo "<div class=\"info\"><img src=\"theme/".getMysqlStr("theme", "global")."/icon/users.png\" /><span class=\"large4\">User Control</span></div>\n";
 			echo "<hr />\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?lockuser\">Lock User</a></div>\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?deluser\">Delete User</a></div>\n";
 			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?moduser\">Modify User</a></div>\n";
+			echo "<div class=\"info\"><a href=\"". $_SERVER["PHP_SELF"] ."?userlevels\">User Aliases</a></div>\n";
 
-			echo "</div>";
+
+
+			echo "</div>\n";
 			
 			
 		}

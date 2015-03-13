@@ -22,6 +22,7 @@
 ini_set('display_errors', 'on');
 ini_set('date.timezone', 'UTC');
 
+
 	//short alias for escaping
 	function mEscape($str) {
 		return mysql_real_escape_string($str);
@@ -180,16 +181,6 @@ ini_set('date.timezone', 'UTC');
 	}
 
 
-	
-	
-	function setGlobalStr($row, $str) {
-		mysql_query("UPDATE global SET ".$row."='".mEscape($str)."'");
-		header("Location: " . $_SERVER["PHP_SELF"]);
-	}
-
-
-
-
 	function createThread($topic, $subject, $message, $author) {
 
 		if (!(empty($subject)) && !(empty($message))) {
@@ -282,12 +273,16 @@ ini_set('date.timezone', 'UTC');
 
 
 	
-	// return value for given colum in table
-	// used for just 'global' table right now
+
 	function getMysqlStr($column, $table) {
 		$sql = "SELECT ".$column." FROM ".$table."";
 		$result = mysql_fetch_assoc(mysql_query($sql));
 		return $result[$column];
+	}
+	
+	function setMysqlStr($row, $str, $table) {
+		mysql_query("UPDATE ".$table." SET ".$row."='".mEscape($str)."'");
+		header("Location: " . $_SERVER["PHP_SELF"]);
 	}
 
 
@@ -491,11 +486,10 @@ ini_set('date.timezone', 'UTC');
 	}
 
 	function formatUserLevel($level) {
-		include 'config.php';
-		if ($level == 0) { return $userLevel["banned"]; } //banned
-		if ($level == 1) { return $userLevel["member"]; } // member
-		if ($level == 2) { return $userLevel["moderator"]; } //moderator
-		if ($level == 3) { return $userLevel["admin"]; } //admin
+		if ($level == 0) { return getMysqlStr("level_banned", "user_settings"); }
+		if ($level == 1) { return getMysqlStr("level_member", "user_settings"); }
+		if ($level == 2) { return getMysqlStr("level_moderator", "user_settings"); }
+		if ($level == 3) { return getMysqlStr("level_admin", "user_settings"); }
 	}
 
 	//return whether thread is locked

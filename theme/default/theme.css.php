@@ -187,7 +187,7 @@ a.threaditem,a.threaditem:link,a.threaditem:active,a.threaditem:hover { text-dec
 	
 }
 
-
+div.frame {padding: 20px; }
 
 div.thread {
 	color: #ddd;

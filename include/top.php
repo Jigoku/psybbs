@@ -146,6 +146,41 @@ if (!$db_selected) {
 		)" , $connection) or trigger_error(mysql_error());
 
 
+	//user settings
+	mysql_query("CREATE TABLE user_settings (
+		level_admin varchar(20) NOT NULL,  
+		level_moderator varchar(20) NOT NULL,  
+		level_member varchar(20) NOT NULL,  
+		level_banned varchar(20) NOT NULL,
+		colour_admin varchar(7) NOT NULL,
+		colour_moderator varchar(7) NOT NULL,
+		colour_member varchar(7) NOT NULL,
+		colour_banned varchar(7) NOT NULL
+	)", $connection) or trigger_error(mysql_error());
+	
+	mysql_query("INSERT INTO user_settings
+		(
+			level_admin, 
+			level_moderator,
+			level_member,
+			level_banned,
+			colour_admin,
+			colour_moderator,
+			colour_member,
+			colour_banned
+		) 
+		VALUES (
+			'admin', 
+			'moderator',
+			'member',
+			'banned',
+			'red',
+			'orange',
+			'yellow',
+			'grey'
+		)" , $connection) or trigger_error(mysql_error());
+		
+		
 	} else {
 		echo 'Error creating database: ' . mysql_error() . "\n";
 	}
