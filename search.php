@@ -34,7 +34,7 @@ if (isset($_SESSION["id"])) {
 		if (strlen($_POST["query"]) > 3) {
 			
 			//TODO add page filtering
-			$sql = "SELECT * FROM posts WHERE content LIKE '%".mEscape($_POST["query"])."%' ORDER by epoch";
+			$sql = "SELECT * FROM posts WHERE content LIKE '%".mEscape($_POST["query"])."%' ORDER by epoch DESC";
 			$resultpost = mysql_query($sql);
 			
 			echo "<div class=\"sub\">Query returned ".mysql_num_rows($resultpost) ." results.</div>\n";
