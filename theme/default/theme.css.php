@@ -369,7 +369,7 @@ a.userbar:hover {
 
 /* forms */
 
-label {
+label.account {
     display: block;
     width: 150px;
     float: left;
@@ -378,9 +378,12 @@ label {
     color: #aaa;
 }
 
-label.settings {
+
+
+label {
     color: #aaa;
 }
+
 
 
 hr { color: #444; background: #444; border: 0px;  }
@@ -394,6 +397,16 @@ form.create, form.login {
 	margin-right:auto;
 	background: transparent;
 	width: 400px;
+	padding: 20px;
+	color: #ddd;
+}
+
+
+form.post {
+	margin-left:auto;
+	margin-right:auto;
+	background: transparent;
+
 	padding: 20px;
 	color: #ddd;
 }

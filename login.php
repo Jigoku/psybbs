@@ -56,10 +56,10 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code
         echo "<div class=\"sub\"><span class=\"large2\">Login</span><hr /></div>\n";
         echo "<div class=\"sub\">\n";
                 echo "<form class=\"create\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\">\n";
-                echo "<label>Username</label> <input type=\"text\" size=\"12\" maxlength=\"20\" name=\"username\"><br />\n";
-                echo "<label>Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password\"><br />\n";
+                echo "<label class=\"account\">Username</label> <input type=\"text\" size=\"12\" maxlength=\"20\" name=\"username\"><br />\n";
+                echo "<label class=\"account\">Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password\"><br />\n";
 
-                echo "<label><img class=\"captcha\" src=\"./scripts/captcha.php\"></label>\n";
+                echo "<label class=\"account\"><img class=\"captcha\" src=\"./scripts/captcha.php\"></label>\n";
                 echo "<span class=\"small\">Please enter the captcha:</span>\n";
                 echo "<br />\n";
                 echo "<input type=\"text\" size=\"12\" name=\"code\"><br />\n";

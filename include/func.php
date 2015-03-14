@@ -62,9 +62,9 @@ ini_set('date.timezone', 'UTC');
 	function changePasswordPrompt() {
 		echo "<div class=\"sub\"><span class=\"large2\">Change Password</span><hr />\n";
 			echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?changepassword\">\n";
-			echo "<label>Current password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"currentpassword\"><br />\n";
-			echo "<label>New password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword\"><br />\n";
-			echo "<label>Verify new password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword2\"><br />\n";
+			echo "<label class=\"account\">Current password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"currentpassword\"><br />\n";
+			echo "<label class=\"account\">New password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword\"><br />\n";
+			echo "<label class=\"account\">Verify new password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword2\"><br />\n";
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\" class=\"button\">\n";
 			echo "</form>\n";
 		echo "</div>\n";
@@ -357,8 +357,9 @@ ini_set('date.timezone', 'UTC');
 				showBBinfo();
                         //show the reply form below
                         echo "<div class=\"sub\">\n";
-                                 echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?topic=" .$_GET["topic"] . "&amp;id=" . $_GET["id"] . "&amp;reply\">\n";
-                                 echo "<label>Message</label><br /><textarea style=\"width:100%\" cols=\"50\" rows=\"12\" name=\"body\"></textarea><br />\n";
+                                 echo "<form class=\"post\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?topic=" .$_GET["topic"] . "&amp;id=" . $_GET["id"] . "&amp;reply\">\n";
+                                 echo "<label id=\"maxchars\">5000</label> remaining characters.";
+                                 echo "<br /><textarea style=\"width:100%\" cols=\"50\" rows=\"12\" onkeyup=\"maxChars(this,5000,'maxchars');\" name=\"body\"></textarea><br />\n";
                                  echo "<input type=\"submit\" value=\"Post Reply\" name=\"submit\" class=\"button\" />\n";
                                  echo "</form>\n";
                         echo "</div>\n";

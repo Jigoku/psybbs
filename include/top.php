@@ -205,6 +205,19 @@ if (!$db_selected) {
 	<link href="<?php echo $psybbs; ?>/theme/<?php echo getMysqlStr("theme", "global");?>/icon/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<link href="<?php echo $psybbs; ?>/theme/<?php echo getMysqlStr("theme", "global"); ?>/theme.css.php<?php echo getMysqlStr("themeopts", "global"); ?>" rel="stylesheet" type="text/css" />
 	<title><?php if(isset($_GET["topic"])){ echo getCurrentTopicTitle($_GET["topic"]); } else { echo getMysqlStr("site_name", "global"); } ?></title>
+	
+	<script type="text/javascript">
+	//limit form input
+	function maxChars(msg, len, id) {
+		chars = msg.value.length;
+		document.getElementById(id).innerHTML = len - chars;
+		if (chars > len) {
+			msg.value = msg.value.substring(0, len);
+			document.getElementById(id).innerHTML = 0;
+		}
+	}
+	</script>
+	
 </head>
 
 <body>

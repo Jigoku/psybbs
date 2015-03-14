@@ -93,11 +93,11 @@ if (!(isset($_SESSION["id"]))) {
 	//echo "<div class=\"info\">Password must be 8-40 characters long.</div>";
 	
                 echo "<form class=\"create\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\">\n";
-                echo "<label>Username</label> <input type=\"text\" size=\"12\" maxlength=\"20\" name=\"username\"><br />\n";
-                echo "<label>Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password\"><br />\n";
-                echo "<label>Verify Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password2\"><br />\n";
+                echo "<label class=\"account\">Username</label> <input type=\"text\" size=\"12\" maxlength=\"20\" name=\"username\"><br />\n";
+                echo "<label class=\"account\">Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password\"><br />\n";
+                echo "<label class=\"account\">Verify Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password2\"><br />\n";
 
-		echo "<label><img class=\"captcha\" src=\"./scripts/captcha.php\"></label>\n";
+		echo "<label class=\"account\"><img class=\"captcha\" src=\"./scripts/captcha.php\"></label>\n";
 		echo "<span class=\"small\">Please enter the captcha:</span>\n";
 		echo "<br />\n";
 		echo "<input type=\"text\" size=\"12\" name=\"code\"><br />\n";
