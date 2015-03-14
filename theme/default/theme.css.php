@@ -369,7 +369,7 @@ a.userbar:hover {
 
 /* forms */
 
-label.account {
+label.account, label.createtopic{
     display: block;
     width: 150px;
     float: left;
@@ -392,7 +392,7 @@ form.settings {
 	margin: 0px auto;
 }
 
-form.create, form.login {
+form.create, form.login, form.search {
 	margin-left:auto;
 	margin-right:auto;
 	background: transparent;

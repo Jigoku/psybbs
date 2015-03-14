@@ -30,9 +30,9 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 					echo "<div class=\"sub\"><span class=\"large2\">Create Topic</span><hr /></div>\n";
 					echo "<div class=\"sub\">\n";
 							echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?createtopic&amp;do\">\n";
-							echo "<label>Topic Title</label> <input type=\"text\" size=\"20\" maxlength=\"255\" name=\"title\"><br />\n";
-							echo "<label>Topic Pagename</label> <input type=\"text\" size=\"20\" maxlength=\"30\" name=\"pagename\"><br />\n";
-							echo "<label>Topic Description</label> <input type=\"text\" size=\"20\" maxlength=\"255\" name=\"description\"><br />\n";
+							echo "<label class=\"createtopic\">Topic Title</label> <input type=\"text\" size=\"30\" maxlength=\"255\" name=\"title\"><br />\n";
+							echo "<label class=\"createtopic\">Topic Pagename</label> <input type=\"text\" size=\"30\" maxlength=\"30\" name=\"pagename\"><br />\n";
+							echo "<label class=\"createtopic\">Topic Description</label> <input type=\"text\" size=\"30\" maxlength=\"255\" name=\"description\"><br />\n";
 							echo "<input type=\"submit\" value=\"Create\" name=\"submit\" class=\"button\">\n";
 							echo "</form>\n";
 					echo "</div>\n";

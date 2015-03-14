@@ -22,9 +22,9 @@ if (isset($_SESSION["id"])) {
 	 if (!isset($_POST["query"])) {
 		echo "<div class=\"sub\"><span class=\"large2\">Search</span><hr /></div>\n";
 		echo "<div class=\"sub\">\n";
-                echo "<form class=\"create\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\">\n";
-                echo "<label>Query</label> <input type=\"text\" size=\"50\" maxlength=\"50\" name=\"query\"><br />\n";
-                echo "<input type=\"submit\" value=\"search\" name=\"submit\" class=\"button\">\n";
+                echo "<form class=\"search\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\">\n";
+                echo "<label class=\"search\">Query</label> <input type=\"text\" size=\"50\" maxlength=\"50\" name=\"query\">\n";
+                echo "<input type=\"submit\" value=\"Submit\" name=\"submit\" >\n";
                 echo "</form>\n";
         echo "</div>\n";
 	} else {
