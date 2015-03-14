@@ -30,7 +30,6 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 * Search querys
 
 ##Project Goals
-* Minimal javascript (currently none, but may be needed to simplifying settings management)
 * W3C XHTML / W3C CSS3 valid
 * SQLi and XSS resistant
 * Fast
