@@ -17,7 +17,13 @@
  */
  
 session_start();
-include "include/config.php";
+
+if (file_exists("include/config.php")) {
+	include "include/config.php";
+} else {
+	echo "ERROR: Could not find your psyBBS configuration, ensure you have edited and renamed the example file.\n";
+	exit;
+}
 include "include/func.php";
 
 $psybbs =  dirname($_SERVER['PHP_SELF']);
