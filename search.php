@@ -29,18 +29,19 @@ if (isset($_SESSION["id"])) {
         echo "</div>\n";
 	} else {
 		
-		echo "<div class=\"sub\"><span class=\"large2\">Search Results</span><hr /></div>\n";
-		echo "<div class=\"sub\">\n";
+		echo "<div class=\"sub\"><span class=\"large2\">Search Results</span><hr />\n";
 		
 		if (strlen($_POST["query"]) > 3) {
 			
 			//TODO add page filtering
 			$sql = "SELECT * FROM posts WHERE content LIKE '%".mEscape($_POST["query"])."%' ORDER by epoch";
 			$resultpost = mysql_query($sql);
-		
+			
+			echo "<div class=\"sub\">Query returned ".mysql_num_rows($resultpost) ." results.</div>\n";
+			
 			if (mysql_num_rows($resultpost) > 0) {
 				while ($post = mysql_fetch_assoc($resultpost)) {
-					
+
 					$sql = "SELECT * FROM threads WHERE id = '". mEscape($post["threadid"])."'";
 					$resultthread = mysql_query($sql);
 					while ($thread = mysql_fetch_assoc($resultthread)) {
@@ -49,7 +50,6 @@ if (isset($_SESSION["id"])) {
 									<div class=\"threaditem\"><span class=\"author\">".$post["author"]. " in </span> '". $thread["subject"] .
 									"'</div>\n";
 					}
-					///////////
 				}
 			} else {
 				echo "No Results!\n";
