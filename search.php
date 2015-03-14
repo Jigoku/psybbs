@@ -44,7 +44,8 @@ if (isset($_SESSION["id"])) {
 					$sql = "SELECT * FROM threads WHERE id = '". mEscape($post["threadid"])."'";
 					$resultthread = mysql_query($sql);
 					while ($thread = mysql_fetch_assoc($resultthread)) {
-							echo "<a class=\"threaditem\" href=\"index.php?topic=".$thread["topic"]."&id=".$thread["id"]."#".$post["id"]."\">
+							//TODO fix page request
+							echo "<a class=\"threaditem\" href=\"index.php?topic=".$thread["topic"]."&id=".$thread["id"]."&page=1#".$post["id"]."\">
 									<div class=\"threaditem\"><span class=\"author\">".$post["author"]. " in </span> '". $thread["subject"] .
 									"'</div>\n";
 					}
