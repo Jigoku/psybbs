@@ -188,6 +188,25 @@ ini_set('date.timezone', 'UTC');
 	}
 
 
+	function toggleUserLock($username) {
+		$result = mysql_fetch_assoc(mysql_query("SELECT * FROM users WHERE username = '".$username."'"));
+		if ($result["locked"] == "N") {
+			mysql_query("UPDATE users SET locked='Y' WHERE username = '".$username."'");
+		} else {
+			mysql_query("UPDATE users SET locked='N' WHERE username = '".$username."'");
+		}
+		
+		header("Location: " . $_SERVER["PHP_SELF"] . "?lockuser");
+	}
+
+	function checkUserLocked($username) {
+		$result = mysql_fetch_assoc(mysql_query("SELECT * FROM users WHERE username = '".$username."'"));
+		if ($result["locked"] == "Y") {
+			return true;
+		}
+
+	}
+
 	function createThread($topic, $subject, $message, $author) {
 
 		if (!(empty($subject)) && !(empty($message))) {

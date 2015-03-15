@@ -72,7 +72,7 @@ if (!(isset($_SESSION["id"]))) {
 
 		$pass = hash('sha1', $pass.$mysql_salt);
 
-	    mysql_query("INSERT INTO users (username, password, epoch, level) VALUES ('$user', '$pass', '".time()."', 1)" , $connection);
+	    mysql_query("INSERT INTO users (username, password, epoch, level, locked) VALUES ('$user', '$pass', '".time()."', 1, 'N')" , $connection);
 		unset($_SESSION["code"]);
 
 		echo "<div id=\"userbar\"><span class=\"small\"><span class=\"shadow\">Welcome ".$user."!</span></span></div>\n";

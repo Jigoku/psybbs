@@ -22,22 +22,29 @@ include "include/top.php";
 if (!(isset($_SESSION["id"]))) {
 
 if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code"])) {
-        $user = mEscape(strtolower($_POST["username"]));
-        $pass = $_POST["password"];
+	$user = mEscape(strtolower($_POST["username"]));
+	$pass = $_POST["password"];
 
-        if(!($_POST['code'] == $_SESSION['code'])) {
-			$errormsg = "Security code was wrong.";
-            include "include/error.php";
-            session_destroy();
-            exit;
-        }
+	if(!($_POST['code'] == $_SESSION['code'])) {
+		$errormsg = "Security code was wrong.";
+		include "include/error.php";
+		session_destroy();
+		exit;
+	}
 
-        if (!(preg_match('#([a-zA-Z0-9]+)#is', $user))) {
-			$errormsg = "Username can only contain alphanumerical symbols.";
-            include "include/error.php";
-            session_destroy();
-            exit;
-        }
+	if (!(preg_match('#([a-zA-Z0-9]+)#is', $user))) {
+		$errormsg = "Username can only contain alphanumerical symbols.";
+		include "include/error.php";
+		session_destroy();
+		exit;
+	}
+
+	if (checkUserLocked($user)) {
+		$errormsg = "Your account is locked.";
+		include "include/error.php";
+		session_destroy();
+		exit;
+	}
 
 
 	if (compareLogin($user, $pass)) {

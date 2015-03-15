@@ -98,7 +98,23 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 		//user control
 		} elseif (array_keys($_GET) === array('lockuser')) {
 			echo "<div class=\"sub\"><span class=\"large2\">Lock User</span><hr /></div>\n";
-
+			
+			$result = mysql_query("SELECT * FROM users");
+			echo "<div class=\"sub\">\n";
+			echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?lockuser&amp;do\">\n";
+			echo "<label>User</label><br />\n";
+			echo "<select name=\"username\">\n";
+			
+			while ($user = mysql_fetch_array($result)) {
+				echo "\t<option value=\"" . $user["username"] . "\" />" . $user["username"] . 
+						" id(" .$user["id"] . ") level(". $user["level"] .") locked(".$user["locked"].")</option>\n";
+			}
+			
+			echo "</select>\n";
+			echo "<input type=\"submit\" value=\"Toggle Lock\" name=\"submit\" class=\"button\">\n";
+			echo "</form>\n";
+			echo "</div>\n";
+			
 		//user control
 		} elseif (array_keys($_GET) === array('announce_on')) {
 			enableAnnouncement();
@@ -107,29 +123,31 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccou
 
 		} elseif (array_keys($_GET) === array('deluser')) {
 			echo "<div class=\"sub\"><span class=\"large2\">Delete User</span><hr /></div>\n";
-
+			echo "<div class=\"sub\"><span class=\"large1\">WARNING: This will delete all posts and threads started by the user</span></div>\n";
+			
 			$result = mysql_query("SELECT * FROM users");
-
-			if (mysql_num_rows($result) == 0) {
-				die(); // we should have at least one user, to make the request..... derp
-			} else {
-				echo "<div class=\"sub\"><span class=\"large1\">WARNING: This will delete all posts and threads started by the user</span></div>\n";
-				echo "<div class=\"sub\">\n";
-					echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?deluser&amp;do\">\n";
-					echo "<label>User</label><br />\n";
-					echo "<select name=\"username\">\n";
-						while ($user = mysql_fetch_array($result)) {
-							echo "\t<option value=\"" . $user["username"] . "\" />" . $user["username"] . 
-									" id(" .$user["id"] . ") level(". $user["level"] .")</option>\n";
-						}
-					echo "</select>\n";
-					echo "<input type=\"submit\" value=\"Accept\" name=\"submit\" class=\"button\">\n";
-					echo "</form>\n";
-				echo "</div>\n";
-
+			echo "<div class=\"sub\">\n";
+			echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?deluser&amp;do\">\n";
+			echo "<label>User</label><br />\n";
+			echo "<select name=\"username\">\n";
+			
+			while ($user = mysql_fetch_array($result)) {
+				echo "\t<option value=\"" . $user["username"] . "\" />" . $user["username"] . 
+						" id(" .$user["id"] . ") level(". $user["level"] .")</option>\n";
 			}
+			
+			echo "</select>\n";
+			echo "<input type=\"submit\" value=\"Delete User\" name=\"submit\" class=\"button\">\n";
+			echo "</form>\n";
+			echo "</div>\n";
+
 		} elseif (array_keys($_GET) === array('deluser', 'do') && isset($_POST["username"])) {
 			delUser(
+				mEscape($_POST["username"])
+			);
+			
+		} elseif (array_keys($_GET) === array('lockuser', 'do') && isset($_POST["username"])) {
+			toggleUserLock(
 				mEscape($_POST["username"])
 			);
 

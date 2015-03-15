@@ -56,11 +56,12 @@ if (!$db_selected) {
 		epoch int(11),
 		username varchar(20) NOT NULL,
 		password varchar(40) NOT NULL,
-		level int(1) UNSIGNED
+		level int(1) UNSIGNED,
+		locked char(1) NOT NULL
 	)", $connection) or trigger_error(mysql_error());
 
 	//insert initial operator account (used for setup)
-	mysql_query("INSERT INTO users (username, password, level, epoch) VALUES ('".$default_admin_username."', '". hash('sha1', $default_admin_password.$mysql_salt) ."', 3,'".time()."')" , $connection);
+	mysql_query("INSERT INTO users (username, password, level, epoch, locked) VALUES ('".$default_admin_username."', '". hash('sha1', $default_admin_password.$mysql_salt) ."', 3,'".time()."', 'N')" , $connection);
 
 	/*
 		Access Levels
