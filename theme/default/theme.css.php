@@ -384,7 +384,11 @@ label {
     color: #aaa;
 }
 
+img.bbcode {
+	background: white;
+	border: 1px solid #000;
 
+}
 
 hr { color: #444; background: #444; border: 0px;  }
 hr.thread  { color: $colour1; background: $colour1; border: 0px;  }

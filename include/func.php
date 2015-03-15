@@ -215,7 +215,7 @@ ini_set('date.timezone', 'UTC');
 			//redirect to new thread
 			header("Location: " . $_SERVER["PHP_SELF"] . "?topic=" . $topic .  "&id=" . $rows . "&page=1");
 		} else {
-			echo "<div class=\"sub\"><span class=\"large2\">You must enter at least something...</span></div>";
+			echo "<div class=\"sub\"><p>Subject and/or message cannot be empty.</p></div>";
 		}
 	}
 
@@ -354,9 +354,10 @@ ini_set('date.timezone', 'UTC');
 
 					formatPost($post["author"], $post["content"], $post["epoch"], $level, $post["id"]);
 				}
-				showBBinfo();
+				
                         //show the reply form below
                         echo "<div class=\"sub\">\n";
+                         showBBinfo();
                                  echo "<form class=\"post\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?topic=" .$_GET["topic"] . "&amp;id=" . $_GET["id"] . "&amp;reply\">\n";
                                  echo "<label id=\"maxchars\">5000</label> remaining characters.";
                                  echo "<br /><textarea id=\"message\" style=\"width:100%\" cols=\"50\" rows=\"12\" onkeyup=\"maxChars(this,5000,'maxchars');\" name=\"body\"></textarea><br />\n";
@@ -648,19 +649,21 @@ ini_set('date.timezone', 'UTC');
 	}
 
 	function showBBinfo() {
-		echo "<div class=\"sub\">\n";
-		echo "BBCode:<hr />";
-		echo "<a href=\"#\" onclick=\"appendText('[b][/b]', 'message');\">bold</a> | ";
-		echo "<a href=\"#\" onclick=\"appendText('[i][/i]', 'message');\">italics</a> | ";
-		echo "<a href=\"#\" onclick=\"appendText('[u][/u]', 'message');\">underline</a> | ";
-		echo "<a href=\"#\" onclick=\"appendText('[s][/s]', 'message');\">strikethrough</a> | ";
-		echo "<a href=\"#\" onclick=\"appendText('[quote][/quote]', 'message');\">quote</a> | ";
-		echo "<a href=\"#\" onclick=\"appendText('[soundcloud][/soundcloud]', 'message');\">soundcloud</a> | ";
-		echo "<a href=\"#\" onclick=\"appendText('[vimeo][/vimeo]', 'message');\">vimeo</a> | ";
-		echo "<a href=\"#\" onclick=\"appendText('[youtube][/youtube]', 'message');\">youtube</a> | ";
-		echo "<a href=\"#\" onclick=\"appendText('[size=14][/size]', 'message');\">size</a> | ";
-		echo "<a href=\"#\" onclick=\"appendText('[color=#ff0000][/color]', 'message');\">color</a> | <hr />";
-		echo "</div>\n";
+
+		echo "<span onclick=\"appendText('[b][/b]', 'message');\"><img title=\"[b]\" class=\"bbcode\" src=\"media/icons/text_bold.png\" /></span>";
+		echo "<span onclick=\"appendText('[i][/i]', 'message');\"><img title=\"[i]\" class=\"bbcode\" src=\"media/icons/text_italic.png\" /></span>";
+		echo "<span onclick=\"appendText('[u][/u]', 'message');\"><img title=\"[u]\" class=\"bbcode\" src=\"media/icons/text_underline.png\" /></span>";
+		echo "<span onclick=\"appendText('[s][/s]', 'message');\"><img title=\"[s]\" class=\"bbcode\" src=\"media/icons/text_strikethrough.png\" /></span>";
+		echo "<span onclick=\"appendText('[size=14][/size]', 'message');\"><img title=\"[size=*]\" class=\"bbcode\" src=\"media/icons/text_size.png\" /></span>";
+		echo "<span onclick=\"appendText('[color=#ff0000][/color]', 'message');\"><img title=\"[color=#??????]\" class=\"bbcode\" src=\"media/icons/color_wheel.png\" /></span>";
+		echo "<span onclick=\"appendText('[quote][/quote]', 'message');\"><img title=\"[quote]\" class=\"bbcode\" src=\"media/icons/comment.png\" /></span>";
+		echo "<span onclick=\"appendText('[img][/img]', 'message');\"><img title=\"[img]\" class=\"bbcode\" src=\"media/icons/picture.png\" /></span>";
+		echo "<span onclick=\"appendText('[url][/url]', 'message');\"><img title=\"[url=*]\" class=\"bbcode\" src=\"media/icons/world_link.png\" /></span>";
+		echo "<span onclick=\"appendText('[soundcloud][/soundcloud]', 'message');\"><img title=\"[soundcloud]\" class=\"bbcode\" src=\"media/icons/sound.png\" /></span>";
+		echo "<span onclick=\"appendText('[vimeo][/vimeo]', 'message');\"><img title=\"[vimeo]\" class=\"bbcode\" src=\"media/icons/film.png\" /></span>";
+		echo "<span onclick=\"appendText('[youtube][/youtube]', 'message');\"><img title=\"[youtube]\" class=\"bbcode\" src=\"media/icons/film.png\" /></span>";
+
+		echo "<hr />\n";
 
 	}
 
