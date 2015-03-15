@@ -222,6 +222,11 @@ if (!$db_selected) {
 			document.getElementById(id).innerHTML = 0;
 		}
 	}
+	
+	function appendText(code, id) {
+        var input = document.getElementById(id);
+        input.value = input.value + code;
+    }
 	</script>
 	
 </head>

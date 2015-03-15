@@ -359,7 +359,7 @@ ini_set('date.timezone', 'UTC');
                         echo "<div class=\"sub\">\n";
                                  echo "<form class=\"post\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?topic=" .$_GET["topic"] . "&amp;id=" . $_GET["id"] . "&amp;reply\">\n";
                                  echo "<label id=\"maxchars\">5000</label> remaining characters.";
-                                 echo "<br /><textarea style=\"width:100%\" cols=\"50\" rows=\"12\" onkeyup=\"maxChars(this,5000,'maxchars');\" name=\"body\"></textarea><br />\n";
+                                 echo "<br /><textarea id=\"message\" style=\"width:100%\" cols=\"50\" rows=\"12\" onkeyup=\"maxChars(this,5000,'maxchars');\" name=\"body\"></textarea><br />\n";
                                  echo "<input type=\"submit\" value=\"Post Reply\" name=\"submit\" class=\"button\" />\n";
                                  echo "</form>\n";
                         echo "</div>\n";
@@ -648,18 +648,20 @@ ini_set('date.timezone', 'UTC');
 	}
 
 	function showBBinfo() {
-		echo "<div class=\"sub\">Supported BB code:<pre>";
-		echo "[b]bold[/b]\n";
-		echo "[i]italics[/i]\n";
-		echo "[u]underline[/u]\n";
-		echo "[s]strikethrough[/s]\n";
-		echo "[quote]quoted text[/quote]\n";
-		echo "[soundcloud]band/track[/soundcloud]\n";
-		echo "[vimeo]video number[/vimeo]\n";
-		echo "[youtube]vieo tag[/youtube]\n";
-		echo "[size=20]Text size 20[/size]\n";
-		echo "[color=#ff0000]red text[/color]\n";
-		echo "</pre></div>";
+		echo "<div class=\"sub\">\n";
+		echo "BBCode:<hr />";
+		echo "<a href=\"#\" onclick=\"appendText('[b][/b]', 'message');\">bold</a> | ";
+		echo "<a href=\"#\" onclick=\"appendText('[i][/i]', 'message');\">italics</a> | ";
+		echo "<a href=\"#\" onclick=\"appendText('[u][/u]', 'message');\">underline</a> | ";
+		echo "<a href=\"#\" onclick=\"appendText('[s][/s]', 'message');\">strikethrough</a> | ";
+		echo "<a href=\"#\" onclick=\"appendText('[quote][/quote]', 'message');\">quote</a> | ";
+		echo "<a href=\"#\" onclick=\"appendText('[soundcloud][/soundcloud]', 'message');\">soundcloud</a> | ";
+		echo "<a href=\"#\" onclick=\"appendText('[vimeo][/vimeo]', 'message');\">vimeo</a> | ";
+		echo "<a href=\"#\" onclick=\"appendText('[youtube][/youtube]', 'message');\">youtube</a> | ";
+		echo "<a href=\"#\" onclick=\"appendText('[size=14][/size]', 'message');\">size</a> | ";
+		echo "<a href=\"#\" onclick=\"appendText('[color=#ff0000][/color]', 'message');\">color</a> | <hr />";
+		echo "</div>\n";
+
 	}
 
 ?>
