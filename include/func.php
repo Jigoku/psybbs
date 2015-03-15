@@ -32,7 +32,8 @@ ini_set('date.timezone', 'UTC');
 	//get information for active user
 	function showAccount() {
 		echo "<div class=\"sub\"><span class=\"large2\">Account Information</span>\n\t<hr />\n";
-
+		//echo "\t\t<img class=\"right\" src=\"media/avatar/".md5($_SESSION["username"]).".png\" class=\"avatar\" alt=\"\" />\n";
+		
 		//date of account creation
 		$result = mysql_query("SELECT * FROM users WHERE id = '". $_SESSION["id"] . "'");
 		$account = mysql_fetch_array($result);
@@ -54,8 +55,9 @@ ini_set('date.timezone', 'UTC');
 		echo "\t<div class=\"info\">You have posted <span class=\"hl\">" .  ($numposts - $numthreads) . "</span> replies.</div>\n";
 		echo "\t<div class=\"info\">You have started <span class=\"hl\">" .  $numthreads . "</span> threads.</div>\n</div>\n";
 		echo "\t<div class=\"sub\"><span class=\"large2\">Account Settings</span>\n\t<hr />\n";
-		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;password\">Change Password</a></div>\n</div>\n";
-
+		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;password\">Change Password</a></div>\n";
+		//echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;avatar\">Change Avatar</a></div>\n</div>\n";
+		echo "</div>";
 
 	}
 
@@ -70,6 +72,21 @@ ini_set('date.timezone', 'UTC');
 		echo "</div>\n";
 		
 	}
+	
+	function changeAvatarPrompt() {
+		echo "<div class=\"sub\"><span class=\"large2\">Change Avatar</span><hr />\n";
+		
+		echo "<form enctype=\"multipart/form-data\" action=\"".$_SERVER["PHP_SELF"]."?account&amp;avatar\" method=\"post\">
+				<input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"1000000\" />
+				Supported filetypes [png] <br /><input name=\"upload\" type=\"file\" />
+				<input type=\"submit\" value=\"Upload\" />
+				</form> ";
+		
+		echo "</div>\n";
+		
+	}
+	
+	
 	
 	function setNewPassword($currentpassword, $newpassword, $newpassword2) {
 		include 'config.php';
@@ -493,7 +510,7 @@ ini_set('date.timezone', 'UTC');
 			}
 		}
 	}
-	
+
 
 	//post formatting
 	function formatPost($author, $content, $epoch, $level, $postid) {
@@ -501,10 +518,11 @@ ini_set('date.timezone', 'UTC');
 
 			echo "\t<div class=\"postinfo\">\n";
 
-				echo "\t\t<span class=\"postauthor\">". $author ."</span><br />\n";		//username
-				echo "\t\t<span class=\"small\">". formatUserLevel($level) ."</span>\n";	//access level
-				echo "\t\t<hr class=\"thread\" />\n";						//--------------------
-				echo "\t\t<img src=\"media/avatar/1.png\" class=\"avatar\" alt=\"\" />\n";		//  IMG
+				echo "\t\t<span class=\"postauthor\">". $author ."</span><br />\n";
+				echo "\t\t<span class=\"small\">". formatUserLevel($level) ."</span>\n";
+				echo "\t\t<hr class=\"thread\" />\n";
+				//echo "\t\t<img src=\"media/avatar/".md5($author).".png\" class=\"avatar\" alt=\"\" />\n";
+				echo "\t\t<img src=\"media/avatar/default.png\" class=\"avatar\" alt=\"\" />\n";
 
 			echo "\t</div>\n";
 			echo "\t<div class=\"postbody\"><span class=\"postdate\">Posted on ". formatDate($epoch) ." </span><br />". formatBB(nl2br($content)) ."</div>"; //convert \n to <br />

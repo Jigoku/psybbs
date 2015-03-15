@@ -51,7 +51,14 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 
 			} elseif (array_keys($_GET) === array('account', 'password')) {
 				changePasswordPrompt();
-			
+			/*
+			} elseif (array_keys($_GET) === array('account', 'avatar')) {
+				if (!(isset($_POST["upload"]))) {
+					changeAvatarPrompt();
+				} else {
+					//TODO; upload form
+				}
+			*/
 			} elseif (array_keys($_GET) === array('changepassword')) {
 				if (isset($_POST["currentpassword"]) && isset($_POST["newpassword"]) && isset($_POST["newpassword2"])) {
 					setNewPassword(
