@@ -25,7 +25,7 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code
 	$user = mEscape(strtolower($_POST["username"]));
 	$pass = $_POST["password"];
 
-	if(!($_POST['code'] == $_SESSION['code'])) {
+	if(!($_POST['code'] == @$_SESSION['code'])) {
 		$errormsg = "Security code was wrong.";
 		include "include/error.php";
 		session_destroy();

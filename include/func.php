@@ -29,6 +29,21 @@ ini_set('date.timezone', 'UTC');
 	}
 
 
+	// from https://secure.gravatar.com/site/implement/images/php/
+	function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
+		$url = 'http://www.gravatar.com/avatar/';
+		$url .= md5( strtolower( trim( $email ) ) );
+		$url .= "?s=$s&d=$d&r=$r";
+		if ( $img ) {
+			$url = '<img src="' . $url . '"';
+			foreach ( $atts as $key => $val )
+				$url .= ' ' . $key . '="' . $val . '"';
+			$url .= ' />';
+		}
+		return $url;
+	}
+
+
 	//get information for active user
 	function showAccount() {
 		echo "<div class=\"sub\"><span class=\"large2\">Account Information</span>\n\t<hr />\n";
@@ -56,7 +71,7 @@ ini_set('date.timezone', 'UTC');
 		echo "\t<div class=\"info\">You have started <span class=\"hl\">" .  $numthreads . "</span> threads.</div>\n</div>\n";
 		echo "\t<div class=\"sub\"><span class=\"large2\">Account Settings</span>\n\t<hr />\n";
 		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;password\">Change Password</a></div>\n";
-		//echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;avatar\">Change Avatar</a></div>\n</div>\n";
+		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;avatar\">Change Avatar</a></div>\n</div>\n";
 		echo "</div>";
 
 	}
@@ -76,11 +91,14 @@ ini_set('date.timezone', 'UTC');
 	function changeAvatarPrompt() {
 		echo "<div class=\"sub\"><span class=\"large2\">Change Avatar</span><hr />\n";
 		
-		echo "<form enctype=\"multipart/form-data\" action=\"".$_SERVER["PHP_SELF"]."?account&amp;avatar\" method=\"post\">
+		/*echo "<form enctype=\"multipart/form-data\" action=\"".$_SERVER["PHP_SELF"]."?account&amp;avatar\" method=\"post\">
 				<input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"1000000\" />
 				Supported filetypes [png] <br /><input name=\"upload\" type=\"file\" />
 				<input type=\"submit\" value=\"Upload\" />
-				</form> ";
+				</form> ";*/
+				
+		echo "Currently only 'gravatar' is supported. To change your avatar on ". getMysqlStr("site_name","global") . ", register for 
+		an account at <a href=\"https://gravatar.com/\">gravatar.com</a> supplying the same email address you registered with here.";
 		
 		echo "</div>\n";
 		
@@ -510,7 +528,11 @@ ini_set('date.timezone', 'UTC');
 			}
 		}
 	}
-
+	function getUserEmail($username) {
+		$sql = "SELECT email FROM users WHERE username = '". $username ."'";		
+		$result = mysql_fetch_assoc(mysql_query($sql));
+		return $result["email"];
+	}
 
 	//post formatting
 	function formatPost($author, $content, $epoch, $level, $postid) {
@@ -521,8 +543,9 @@ ini_set('date.timezone', 'UTC');
 				echo "\t\t<span class=\"postauthor\">". $author ."</span><br />\n";
 				echo "\t\t<span class=\"small\">". formatUserLevel($level) ."</span>\n";
 				echo "\t\t<hr class=\"thread\" />\n";
-				//echo "\t\t<img src=\"media/avatar/".md5($author).".png\" class=\"avatar\" alt=\"\" />\n";
-				echo "\t\t<img src=\"media/avatar/default.png\" class=\"avatar\" alt=\"\" />\n";
+				
+				// implement options for these; when no gravatar account exists [ 404 | mm | identicon | monsterid | wavatar ]
+				echo "\t\t<img src=\"".get_gravatar(getUserEmail($author), 100, '404', 'x', false, '')."\" class=\"avatar\" alt=\"\" />\n";
 
 			echo "\t</div>\n";
 			echo "\t<div class=\"postbody\"><span class=\"postdate\">Posted on ". formatDate($epoch) ." </span><br />". formatBB(nl2br($content)) ."</div>"; //convert \n to <br />
@@ -583,14 +606,15 @@ ini_set('date.timezone', 'UTC');
 		include "config.php";
 
 		$result = mysql_query("
-			SELECT id FROM users WHERE username = '" .
+			SELECT * FROM users WHERE username = '" .
 			mEscape($username) . "' AND password = '". hash('sha1', $password.$mysql_salt) ."'"
 		) or trigger_error(mysql_error());
 
 		if(mysql_num_rows($result) > 0) {
-			$userid = mysql_fetch_assoc($result);
-			$_SESSION["id"] =  $userid["id"];
-			$_SESSION["username"] = mEscape($username);
+			$user = mysql_fetch_assoc($result);
+			$_SESSION["id"] =  $user["id"];
+			$_SESSION["username"] = $user["username"];
+			$_SESSION["email"] = $user["email"];
 			return true;
 		}
 

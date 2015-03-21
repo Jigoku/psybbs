@@ -20,11 +20,13 @@ ini_set('display_errors', 'on');
 include "include/top.php";
 if (!(isset($_SESSION["id"]))) {
 
-	if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) && isset($_POST["code"])) {
+	if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) 
+			&& isset($_POST["code"]) && isset($_POST["email"])) {
 
 		$user = mEscape($_POST["username"]);
 		$pass = mEscape($_POST["password"]);
 		$pass2 = mEscape($_POST["password2"]);
+		$email = mEscape($_POST["email"]);
 
 
 		if(!($_POST["code"] == @$_SESSION["code"])) {
@@ -72,7 +74,7 @@ if (!(isset($_SESSION["id"]))) {
 
 		$pass = hash('sha1', $pass.$mysql_salt);
 
-	    mysql_query("INSERT INTO users (username, password, epoch, level, locked) VALUES ('$user', '$pass', '".time()."', 1, 'N')" , $connection);
+	    mysql_query("INSERT INTO users (username, password, epoch, level, locked, email) VALUES ('$user', '$pass', '".time()."', 1, 'N', '$email')" , $connection);
 		unset($_SESSION["code"]);
 
 		echo "<div id=\"userbar\"><span class=\"small\"><span class=\"shadow\">Welcome ".$user."!</span></span></div>\n";
@@ -96,6 +98,7 @@ if (!(isset($_SESSION["id"]))) {
                 echo "<label class=\"account\">Username</label> <input type=\"text\" size=\"12\" maxlength=\"20\" name=\"username\"><br />\n";
                 echo "<label class=\"account\">Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password\"><br />\n";
                 echo "<label class=\"account\">Verify Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password2\"><br />\n";
+                 echo "<label class=\"account\">Email Address</label> <input type=\"text\" size=\"12\" maxlength=\"150\" name=\"email\"><br />\n";
 
 		echo "<label class=\"account\"><img class=\"captcha\" src=\"./scripts/captcha.php\"></label>\n";
 		echo "<span class=\"small\">Please enter the captcha:</span>\n";
