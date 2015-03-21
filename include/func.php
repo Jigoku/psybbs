@@ -43,7 +43,11 @@ ini_set('date.timezone', 'UTC');
 		return $url;
 	}
 
-
+	function getUserPostCount($username) {
+		$result= mysql_query("SELECT * FROM posts WHERE author = '". $username ."'");
+		return mysql_num_rows($result);
+	}
+	
 	//get information for active user
 	function showAccount() {
 		echo "<div class=\"sub\"><span class=\"large2\">Account Information</span>\n\t<hr />\n";
@@ -64,15 +68,11 @@ ini_set('date.timezone', 'UTC');
 		echo formatUserLevel(getAccountLevel());
 		echo "</span>\n\t</div>\n";
 
-		//user posts total
-		$resultposts= mysql_query("SELECT * FROM posts WHERE author = '". $_SESSION["username"] ."'");
-		$numposts = mysql_num_rows($resultposts);
-
 		//user threads total
 		$resultthreads= mysql_query("SELECT * FROM threads WHERE author = '". $_SESSION["username"] ."'");
 		$numthreads = mysql_num_rows($resultthreads);
 
-		echo "\t<div class=\"info\">You have posted <span class=\"hl\">" .  ($numposts - $numthreads) . "</span> replies.</div>\n";
+		echo "\t<div class=\"info\">You have posted <span class=\"hl\">" .  (getUserPostCount($_SESSION["username"]) - $numthreads) . "</span> replies.</div>\n";
 		echo "\t<div class=\"info\">You have started <span class=\"hl\">" .  $numthreads . "</span> threads.</div>\n</div>\n";
 		echo "\t<div class=\"sub\"><span class=\"large2\">Account Settings</span>\n\t<hr />\n";
 		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;password\">Change Password</a></div>\n";
@@ -579,10 +579,11 @@ ini_set('date.timezone', 'UTC');
 
 			echo "\t<div class=\"postinfo\">\n";
 				echo "\t\t<span class=\"postauthor\">". $author ."</span><br />\n";
-				echo "\t\t<span class=\"small\">". formatUserLevel($level) ."</span>\n";
+				echo "\t\t<span class=\"small\">". formatUserLevel($level) ."</span><br />\n";
+				echo "\t\t<span class=\"small\">". getUserPostCount($author) ." posts</span>\n";
 				echo "\t\t<hr class=\"thread\" />\n";
 				
-				if (!(getGravatarType($author) == "null")) {
+				if (!(getGravatarType($author) == "null")) {	
 					echo "\t\t<img src=\"".get_gravatar(getUserEmail($author), 100, getGravatarType($author), 'x', false, '')."\" class=\"avatar\" alt=\"\" />\n";
 				} 
 			

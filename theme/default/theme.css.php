@@ -263,7 +263,7 @@ div.post {
 div.postinfo {
 	float:left;
 	width: 120px;
-	padding: 10px 0px 0px 10px;
+	padding: 10px 0px 10px 10px;
 	background: #222;
 }
 div.postbody {
@@ -290,7 +290,7 @@ div#threadtitle {
 .postdate { color: #555; font-size: 14px;font-style: italic; float:right;}
 .postauthor { font-size: 16px; color: #888; font-weight: bold;}
 /*div.postavatar { float:left; margin-right: 10px;}*/
-img.avatar { float:left; margin-right: 10px; width: 100px; height: 100px; margin-bottom: 10px; 
+img.avatar { float:left; width: 100px; height: 100px;
 background: transparent; margin-top:5px;}
 
 /* text items */
