@@ -700,7 +700,7 @@ ini_set('date.timezone', 'UTC');
 			'~\[color=(.*?)\](.*?)\[/color\]~s',
 			'~\[youtube\](.*?)\[/youtube\]~s',
 			'~\[vimeo\](.*?)\[/vimeo\]~s',
-			'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
+			'~\[url=(https?://.*?)\](.*?)\[/url\]~s',
 			'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
 			'~\[soundcloud\](.*?)\[/soundcloud\]~s',
 		);
@@ -716,7 +716,7 @@ ini_set('date.timezone', 'UTC');
 			'<span style="color:$1;">$2</span>',
 			'<iframe width="500" height="281" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>',
 			'<iframe width="500" height="281" src="https://player.vimeo.com/video/$1" frameborder="0" allowfullscreen></iframe>',
-			'<a href="$1">$1</a>',
+			'<a href="$1">$2</a>',
 			'<a href="$1"><img src="$1" width="100%" alt="" /></a>',
 			'<iframe width="500" height="150" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/$1&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>'
 		);
@@ -733,7 +733,7 @@ ini_set('date.timezone', 'UTC');
 		echo "<span onclick=\"appendText('[color=#ff0000][/color]', 'message');\"><img title=\"[color=#??????]\" class=\"bbcode\" src=\"media/icons/color_wheel.png\" /></span>";
 		echo "<span onclick=\"appendText('[quote][/quote]', 'message');\"><img title=\"[quote]\" class=\"bbcode\" src=\"media/icons/comment.png\" /></span>";
 		echo "<span onclick=\"appendText('[img][/img]', 'message');\"><img title=\"[img]\" class=\"bbcode\" src=\"media/icons/picture.png\" /></span>";
-		echo "<span onclick=\"appendText('[url][/url]', 'message');\"><img title=\"[url=*]\" class=\"bbcode\" src=\"media/icons/world_link.png\" /></span>";
+		echo "<span onclick=\"appendText('[url=][/url]', 'message');\"><img title=\"[url=*]\" class=\"bbcode\" src=\"media/icons/world_link.png\" /></span>";
 		echo "<span onclick=\"appendText('[soundcloud][/soundcloud]', 'message');\"><img title=\"[soundcloud]\" class=\"bbcode\" src=\"media/icons/sound.png\" /></span>";
 		echo "<span onclick=\"appendText('[vimeo][/vimeo]', 'message');\"><img title=\"[vimeo]\" class=\"bbcode\" src=\"media/icons/film.png\" /></span>";
 		echo "<span onclick=\"appendText('[youtube][/youtube]', 'message');\"><img title=\"[youtube]\" class=\"bbcode\" src=\"media/icons/film.png\" /></span>";
