@@ -52,6 +52,11 @@ ini_set('date.timezone', 'UTC');
 		//date of account creation
 		$result = mysql_query("SELECT * FROM users WHERE id = '". $_SESSION["id"] . "'");
 		$account = mysql_fetch_array($result);
+		
+		if (!(getGravatarType($_SESSION["username"]) == "null")) {
+			echo "\t<img class=\"right\" src=\"".get_gravatar(getUserEmail($_SESSION["username"]), 100, getGravatarType($_SESSION["username"]), 'x', false, '')."\" class=\"avatar\" alt=\"\" />\n";
+		}
+		
 		echo "\t<div class=\"info\">User since " .  date('M/d/Y', $account['epoch']) . "</div>\n";
 
 		//show access level (as group name)
@@ -100,18 +105,37 @@ ini_set('date.timezone', 'UTC');
 		
 	}
 	
+	function isGravatarValueSet($type) {
+		$result = mysql_query("SELECT gravatar FROM users WHERE id = '". $_SESSION["id"] . "'");
+		$user = mysql_fetch_array($result);
+		if ($user["gravatar"] == $type) { return "checked=\"checked\""; }
+	}
+	
+	function setGravatarType($type) {
+		mysql_query("UPDATE users SET gravatar='".$type."' WHERE id = '". $_SESSION["id"] . "'");
+		header("Location: " . $_SERVER["PHP_SELF"] . "?account");
+	}
+	
+	function getGravatarType($username) {
+		$result = mysql_query("SELECT gravatar FROM users WHERE username = '". $username . "'");
+		$user = mysql_fetch_array($result);
+		return $user["gravatar"];
+	}
+	
 	function changeAvatarPrompt() {
 		echo "<div class=\"sub\"><span class=\"large2\">Change Avatar</span><hr />\n";
-		
-		/*echo "<form enctype=\"multipart/form-data\" action=\"".$_SERVER["PHP_SELF"]."?account&amp;avatar\" method=\"post\">
-				<input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"1000000\" />
-				Supported filetypes [png] <br /><input name=\"upload\" type=\"file\" />
-				<input type=\"submit\" value=\"Upload\" />
-				</form> ";*/
-				
-		echo "Currently only 'gravatar' is supported. To change your avatar on ". getMysqlStr("site_name","global") . ", register for 
-		an account at <a href=\"https://gravatar.com/\">gravatar.com</a> supplying the same email address you registered with here.";
-		
+		echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?account&amp;avatar\">\n";
+		echo "<input type=\"hidden\" name=\"update\">";
+
+		echo "Gravatar Type:<br />\n";
+		echo "<input type=\"radio\" name=\"gravatar\" value=\"null\" ".isGravatarValueSet("null")." /> none<br />\n";
+		echo "<input type=\"radio\" name=\"gravatar\" value=\"mm\" ".isGravatarValueSet("mm")." /> mm<br />\n";
+		echo "<input type=\"radio\" name=\"gravatar\" value=\"identicon\" ".isGravatarValueSet("identicon")." /> identicon<br />\n";
+		echo "<input type=\"radio\" name=\"gravatar\" value=\"monsterid\" ".isGravatarValueSet("monsterid")." /> monsterid<br />\n";
+		echo "<input type=\"radio\" name=\"gravatar\" value=\"wavatar\" ".isGravatarValueSet("wavatar")." /> wavatar<br />\n";
+		echo "<input type=\"submit\" value=\"Update\" name=\"submit\" class=\"button\">\n";
+		echo "</form>\n";
+			
 		echo "</div>\n";
 		
 	}
@@ -554,14 +578,14 @@ ini_set('date.timezone', 'UTC');
 			echo "<a name=\"".$postid."\"></a><div class=\"post\">\n";
 
 			echo "\t<div class=\"postinfo\">\n";
-
 				echo "\t\t<span class=\"postauthor\">". $author ."</span><br />\n";
 				echo "\t\t<span class=\"small\">". formatUserLevel($level) ."</span>\n";
 				echo "\t\t<hr class=\"thread\" />\n";
 				
-				// implement options for these; when no gravatar account exists [ 404 | mm | identicon | monsterid | wavatar ]
-				echo "\t\t<img src=\"".get_gravatar(getUserEmail($author), 100, '404', 'x', false, '')."\" class=\"avatar\" alt=\"\" />\n";
-
+				if (!(getGravatarType($author) == "null")) {
+					echo "\t\t<img src=\"".get_gravatar(getUserEmail($author), 100, getGravatarType($author), 'x', false, '')."\" class=\"avatar\" alt=\"\" />\n";
+				} 
+			
 			echo "\t</div>\n";
 			echo "\t<div class=\"postbody\"><span class=\"postdate\">Posted on ". formatDate($epoch) ." </span><br />". formatBB(nl2br($content)) ."</div>"; //convert \n to <br />
 

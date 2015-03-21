@@ -58,10 +58,12 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 				changeEmailPrompt();
 			
 			} elseif (array_keys($_GET) === array('account', 'avatar')) {
-				if (!(isset($_POST["upload"]))) {
+				if (!(isset($_POST["update"]))) {
 					changeAvatarPrompt();
 				} else {
-					//TODO; upload form
+					setGravatarType( 
+						mEscape($_POST["gravatar"])
+					);
 				}
 			
 			} elseif (array_keys($_GET) === array('changepassword')) {
