@@ -44,13 +44,18 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 		}
 
 		if (!(isset($_GET["topic"]))) {
-
+			
+			/* START USER ACCOUNT SETTINGS
+			*/
 			if (array_keys($_GET) === array('account')) {
 				//show profile information per active account
 				showAccount();
 
 			} elseif (array_keys($_GET) === array('account', 'password')) {
 				changePasswordPrompt();
+			
+			} elseif (array_keys($_GET) === array('account', 'email')) {
+				changeEmailPrompt();
 			
 			} elseif (array_keys($_GET) === array('account', 'avatar')) {
 				if (!(isset($_POST["upload"]))) {
@@ -68,11 +73,23 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 					);
 				}
 				
+			} elseif (array_keys($_GET) === array('changeemail')) {
+				if (isset($_POST["newemail"])) {
+					setNewEmail(
+						mEscape($_POST["newemail"])
+					);
+				}
+				
 			} elseif (array_keys($_GET) === array('stats')) {
 				//show server (forum) stats
 				showStats();
+				
+			/* END USER ACCOUNT SETTINGS
+			*/
 
-			/**** ADMIN ****/
+
+			/* START ADMIN SETTINGS
+			*/
 			//main page
 			} elseif (array_keys($_GET) === array('admin') && getAccountLevel() == 3) {
 				showSettings();
@@ -89,8 +106,8 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 					mEscape($_POST["pagename"]),
 					mEscape($_POST["description"])
 				);
-			/**** END ADMIN ****/
-
+			/* END ADMIN SETTINGS
+			*/
 			} else {
 				//list the topics
 				listTopics();

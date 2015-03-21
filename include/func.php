@@ -71,6 +71,7 @@ ini_set('date.timezone', 'UTC');
 		echo "\t<div class=\"info\">You have started <span class=\"hl\">" .  $numthreads . "</span> threads.</div>\n</div>\n";
 		echo "\t<div class=\"sub\"><span class=\"large2\">Account Settings</span>\n\t<hr />\n";
 		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;password\">Change Password</a></div>\n";
+		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;email\">Change Email</a></div>\n";
 		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;avatar\">Change Avatar</a></div>\n</div>\n";
 		echo "</div>";
 
@@ -82,6 +83,17 @@ ini_set('date.timezone', 'UTC');
 			echo "<label class=\"account\">Current password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"currentpassword\"><br />\n";
 			echo "<label class=\"account\">New password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword\"><br />\n";
 			echo "<label class=\"account\">Verify new password</label> <input type=\"password\" size=\"20\" maxlength=\"40\" name=\"newpassword2\"><br />\n";
+			echo "<input type=\"submit\" value=\"Update\" name=\"submit\" class=\"button\">\n";
+			echo "</form>\n";
+		echo "</div>\n";
+		
+	}
+	
+	function changeEmailPrompt() {
+		echo "<div class=\"sub\"><span class=\"large2\">Change Email</span><hr />\n";
+			echo "<div class=\"sub\">Current email address: " . getUserEmail($_SESSION["username"]) ."</div>";
+			echo "<form class=\"\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?changeemail\">\n";
+			echo "<label class=\"account\">New Email Address</label> <input type=\"text\" size=\"30\" maxlength=\"150\" name=\"newemail\"><br />\n";
 			echo "<input type=\"submit\" value=\"Update\" name=\"submit\" class=\"button\">\n";
 			echo "</form>\n";
 		echo "</div>\n";
@@ -104,7 +116,10 @@ ini_set('date.timezone', 'UTC');
 		
 	}
 	
-	
+	function setNewEmail($email) {
+		mysql_query("UPDATE users SET email='".$email."' WHERE username = '".$_SESSION["username"]."'");
+		header("Location: " . $_SERVER["PHP_SELF"] . "?account&email");
+	}
 	
 	function setNewPassword($currentpassword, $newpassword, $newpassword2) {
 		include 'config.php';
@@ -614,7 +629,6 @@ ini_set('date.timezone', 'UTC');
 			$user = mysql_fetch_assoc($result);
 			$_SESSION["id"] =  $user["id"];
 			$_SESSION["username"] = $user["username"];
-			$_SESSION["email"] = $user["email"];
 			return true;
 		}
 
