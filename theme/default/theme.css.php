@@ -204,6 +204,7 @@ div.threadopts {
 	background: url(tile2.png) #000;
 	border-top: 1px solid $colour1;
 	border-bottom: 1px solid $colour1;
+	min-height:15px;
 }
 div.threaditem, div.topicitem {
 	padding: 10px;
@@ -255,9 +256,9 @@ a.pagebutton:hover   { color: #000; text-decoration: none; background: #444; }
 
 
 div.post {
-	background: #111;
+	background: #222;
 	overflow:hidden;
-	border-bottom: 1px solid #222;
+
 }
 
 div.postinfo {
@@ -265,14 +266,15 @@ div.postinfo {
 	width: 120px;
 	padding: 10px 0px 10px 10px;
 	background: #222;
+	min-height: 160px;
+
 }
 div.postbody {
 	padding: 20px;
 	color: #ddd;
 	overflow:hidden;
-	border-left: 1px solid #222;
-
-	min-height: 170px;
+	background: #111;
+	min-height: 180px;
 }
 
 div#threadtitle {
@@ -280,18 +282,18 @@ div#threadtitle {
 	font-weight: bold;
 	color: $colour1;
 	padding: 15px;
-	border-top: 1px solid #222;;
-	border-bottom: 1px solid #222;
+	border-top: 1px solid #222;
+
 	background: #000;
 	background: url(tile.png) #000
 }
 
 
-.postdate { color: #555; font-size: 14px;font-style: italic; float:right;}
+.postdate { color: #bbb; font-size: 12px;font-style: italic; float:right;}
 .postauthor { font-size: 16px; color: #888; font-weight: bold;}
-/*div.postavatar { float:left; margin-right: 10px;}*/
+div.postavatar { float:left; margin-right: 10px;}
 img.avatar { float:left; width: 100px; height: 100px;
-background: transparent; margin-top:5px;}
+background: transparent; margin-top:5px; }
 
 /* text items */
 .subject { color: #bbb; }

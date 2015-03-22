@@ -434,8 +434,6 @@ ini_set('date.timezone', 'UTC');
 				showPageNav($total_items, $total_pages, $items_per_page, "index.php?topic=" . $topic."&amp;id=$id");
 
 				while ($post = mysql_fetch_array($result)) {
-					if (getAccountLevel() > 1) { echo "<div class=\"threadopts\">Post Options | <a href=\"?deletepost=". $post["id"] ."\">delete post</a> &brvbar; edit</div>\n"; }
-
 					//get user level
 					$result2 = mysql_query("SELECT level FROM users WHERE username= '" . $post["author"] ."'")
 						or trigger_error(mysql_error());
@@ -575,10 +573,18 @@ ini_set('date.timezone', 'UTC');
 
 	//post formatting
 	function formatPost($author, $content, $epoch, $level, $postid) {
-			echo "<a name=\"".$postid."\"></a><div class=\"post\">\n";
+			
+			echo "<div class=\"post\">";
+			echo "<div class=\"threadopts\">";
+			echo "<a href=\"#$postid\" name=\"".$postid."\">#$postid</a>";
+			
+			if (getAccountLevel() > 1) { echo " &brvbar; <a href=\"?deletepost=". $postid ."\">delete post</a> &brvbar; edit\n"; }
+			
+			echo "<span class=\"postdate\">Posted on ". formatDate($epoch) ." </span>\n";
+			echo "</div>";
 
 			echo "\t<div class=\"postinfo\">\n";
-				echo "\t\t<span class=\"postauthor\">". $author ."</span><br />\n";
+				echo "<span class=\"postauthor\">". $author ."</span><br />";
 				echo "\t\t<span class=\"small\">". formatUserLevel($level) ."</span><br />\n";
 				echo "\t\t<span class=\"small\">". getUserPostCount($author) ." posts</span>\n";
 				echo "\t\t<hr class=\"thread\" />\n";
@@ -588,7 +594,7 @@ ini_set('date.timezone', 'UTC');
 				} 
 			
 			echo "\t</div>\n";
-			echo "\t<div class=\"postbody\"><span class=\"postdate\">Posted on ". formatDate($epoch) ." </span><br />". formatBB(nl2br($content)) ."</div>"; //convert \n to <br />
+			echo "\t<div class=\"postbody\">".formatBB(nl2br($content)) ."</div>"; //convert \n to <br />
 
 			echo "</div>\n";
 
