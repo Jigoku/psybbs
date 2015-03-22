@@ -67,10 +67,9 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 				}
 			
 			} elseif (array_keys($_GET) === array('changepassword')) {
-				if (strlen($pass) < 8) {
+				if (strlen($_POST["newpassword"]) < 8) {
 					$errormsg = "New password must be at least 8 characters.";
 					include "include/error.php";
-					session_destroy();
 					exit;
 				} elseif (isset($_POST["currentpassword"]) && isset($_POST["newpassword"]) && isset($_POST["newpassword2"])) {
 					setNewPassword(
