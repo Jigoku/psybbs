@@ -445,18 +445,18 @@ ini_set('date.timezone', 'UTC');
 
 					formatPost($post["author"], $post["content"], $post["epoch"], $level, $post["id"]);
 				}
-				
+				showPageNav($total_items, $total_pages, $items_per_page, "index.php?topic=" . $topic."&amp;id=$id");
                         //show the reply form below
-                        echo "<div class=\"sub\">\n";
+                        echo "<div id=\"reply\">\n";
                          showBBinfo();
-                                 echo "<form class=\"post\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?topic=" .$_GET["topic"] . "&amp;id=" . $_GET["id"] . "&amp;reply\">\n";
+                                 echo "Reply to this thread:<form class=\"post\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?topic=" .$_GET["topic"] . "&amp;id=" . $_GET["id"] . "&amp;reply\">\n";
                                  echo "<label id=\"maxchars\">5000</label> remaining characters.";
                                  echo "<br /><textarea id=\"message\" style=\"width:100%\" cols=\"50\" rows=\"12\" onkeyup=\"maxChars(this,5000,'maxchars');\" name=\"body\"></textarea><br />\n";
                                  echo "<input type=\"submit\" value=\"Post Reply\" name=\"submit\" class=\"button\" />\n";
                                  echo "</form>\n";
                         echo "</div>\n";
                         
-				showPageNav($total_items, $total_pages, $items_per_page, "index.php?topic=" . $topic."&amp;id=$id");
+				
 			} else { 
 				echo "<div class=\"sub\"><span class=\"large2\">Page does not exist!</span></div>";
 			}
@@ -755,7 +755,6 @@ ini_set('date.timezone', 'UTC');
 	}
 
 	function showBBinfo() {
-
 		echo "<span onclick=\"appendText('[b][/b]', 'message');\"><img title=\"[b]\" class=\"bbcode\" src=\"media/icons/text_bold.png\" /></span>";
 		echo "<span onclick=\"appendText('[i][/i]', 'message');\"><img title=\"[i]\" class=\"bbcode\" src=\"media/icons/text_italic.png\" /></span>";
 		echo "<span onclick=\"appendText('[u][/u]', 'message');\"><img title=\"[u]\" class=\"bbcode\" src=\"media/icons/text_underline.png\" /></span>";
@@ -768,9 +767,7 @@ ini_set('date.timezone', 'UTC');
 		echo "<span onclick=\"appendText('[soundcloud][/soundcloud]', 'message');\"><img title=\"[soundcloud]\" class=\"bbcode\" src=\"media/icons/sound.png\" /></span>";
 		echo "<span onclick=\"appendText('[vimeo][/vimeo]', 'message');\"><img title=\"[vimeo]\" class=\"bbcode\" src=\"media/icons/film.png\" /></span>";
 		echo "<span onclick=\"appendText('[youtube][/youtube]', 'message');\"><img title=\"[youtube]\" class=\"bbcode\" src=\"media/icons/film.png\" /></span>";
-
 		echo "<hr />\n";
-
 	}
 
 ?>

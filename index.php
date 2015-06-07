@@ -157,7 +157,7 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 
 				        echo "<div class=\"sub\">\n";
 				          showBBinfo();
-				                echo "<form class=\"post\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?topic=" .$_GET["topic"] . "&amp;newthread\">\n";
+				                echo "Create a new thread:<form class=\"post\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "?topic=" .$_GET["topic"] . "&amp;newthread\">\n";
 				                echo "<label>Thread Title </label> <input type=\"text\" size=\"60\" maxlength=\"60\" name=\"subject\"><br />\n";
 				                echo "<label id=\"maxchars\">5000</label> remaining characters";
 				                echo "<br /><textarea id=\"message\" style=\"width:100%\" cols=\"50\" rows=\"12\" onkeyup=\"maxChars(this,5000,'maxchars');\" name=\"body\"></textarea><br />\n";

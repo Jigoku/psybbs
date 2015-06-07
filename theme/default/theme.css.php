@@ -41,13 +41,13 @@ if (isset($_GET["colour1"])){
 	$colour1 = "#" . $_GET["colour1"];
 
 } else {
-	$colour1 = "#71D096";
+	$colour1 = "#555";
 }
 
 if (isset($_GET["colour2"])){
 	$colour2 = "#" . $_GET["colour2"];
 } else {
-	$colour2 = "#0B221A";
+	$colour2 = "#220000";
 }
 ?>
 
@@ -70,12 +70,14 @@ if (isset($_GET["fixed"])){
 //fixed layout
 echo "
 div#wrap {
+
     width: 1000px;
 	margin: auto;
 }
 
 div#page {
     width: 800;
+    border: 2px solid #555;
 }
 ";
 
@@ -96,7 +98,6 @@ div#wrap {
 echo "
 div#page {
 	background: transparent;
-	border-bottom: 1px solid $colour1;
 	position: relative;
 	width: 100%;
 }
@@ -105,7 +106,7 @@ div#wrap {
 	background: #000;
  }
 
-div.sub { color: #ddd; padding:20px; background: url(tile.png) #000 }
+div.sub, div#reply { color: #ddd; padding:20px; background: url(tile.png) #000 }
 
 
 .splashimg {
@@ -162,6 +163,7 @@ a.topic {
 	display:block;
 	border-top: 2px solid #222;
 	background: #111;
+
 }
 a.topic:link,a.topic:active {
 	color: #bbb;
@@ -202,8 +204,7 @@ div.threadopts {
 	color: $colour1;
 	font-size: 12px;
 	background: url(tile2.png) #000;
-	border-top: 1px solid $colour1;
-	border-bottom: 1px solid $colour1;
+	border-bottom: 2px solid #555;
 	min-height:15px;
 }
 div.threaditem, div.topicitem {
@@ -240,7 +241,8 @@ div.pagenav {
 	background: #222;
 	height: 25px;
 	background: url(tile2.png) #000;
-	
+
+	border-bottom: 2px solid #555;
 }
 
 a.pagebutton:link,a.pagebutton:visited,a.pagebutton:active,a.pagebutton:hover {
@@ -259,6 +261,7 @@ div.post {
 	background: #222;
 	overflow:hidden;
 
+	border-bottom: 2px solid #555;
 }
 
 div.postinfo {
@@ -275,6 +278,7 @@ div.postbody {
 	overflow:hidden;
 	background: #111;
 	min-height: 180px;
+		border-left: 2px solid #555;
 }
 
 div#threadtitle {
@@ -282,7 +286,8 @@ div#threadtitle {
 	font-weight: bold;
 	color: $colour1;
 	padding: 15px;
-	border-top: 1px solid #222;
+	border-top: 2px solid #555;
+	border-bottom: 2px solid #555;
 
 	background: #000;
 	background: url(tile.png) #000
@@ -290,9 +295,9 @@ div#threadtitle {
 
 
 .postdate { color: #bbb; font-size: 12px;font-style: italic; float:right;}
-.postauthor { font-size: 16px; color: #888; font-weight: bold;}
-div.postavatar { float:left; margin-right: 10px;}
-img.avatar { float:left; width: 100px; height: 100px;
+.postauthor { font-size: 16px; color: #888; font-weight: bold; }
+div.postavatar { float:left; margin-right: 10px; }
+img.avatar { float:left; width: 100px; height: 100px; border-radius: 15px;
 background: transparent; margin-top:5px; }
 
 /* text items */
@@ -343,7 +348,7 @@ img { padding: 5px; }
 img.thread { width: 32px; height 32px; float:left; margin-right: 5px;  }
 
 div#userbar {
-
+	border-bottom: 2px solid #555;
 	padding:10px;
 	background: $colour1; /* fallback */
 	background: -moz-linear-gradient(top, $colour2,  $colour1);
@@ -352,7 +357,7 @@ div#userbar {
 
 a.userbar:link,a.userbar:visited,a.userbar:active    { 
 	text-decoration: none;
-	border-radius: 15px;
+	border-radius: 5px;
 	font-size: 12px;
 	color: #888;
 	border: 1px solid #111;
