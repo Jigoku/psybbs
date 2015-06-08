@@ -58,22 +58,25 @@ ini_set('date.timezone', 'UTC');
 		$account = mysql_fetch_array($result);
 		
 		if (!(getGravatarType($_SESSION["username"]) == "null")) {
-			echo "\t<img class=\"right\" src=\"".get_gravatar(getUserEmail($_SESSION["username"]), 100, getGravatarType($_SESSION["username"]), 'x', false, '')."\" class=\"avatar\" alt=\"\" />\n";
+			echo "\t<img class=\"avatar\" src=\"".get_gravatar(getUserEmail($_SESSION["username"]), 100, getGravatarType($_SESSION["username"]), 'x', false, '')."\" alt=\"\" />\n";
 		}
-		
-		echo "\t<div class=\"info\">User since " .  date('M/d/Y', $account['epoch']) . "</div>\n";
 
-		//show access level (as group name)
-		echo "\t<div class=\"info\">Access Level <span class=\"hl\">";
-		echo formatUserLevel(getAccountLevel());
-		echo "</span>\n\t</div>\n";
+		echo "<div id=\"account\">\n";
+			echo "\t<div class=\"info\">User since " .  date('M/d/Y', $account['epoch']) . "</div>\n";
 
-		//user threads total
-		$resultthreads= mysql_query("SELECT * FROM threads WHERE author = '". $_SESSION["username"] ."'");
-		$numthreads = mysql_num_rows($resultthreads);
+			//show access level (as group name)
+			echo "\t<div class=\"info\">Access Level <span class=\"hl\">";
+			echo formatUserLevel(getAccountLevel());
+			echo "</span>\n\t</div>\n";
 
-		echo "\t<div class=\"info\">You have posted <span class=\"hl\">" .  (getUserPostCount($_SESSION["username"]) - $numthreads) . "</span> replies.</div>\n";
-		echo "\t<div class=\"info\">You have started <span class=\"hl\">" .  $numthreads . "</span> threads.</div>\n</div>\n";
+			//user threads total
+			$resultthreads= mysql_query("SELECT * FROM threads WHERE author = '". $_SESSION["username"] ."'");
+			$numthreads = mysql_num_rows($resultthreads);
+
+			echo "\t<div class=\"info\">You have posted <span class=\"hl\">" .  (getUserPostCount($_SESSION["username"]) - $numthreads) . "</span> replies.</div>\n";
+			echo "\t<div class=\"info\">You have started <span class=\"hl\">" .  $numthreads . "</span> threads.</div>\n</div>\n";
+		echo "</div>\n";
+
 		echo "\t<div class=\"sub\"><span class=\"large2\">Account Settings</span>\n\t<hr />\n";
 		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;password\">Change Password</a></div>\n";
 		echo "\t<div class=\"info\"><a href=\"".$_SERVER["PHP_SELF"]."?account&amp;email\">Change Email</a></div>\n";
@@ -576,7 +579,7 @@ ini_set('date.timezone', 'UTC');
 			
 			echo "<div class=\"post\">";
 			echo "<div class=\"threadopts\">";
-			echo "<a href=\"#$postid\" name=\"".$postid."\">#$postid</a>";
+			echo "<a href=\"#$postid\" name=\"".$postid."\">#</a>";
 			
 			if (getAccountLevel() > 1) { echo " &brvbar; <a href=\"?deletepost=". $postid ."\">delete post</a> &brvbar; edit\n"; }
 			

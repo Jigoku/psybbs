@@ -142,6 +142,10 @@ p {
 
 }
 
+div#account {
+	padding: 15px;
+}
+
 div#banner {
 	background: #222; /* fallback */
 	padding: 10px; 
@@ -212,13 +216,13 @@ div.threadopts {
 }
 div.threaditem, div.topicitem {
 	padding: 10px;
-	border-top: 1px solid #222;
+	border-top: 2px solid #222;
 	color: #bbb;
 	background: #111;
 }
 
 div.topicitem {
-	border-top: 1px solid #222;
+	border-bottom: 2px solid #555;
 	color: $colour1;
 	font-weight: bold;
 	padding:15px;
@@ -289,7 +293,6 @@ div#threadtitle {
 	font-weight: bold;
 	color: $colour1;
 	padding: 15px;
-	border-top: 2px solid #555;
 	border-bottom: 2px solid #555;
 
 	background: #000;
@@ -348,7 +351,7 @@ a:hover   { color: $colour1; text-decoration: underline overline; }
 img { padding: 5px; }
 
 
-img.thread { width: 32px; height 32px; float:left; margin-right: 5px;  }
+img.thread { width: 32px; height 32px; float:left; margin-right: 5px;  border-radius: 15px; }
 
 div#userbar {
 	border-bottom: 2px solid #555;
@@ -400,7 +403,7 @@ img.bbcode {
 
 }
 
-hr { color: #444; background: #444; border: 0px;  }
+hr { color: #444; background: #444; border: 1px #444 solid;  }
 hr.thread  { color: $colour1; background: $colour1; border: 0px;  }
 form.settings {
 	margin: 0px auto;
