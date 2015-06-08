@@ -23,7 +23,7 @@ include "include/top.php";
 if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 		if (isset($_GET["logout"])) { endSession(); }
 
-		//navigational links and welcome message
+/*		//navigational links and welcome message
 		echo "\t\t<div id=\"userbar\">\n";
 		//echo "\t\t\t$site_title<span class=\"bannerquote\">$site_notice</span><br /><span class=\"small\">Welcome <b>". $_SESSION["username"] ."</b></span>\n";
 		echo "\t\t\t<span class=\"small\"><span class=\"shadow\">Welcome back <b>". $_SESSION["username"] ."</b></span></span>\n";
@@ -42,6 +42,8 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 		if (checkAnnounceEnabled()) {
 			echo "<div id=\"announce\">".getMysqlStr("site_announce", "global")."</div>";
 		}
+*/
+		include 'include/userbar.php';
 
 		if (!(isset($_GET["topic"]))) {
 			

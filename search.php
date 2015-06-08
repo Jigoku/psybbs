@@ -19,6 +19,8 @@ ini_set('display_errors', 'on');
 include 'include/top.php';
 
 if (isset($_SESSION["id"])) {
+	include 'include/userbar.php';
+
 	 if (!isset($_POST["query"])) {
 		echo "<div class=\"sub\"><span class=\"large2\">Search</span><hr /></div>\n";
 		echo "<div class=\"sub\">\n";

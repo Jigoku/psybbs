@@ -55,12 +55,14 @@ html {
 	background: #333; /* fallback */
     background: -moz-linear-gradient(left,  #111,  #222, #333, #333,#333,#333,#333,#333,#333,#222, #111);
     background: -webkit-linear-gradient(left,  #111,  #222, #333, #333,#333,#333,#333,#333,#333,#222, #111);
-	margin-top: 40px; margin-bottom:30px; padding:0; 
+	padding:0; 
 }
 
 body {
 	color: #bbb;
 	font-family: Helvetica, sans-serif;
+	margin-top: 30px; 
+	margin-bottom: 30px;
 }
 
 <?php
@@ -90,6 +92,9 @@ div#wrap {
 	margin-right: 30px;
 }
 
+div#page {
+	border: 2px solid #555;
+}
 ";
 
 }
@@ -173,8 +178,6 @@ a.topic:hover {
 	background: #222; /* fallback */
 	background: -moz-linear-gradient(bottom, #222, #111);
 	background: -webkit-linear-gradient(bottom, #222, #111);
-	border-left: 1px solid $colour1;
-	margin-left: -1px;
 }
 
 a.threaditem,a.threaditem:link,a.threaditem:active,a.threaditem:hover { text-decoration: none; color:transparent;}
@@ -187,7 +190,7 @@ a.threaditem,a.threaditem:link,a.threaditem:active,a.threaditem:hover { text-dec
 	width: 30px;
 	background: transparent;
 	margin-right:10px;
-	
+	border-radius: 15px;
 }
 
 div.frame {padding: 20px; }
