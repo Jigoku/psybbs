@@ -19,6 +19,7 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 * Global user customization
 * Local user customization
 * Simple stats
+* Gravatar support
 * Search querys
 
 ##Project Goals
