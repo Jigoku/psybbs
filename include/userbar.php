@@ -17,7 +17,7 @@
 				} else {
 					echo "<a class=\"userbar\" href=\"". $psybbs ."/login.php\">login</a>\n";
 					echo "<a class=\"userbar\" href=\"". $psybbs ."/create.php\">register</a>\n";
-					echo "<a class=\"userbar\" href=\"". $psybbs ."/info.php\">status</a>\n";
+					echo "<a class=\"userbar\" href=\"". $psybbs ."/info.php\">info</a>\n";
 				}
 				
                 echo "\t\t\t</span>\n\t\t</div>\n";

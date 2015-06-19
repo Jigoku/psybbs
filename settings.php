@@ -17,11 +17,14 @@
  */
  
 ini_set('display_errors', 'on');
-include "include/top.php";
-
+include 'include/top.php';
+include 'include/userbar.php';
 
 //check if we're logged in
 if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"]) && getAccountLevel() == 3) {
+	
+	
+	
 		echo "<div class=\"sub\">\n";
 		/**** ADMIN ****/
 
