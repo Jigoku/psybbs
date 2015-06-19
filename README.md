@@ -36,6 +36,13 @@ This is and will be full of bugs right now, consider this software as pre-alpha 
 * When processed, 'include/top.php' will check if a database exists, and automatically creates it
 * Log in with your primary admin account and click the 'settings' tab in the userbar for further configuration
 
+##Preview
+![screenshot67](https://cloud.githubusercontent.com/assets/1535179/8247930/7423e92c-1650-11e5-9ad6-294054d4cdab.png)
+![screenshot68](https://cloud.githubusercontent.com/assets/1535179/8247931/75527340-1650-11e5-91c6-e3f675156af0.png)
+![screenshot69](https://cloud.githubusercontent.com/assets/1535179/8247933/7647f432-1650-11e5-9f85-920a4d04c18a.png)
+![screenshot70](https://cloud.githubusercontent.com/assets/1535179/8247934/770ef244-1650-11e5-8b75-82d65bc7ed14.png)
+
+
 ##Licensing
 The code of psyBBS is released under the General Public License version 3. 
 Graphics/Artwork are released under various Creative Commons licenses (no stricter that cc-by-sa).
