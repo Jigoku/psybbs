@@ -5,7 +5,7 @@
                 echo "\t\t\t<span class=\"small\"><span class=\"shadow\">Welcome back <b>". getUserName() ."</b></span></span>\n";
                 echo "\t\t\t<span class=\"right\">\n";
 
-                if (getAccountLevel() == 3) { echo "\t\t\t\t<a class=\"userbar\" href=\"settings.php\">settings</a> &brvbar; \n"; }
+                if (getAccountLevel() == 3) { echo "\t\t\t\t<a class=\"userbar\" href=\"" . $psybbs . "/settings.php\">board settings</a>\n"; }
                 
                 if (isset($_SESSION["id"])) {
 					echo "\t\t\t\t<a class=\"userbar\" href=\"" . $psybbs . "\">topics</a>\n";

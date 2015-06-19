@@ -429,7 +429,7 @@ ini_set('date.timezone', 'UTC');
 			
 			//check access level for additional functions
 			if (getAccountLevel() == 3) {
-				echo "<div class=\"threadopts\">Thread Options | <a href=\"?deletethread=". $id ."\">delete thread</a> &brvbar; lock &brvbar; sticky &brvbar; edit</div>"; 
+				echo "<div class=\"threadopts\">Thread Options &brvbar; <a href=\"?deletethread=". $id ."\">delete thread</a> &brvbar; lock &brvbar; sticky &brvbar; edit</div>"; 
 			}
 			
 			echo "\t<div id=\"threadtitle\">Subject: <span class=\"title\">". $subject["subject"]."</span></div>\n";
@@ -585,7 +585,7 @@ ini_set('date.timezone', 'UTC');
 	function formatPost($author, $content, $epoch, $level, $postid) {
 			
 			echo "<div class=\"post\">";
-			echo "<div class=\"threadopts\">";
+			echo "<div class=\"postopts\">";
 			echo "<a href=\"#$postid\" name=\"".$postid."\">#</a>";
 			
 			if (getAccountLevel() > 1) { echo " &brvbar; <a href=\"?deletepost=". $postid ."\">delete post</a> &brvbar; edit\n"; }

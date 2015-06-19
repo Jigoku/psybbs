@@ -160,7 +160,10 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 				} else {
 					echo "<div class=\"sub\"><span class=\"large2\">Topic does not exist!</span></div>\n";
 				}
-
+			} elseif (array_keys($_GET) === array('topic', 'id') && (mEscape($_GET["id"])) > 0 ) {
+				// add "page=X" if not supplied
+				header("Location: ". $_SERVER["PHP_SELF"] . "?topic=". mEscape($_GET["topic"]) . "&id=" . mEscape($_GET["id"]) . "&page=1");
+				
 			} else {
 				if (checkTopicExists(mEscape($_GET["topic"]))) {
 					//list the threads in selected topic

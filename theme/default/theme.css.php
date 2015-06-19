@@ -154,7 +154,7 @@ div#banner {
 	font-family: Monospace;
 	font-size: 20px;
 	font-weight: bold;
-	border-bottom: 1px solid $colour1;
+	border-bottom: 2px solid #555;
 	height: 25px;
 }
 
@@ -209,7 +209,7 @@ div.thread {
 	
 }
 
-div.threadopts {
+div.threadopts,div.postopts {
 	padding: 5px;
 	color: $colour1;
 	font-size: 12px;
@@ -217,6 +217,10 @@ div.threadopts {
 	border-bottom: 2px solid #555;
 	min-height:15px;
 }
+div.threadopts {
+	background: #111;
+}
+
 div.threaditem, div.topicitem {
 	padding: 10px;
 	border-top: 2px solid #222;
