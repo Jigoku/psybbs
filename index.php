@@ -23,26 +23,6 @@ include "include/top.php";
 if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 		if (isset($_GET["logout"])) { endSession(); }
 
-/*		//navigational links and welcome message
-		echo "\t\t<div id=\"userbar\">\n";
-		//echo "\t\t\t$site_title<span class=\"bannerquote\">$site_notice</span><br /><span class=\"small\">Welcome <b>". $_SESSION["username"] ."</b></span>\n";
-		echo "\t\t\t<span class=\"small\"><span class=\"shadow\">Welcome back <b>". $_SESSION["username"] ."</b></span></span>\n";
-		echo "\t\t\t<span class=\"right\">\n";
-
-		if (getAccountLevel() == 3) { echo "\t\t\t\t<a class=\"userbar\" href=\"settings.php\">settings</a> &brvbar; \n"; }
-		echo "\t\t\t\t<a class=\"userbar\" href=\"" . $_SERVER["PHP_SELF"] . "\">topics</a>\n";
-		echo "\t\t\t\t<a class=\"userbar\" href=\"" . $_SERVER["PHP_SELF"] . "?account\">account</a>\n";
-		echo "\t\t\t\t<a class=\"userbar\" href=\"" . $_SERVER["PHP_SELF"] . "?stats\">stats</a>\n";
-		echo "\t\t\t\t<a class=\"userbar\" href=\"search.php\">search</a>\n";
-		echo "\t\t\t\t<a class=\"userbar\" href=\"" . $_SERVER["PHP_SELF"] . "?logout\">logout</a>\n";
-		echo "\t\t\t</span>\n";
-		echo "\t\t</div>\n\n";
-		
-		 //announcements (if enabled)..
-		if (checkAnnounceEnabled()) {
-			echo "<div id=\"announce\">".getMysqlStr("site_announce", "global")."</div>";
-		}
-*/
 		include 'include/userbar.php';
 
 		if (!(isset($_GET["topic"]))) {
@@ -196,8 +176,8 @@ if (isset($_SESSION["id"]) && checkUserExists($_SESSION["username"])) {
 
 } else {
 
-	echo "<div id=\"userbar\"><a class=\"userbar\" href=\"login.php\">login</a> &brvbar; <a class=\"userbar\" href=\"create.php\">register</a>";
-	echo "<span class=\"right\"><a class=\"userbar\" href=\"info.php\">?</a></span></div>\n";
+    include 'include/userbar.php';
+
 
 	echo "<div class=\"sub\"><img class=\"splashimg\" src=\"theme/".getMysqlStr("theme", "global")."/splash.png\" />";
 	echo "<h1 class=\"large3\">".getMysqlStr("site_title", "global")."</h1><br /></div>";

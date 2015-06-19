@@ -185,6 +185,9 @@ a.topic:hover {
 }
 
 a.threaditem,a.threaditem:link,a.threaditem:active,a.threaditem:hover { text-decoration: none; color:transparent;}
+
+a#headerlink { text-decoration: none; color:transparent; }
+
 .topicdescription {color: #bbb; font-size: 14px;}
 .topictitle { text-decoration: underline; color: $colour1; font-size: 16px;}
 

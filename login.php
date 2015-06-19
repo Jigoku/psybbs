@@ -60,7 +60,8 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["code
 
 
 } else {
-        echo "<div class=\"sub\"><span class=\"large2\">Login</span><hr /></div>\n";
+	include 'include/userbar.php';
+
         echo "<div class=\"sub\">\n";
                 echo "<form class=\"create\" method=\"post\" action=\"" . $_SERVER["PHP_SELF"] . "\">\n";
                 echo "<label class=\"account\">Username</label> <input type=\"text\" size=\"12\" maxlength=\"20\" name=\"username\"><br />\n";

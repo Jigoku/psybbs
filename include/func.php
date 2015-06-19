@@ -48,6 +48,13 @@ ini_set('date.timezone', 'UTC');
 		return mysql_num_rows($result);
 	}
 	
+	function getUserName() {
+		if (isset($_SESSION["username"])) {
+			return $_SESSION["username"];
+		}
+		return "guest";
+	}
+	
 	//get information for active user
 	function showAccount() {
 		echo "<div class=\"sub\"><span class=\"large2\">Account Information</span>\n\t<hr />\n";
@@ -710,9 +717,13 @@ ini_set('date.timezone', 'UTC');
 
 	//return the access level for active user
 	function getAccountLevel() {
-		$result = mysql_query("SELECT level FROM users WHERE id = '". $_SESSION["id"] . "'");
-		$row = mysql_fetch_assoc($result);
-		return $row['level'];
+		if (isset($_SESSION["id"])) {
+			$result = mysql_query("SELECT level FROM users WHERE id = '". $_SESSION["id"] . "'");
+			$row = mysql_fetch_assoc($result);
+			return $row['level'];
+		} 
+		return 0;
+		
 	}
 	
 	

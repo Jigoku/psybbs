@@ -88,9 +88,9 @@ if (!(isset($_SESSION["id"]))) {
 	        echo "<div class=\"sub\"><span class=\"large2\">Account Created</span><hr />You may now <a href=\"login.php\">login</a></div>";
 
 	} else {
+		
+		include 'include/userbar.php';
 
-
-	echo "<div class=\"sub\"><span class=\"large2\">Create account</span><hr /></div>\n";
 	//echo "<div class=\"sub\"><div class=\"info\">Username must be alpha-numeric and 3-20 characters long.</div>";
 	//echo "<div class=\"info\">Password must be 8-40 characters long.</div>";
 	
@@ -98,7 +98,7 @@ if (!(isset($_SESSION["id"]))) {
                 echo "<label class=\"account\">Username</label> <input type=\"text\" size=\"12\" maxlength=\"20\" name=\"username\"><br />\n";
                 echo "<label class=\"account\">Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password\"><br />\n";
                 echo "<label class=\"account\">Verify Password</label> <input type=\"password\" size=\"12\" maxlength=\"40\" name=\"password2\"><br />\n";
-                 echo "<label class=\"account\">Email Address</label> <input type=\"text\" size=\"12\" maxlength=\"150\" name=\"email\"><br />\n";
+                echo "<label class=\"account\">Email Address</label> <input type=\"text\" size=\"12\" maxlength=\"150\" name=\"email\"><br />\n";
 
 		echo "<label class=\"account\"><img class=\"captcha\" src=\"./scripts/captcha.php\"></label>\n";
 		echo "<span class=\"small\">Please enter the captcha:</span>\n";

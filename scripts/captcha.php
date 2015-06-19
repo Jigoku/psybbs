@@ -34,16 +34,16 @@
 	$im = imagecreatetruecolor(150,50);
 
 	//background colour
-	$bg = imagecolorallocate($im, 30, 30, 30);
-	$text1 = imagecolorallocate($im, rand(0,40), rand(0,80), rand(30,60));
-	$text2 = imagecolorallocate($im, rand(40,80), rand(140,180), rand(130,160));
+	$bg = imagecolorallocate($im, rand(20,30), rand(20,30), rand(20,30));
+	$text1 = imagecolorallocate($im, rand(80,100), rand(0,20), rand(0,20));
+	$text2 = imagecolorallocate($im, rand(150,200), rand(0,100), rand(30,100));
 
-	$rand1 = imagecolorallocate($im, rand(0,40), rand(100,140), rand(90,120));
-	$rand2 = imagecolorallocate($im, rand(0,40), rand(100,140), rand(90,120));
-	$rand3 = imagecolorallocate($im, rand(0,40), rand(100,140), rand(90,120));
-	$rand4 = imagecolorallocate($im, rand(0,40), rand(100,140), rand(90,120));
-	$rand5 = imagecolorallocate($im, rand(0,40), rand(100,140), rand(90,120));
-	$rand6 = imagecolorallocate($im, rand(0,40), rand(100,140), rand(90,120));
+	$rand1 = imagecolorallocate($im, rand(100,140), rand(0,40), rand(0,80));
+	$rand2 = imagecolorallocate($im, rand(100,140), rand(0,40), rand(0,80));
+	$rand3 = imagecolorallocate($im, rand(100,140), rand(0,40), rand(0,80));
+	$rand4 = imagecolorallocate($im, rand(100,140), rand(0,40), rand(0,80));
+	$rand5 = imagecolorallocate($im, rand(100,140), rand(0,40), rand(0,80));
+	$rand6 = imagecolorallocate($im, rand(100,140), rand(0,40), rand(0,80));
 
 	imagefilledrectangle($im, 0, 0, 149, 49, $bg);
 	imagefilledrectangle($im, rand(0,149), rand(0,49), rand(0,149), rand(0,49), $rand1);

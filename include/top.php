@@ -238,5 +238,5 @@ if (!$db_selected) {
 <div id="wrap">
 	<div id="page">
 		<div id="banner">
-			<?php echo getMysqlStr("site_title", "global") ?><span class="bannerquote"><?php echo getMysqlStr("site_quote", "global"); ?></span>
+			<a id="headerlink" href="<?php echo $psybbs ;?>"><?php echo getMysqlStr("site_title", "global") ?></a><span class="bannerquote"><?php echo getMysqlStr("site_quote", "global"); ?></span>
 		</div>
