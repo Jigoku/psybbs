@@ -161,7 +161,7 @@ div#banner {
 div#announce {
   padding: 10px;
   font-size: 12px;
-
+	border-bottom: 2px solid #555;
   background: url(tile2.png) #000;
 }
 
