@@ -41,13 +41,13 @@ if (isset($_GET["colour1"])){
 	$colour1 = "#" . $_GET["colour1"];
 
 } else {
-	$colour1 = "#555";
+	$colour1 = "#991433";
 }
 
 if (isset($_GET["colour2"])){
 	$colour2 = "#" . $_GET["colour2"];
 } else {
-	$colour2 = "#220000";
+	$colour2 = "#A25D45";
 }
 ?>
 
